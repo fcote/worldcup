@@ -1,8 +1,21 @@
+### LARAVEL ###
 /bootstrap/compiled.php
 /vendor
 composer.phar
 composer.lock
-.env.*.php
+.env.local.php
 .env.php
 .DS_Store
 Thumbs.db
+
+### MAC ###
+.com.apple.timemachine.supported
+
+### Keepers ###
+!.gitkeep
+
+### PHPSTORM ###
+.idea
+
+### BOWER ###
+/public/bower_components
