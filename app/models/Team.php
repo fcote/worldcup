@@ -1,6 +1,6 @@
 <?php
 /**
- * Modèle de donnée des utilisateurs
+ * Modèle de donnée des équipes du tournoi
  *
  * PHP version 5.5
  *
@@ -12,15 +12,14 @@
  * @since      0.1
  */
 
-
-class User extends Eloquent {
+class Team extends Eloquent {
 
     /**
      * Table corespondant sur le SGBD
      *
      * @var string
      */
-    protected $table = 'user';
+    protected $table = 'team';
 
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
@@ -28,10 +27,7 @@ class User extends Eloquent {
      * @var array
      */
     public static $rules = array(
-        'username' => 'required|alpha_num|max:255',
-        'password' => 'required|alpha_num|max:255',
-        'points' => 'required|integer',
-        'firstname' => 'required|alpha_num|max:255',
-        'lastname' => 'required|alpha_num|max:255',
+        'name' => 'required|alpha_num|max:255',
+        'flag' => 'required|alpha|max:2',
     );
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Modèle de donnée des utilisateurs
+ * Modèle de donnée des paris
  *
  * PHP version 5.5
  *
@@ -12,15 +12,14 @@
  * @since      0.1
  */
 
-
-class User extends Eloquent {
+class Bet extends Eloquent {
 
     /**
      * Table corespondant sur le SGBD
      *
      * @var string
      */
-    protected $table = 'user';
+    protected $table = 'bet';
 
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
@@ -28,10 +27,10 @@ class User extends Eloquent {
      * @var array
      */
     public static $rules = array(
-        'username' => 'required|alpha_num|max:255',
-        'password' => 'required|alpha_num|max:255',
+        'user_id' => 'exists:user,id',
+        'game_id' => 'exists:game,id',
         'points' => 'required|integer',
-        'firstname' => 'required|alpha_num|max:255',
-        'lastname' => 'required|alpha_num|max:255',
+        'team1_goals' => 'required|integer',
+        'team2_goals' => 'required|integer',
     );
 }
