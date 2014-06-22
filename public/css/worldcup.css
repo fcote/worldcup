@@ -1,0 +1,32 @@
+/************************** Global **************************/
+
+body{
+    background-color: #fff;
+}
+
+/************************** Navbar **************************/
+
+.navbar-inverse{
+    margin-top: 30px;
+    border-radius: 0px;
+    border-color: #fff;
+    border-width: 1px;
+    color: #fff;
+}
+
+.navbar-inverse .nav li a{
+    color: #fff;
+}
+
+.navbar-inverse .nav li a.blacklink{
+    color: #333;
+}
+
+.navbar-inverse .navbar-brand img{
+    width: 90px;
+    padding: -15px;
+}
+
+.navbar-inverse .navbar-brand{
+    padding: 0px;
+}
