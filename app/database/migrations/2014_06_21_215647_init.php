@@ -16,7 +16,7 @@ class Init extends Migration {
         Schema::create('user', function($table)
         {
             $table->increments('id')->unsigned();
-            $table->string('username', 255);
+            $table->string('email', 255);
             $table->string('password', 255);
             $table->integer('points');
             $table->string('firstname', 255);
@@ -111,8 +111,8 @@ class Init extends Migration {
         Schema::dropIfExists('bet');
         Schema::dropIfExists('game');
 
-        Schema::dropIfExists('user');
         Schema::dropIfExists('token');
+        Schema::dropIfExists('user');
         Schema::dropIfExists('team');
         Schema::dropIfExists('stage');
 	}

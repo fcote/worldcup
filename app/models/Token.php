@@ -29,4 +29,14 @@ class Token extends Eloquent {
     public static $rules = array(
         'user_id' => 'exists:user,id',
     );
+
+    /**
+     * Récupère un objet token avec son ID
+     *
+     * @param $token
+     * @return mixed
+     */
+    public static function getWithToken($token){
+        return Token::where('id', $token)->first();
+    }
 }

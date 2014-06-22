@@ -15,3 +15,20 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+
+// =============================================
+// API ROUTES ==================================
+// =============================================
+
+//Permet la connexion, création et déconnexion d'un compte utilisateur
+Route::get('/api/users/logout', array('before' => 'token', 'uses' => 'AuthController@logout'));
+Route::post('/api/users/login', 'AuthController@login');
+Route::post('/api/users/', 'UserController@store');
+
+//Tout les ressources disponibles avec un token
+Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
+
+    Route::resource('users', 'UserController',
+        array('only' => array('index')));
+});

@@ -12,6 +12,7 @@
  * @since      0.1
  */
 
+use Rhumsaa\Uuid\Uuid;
 
 class User extends Eloquent {
 
@@ -23,15 +24,66 @@ class User extends Eloquent {
     protected $table = 'user';
 
     /**
+     * Liste des champs assignable en masse
+     *
+     * @var array
+     */
+    protected $fillable = array('email', 'password', 'firstname', 'lastname');
+
+    /**
+     * Table corespondant au champ caché sur les retours JSON
+     *
+     * @var array
+     */
+    protected $hidden = array('password');
+
+    /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
      * @var array
      */
     public static $rules = array(
-        'username' => 'required|alpha_num|max:255',
+        'email' => 'required|email|max:255',
         'password' => 'required|alpha_num|max:255',
-        'points' => 'required|integer',
+        /*'points' => 'required|integer',*/
         'firstname' => 'required|alpha_num|max:255',
         'lastname' => 'required|alpha_num|max:255',
     );
+
+    /**
+     * Méthode pour récupérer un objet utilisateur avec un email
+     * @param $email
+     * @param $password
+     * @return mixed
+     */
+    public static function getUserWithEmail($email){
+        return User::where('email', $email)->first();
+    }
+
+    /**
+     * Méthode pour récupérer un object utilisateur avec un jeton d'accès
+     * @param $token
+     * @return mixed
+     */
+    public static function getUserWithToken($token){
+        return User::join('token', 'token.id', '=', $token)
+            ->where('user.id', 'token.user_id')
+            ->get();
+    }
+
+    /**
+     * Créer un nouveau jeton d'accès
+     * @return Token
+     */
+    public function getNewToken(){
+        $id = (string)Uuid::uuid4();
+
+        $token = new Token();
+        $token->id = $id;
+        $token->user_id = $this->id;
+        $token->save();
+        $token->id = $id;
+
+        return $token;
+    }
 }
