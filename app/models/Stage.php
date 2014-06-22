@@ -21,6 +21,16 @@ class Stage extends Eloquent {
      */
     protected $table = 'stage';
 
+    public $timestamps = false;
+
+
+    /**
+     * Table corespondant au champ caché sur les retours JSON
+     *
+     * @var array
+     */
+    protected $hidden = array('next_stage', 'created_at', 'updated_at');
+
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
