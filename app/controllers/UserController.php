@@ -30,6 +30,20 @@ class UserController extends BaseController {
     }
 
     /**
+     * Renvoi un utilisateur
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+
+        return Response::json(
+            array('success' => true,
+                'payload' => User::find($id)->toArray(),
+            ));
+    }
+
+    /**
      * Enregistre un nouvel utilisateur
      *
      * @return Response

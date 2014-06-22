@@ -30,5 +30,5 @@ Route::post('/api/users/', 'UserController@store');
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
     Route::resource('users', 'UserController',
-        array('only' => array('index')));
+        array('only' => array('index', 'show')));
 });
