@@ -17,8 +17,8 @@ angular.module('services', [])
     .factory('serviceUser', function($http) {
         return {
 
-            getUser : function(id) {
-                return $http.get('/api/users/' + id);
+            getUser : function(id, token) {
+                return $http.get('/api/users/' + id + '?token=' + token);
             },
 
             login : function(email, pass) {
@@ -28,6 +28,10 @@ angular.module('services', [])
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param({"email" : email, "password" : pass})
                 });
+            },
+
+            logout : function(token) {
+                return $http.get('/api/users/logout?token=' + token);
             },
 
             register : function(email, pass, first, last) {

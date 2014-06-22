@@ -27,15 +27,18 @@
 </head>
 <body @yield('body') >
 
-<div class="container">
-    <div class="guest">
-        <div class="container">
-            <img src="" alt=""/>
-        </div>
-        <hr/>
+<div class="guest" ng-hide="isConnected">
+    <div class="container">
+        <img src="/images/WCLoginLogo.png" alt=""/>
     </div>
+    <hr/>
+</div>
+
+
+
+<div class="container">
     <!-- Static navbar -->
-    <div class="navbar navbar-inverse" role="navigation">
+    <div class="navbar navbar-inverse" role="navigation" ng-show="isConnected">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -56,6 +59,7 @@
                             <li><a class="blacklink" href="#">Something else here</a></li>
                         </ul>
                     </li>
+                    <li><a href="#" ng-click="logout()">Déconnexion</a></li>
                 </ul>
             </div>
         </div>
