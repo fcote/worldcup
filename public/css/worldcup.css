@@ -1,13 +1,21 @@
 /************************** Global **************************/
 
 body{
-    background-color: #fff;
+    background-color: #333;
+}
+
+.title{
+    color: #00923E;
+    margin-left: 8%;
+    background-color: #F8C100;
 }
 
 /************************** Navbar **************************/
 
 .navbar-inverse{
     margin-top: 30px;
+    background-color: #F8C100;
+    border: none;
     border-radius: 0px;
     border-color: #fff;
     border-width: 1px;
@@ -15,18 +23,60 @@ body{
 }
 
 .navbar-inverse .nav li a{
-    color: #fff;
+    color: #333;
 }
+
+.navbar-inverse .nav li a:hover{
+    color: #333;
+}
+
 
 .navbar-inverse .nav li a.blacklink{
     color: #333;
 }
 
 .navbar-inverse .navbar-brand img{
-    width: 90px;
+    width: 89px;
+    margin-left: 0px;
     padding: -15px;
 }
 
 .navbar-inverse .navbar-brand{
     padding: 0px;
+}
+
+/************************** Connection **************************/
+
+.login-form {
+    margin: 30px auto;
+    width: 40%;
+}
+
+.login-form button{
+    color: #333;
+    border-radius: 0;
+    background-color: #F8C100;
+    border: none;
+}
+
+.login-form button:hover{
+    background-color: #dfad00;
+    border: none;
+}
+
+.login-form input{
+    height: 50px;
+    border-radius: 0;
+}
+
+.login-form input:focus{
+    border-color: #F8C100;
+    z-index: -2;
+}
+
+.login-form input[type="email"] {
+    margin-bottom: -1px;
+}
+.login-form input[type="password"] {
+    margin-bottom: 10px;
 }

@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('index');
-});
-
 
 // =============================================
 // API ROUTES ==================================
@@ -31,4 +26,10 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
     Route::resource('users', 'UserController',
         array('only' => array('index')));
+});
+
+
+App::missing(function()
+{
+    return View::make('index');
 });

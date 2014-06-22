@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('body')
-    ng-app="worldcup"
+ng-app="worldcup"
 @stop
 
 @section('content')

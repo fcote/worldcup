@@ -9,12 +9,15 @@
     <!-- BOWER COMPONENTS -->
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/bower_components/angular-loading-bar/build/loading-bar.min.css"/>
+    <link rel="stylesheet" href="/bower_components/fontawesome/css/font-awesome.min.css"/>
 
     <script src="/bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
     <script src="/bower_components/angular/angular.min.js" type="text/javascript"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript" ></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js" type="text/javascript"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js" type="text/javascript"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js" type="text/javascript"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- CUSTOM -->
     <link rel="stylesheet" type="text/css" href="/css/worldcup.css" media="screen" />
@@ -25,7 +28,12 @@
 <body @yield('body') >
 
 <div class="container">
-
+    <div class="guest">
+        <div class="container">
+            <img src="" alt=""/>
+        </div>
+        <hr/>
+    </div>
     <!-- Static navbar -->
     <div class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
@@ -36,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img src="/images/WClogoCrop.jpg" alt=""/></a>
+                <a class="navbar-brand" href="/"><img src="/images/WClogo.jpg" alt=""/></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -52,15 +60,20 @@
             </div>
         </div>
     </div>
-
+    <h1 class="title">*-* title *-*</h1>
 </div>
+
+
 
 @yield('content')
 
 
 <!-- ANGULARJS -->
+<script src="/js/auth.js"></script>
 <script src="/js/services.js"></script>
+<script src="/js/controllers/accountController.js"></script>
 <script src="/js/app.js"></script>
+
 
 </body>
 </html>
