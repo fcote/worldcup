@@ -1,6 +1,6 @@
 <?php
 /**
- * Controlleur permetant la gestion des utilisateurs
+ * Controlleur permetant la gestion des paris
  *
  * PHP version 5.5
  *
@@ -13,38 +13,42 @@
  */
 
 
-class UserController extends BaseController {
+class BetController extends BaseController {
 
 
     /**
-     * Renvoi tout les utilisateurs en JSON
+     * Renvoi tout les paris en JSON
      *
      * @return Response
      */
     public function index()
     {
+        $user = User::getUserWithToken($_GET['token']);
+
         return Response::json(
             array('success' => true,
-                'payload' => User::get()->toArray(),
+                'payload' => Bet::where('user_id', $user->id)->get()->toArray(),
             ));
     }
 
     /**
-     * Renvoi un utilisateur
+     * Renvoi un paris
      *
      * @return Response
      */
     public function show($id)
     {
 
+        $user = User::getUserWithToken($_GET['token']);
+
         return Response::json(
             array('success' => true,
-                'payload' => User::find($id)->toArray(),
+                'payload' => Bet::whereRaw('user_id = ? && id = ?', array($user->id), $id)->toArray(),
             ));
     }
 
     /**
-     * Enregistre un nouvel utilisateur
+     * Enregistre un nouveau paris
      *
      * @return Response
      */
@@ -52,7 +56,7 @@ class UserController extends BaseController {
     {
         $input = Input::all();
 
-        $validator = Validator::make($input, User::$rules);
+        $validator = Validator::make($input, Bet::$rules);
 
         if ($validator->fails())
             return Response::json(
@@ -62,12 +66,11 @@ class UserController extends BaseController {
                 ),
                 400);
 
-        $input['password'] = Hash::make($input['password']);
-        $user = User::create($input);
+        $bet = Bet::create($input);
 
         return Response::json(
             array('success' => true,
-                'payload' => $user->toArray(),
+                'payload' => $bet->toArray(),
             ));
     }
 

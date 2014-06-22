@@ -25,7 +25,26 @@ Route::post('/api/users/', 'UserController@store');
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
     Route::resource('users', 'UserController',
-        array('only' => array('index')));
+        array('only' => array('index', 'show')));
+
+    Route::resource('games', 'GameController',
+        array('only' => array('index', 'show')));
+
+    Route::resource('transactions', 'TransactionController',
+        array('only' => array('index', 'show')));
+
+    Route::resource('bets', 'BetController',
+        array('only' => array('index', 'show', 'store')));
+});
+
+// =============================================
+// CATCH ALL ROUTE =============================
+// =============================================
+// all routes that are not home or api will be redirected to the frontend
+// this allows angular to route them
+App::missing(function()
+{
+    return View::make('index');
 });
 
 

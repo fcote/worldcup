@@ -42,8 +42,6 @@ class Init extends Migration {
             $table->increments('id')->unsigned();
             $table->string('name', 255);
             $table->string('flag', 2);
-
-            $table->timestamps();
         });
 
 
@@ -55,8 +53,6 @@ class Init extends Migration {
             $table->integer('next_stage')->unsigned()->nullable();
 
             $table->foreign('next_stage')->references('id')->on('stage');
-
-            $table->timestamps();
         });
 
         //Création table des matches
@@ -80,8 +76,6 @@ class Init extends Migration {
             $table->foreign('team2_id')->references('id')->on('team');
             $table->foreign('stage_id')->references('id')->on('stage');
             $table->foreign('winner_id')->references('id')->on('team');
-
-            $table->timestamps();
         });
 
         //Création table des paris
@@ -99,6 +93,21 @@ class Init extends Migration {
 
             $table->timestamps();
         });
+
+        //Création table des transactions
+        Schema::create('transaction', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->integer('bet_id')->unsigned();
+            $table->integer('value');
+            $table->enum('type', array('bet', 'gain'));
+
+            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('bet_id')->references('id')->on('bet');
+
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -110,6 +119,7 @@ class Init extends Migration {
 	{
         Schema::dropIfExists('bet');
         Schema::dropIfExists('game');
+        Schema::dropIfExists('transaction');
 
         Schema::dropIfExists('token');
         Schema::dropIfExists('user');

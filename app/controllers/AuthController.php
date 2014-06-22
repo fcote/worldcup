@@ -26,7 +26,7 @@ class AuthController extends BaseController {
 
         $user = User::getUserWithEmail($input['email']);
 
-        if (Input::has('email') && Input::has('password') && Hash::check($input['password'], $user->password))
+        if ($user != null && Input::has('email') && Input::has('password') && Hash::check($input['password'], $user->password))
         {
             return Response::json(
                 array('success' => true,
@@ -34,7 +34,7 @@ class AuthController extends BaseController {
                 ));
         }else{
             return Response::json(
-                array('success' => true,
+                array('success' => false,
                     'payload' => array(),
                     'error' => 'Informations incorrects (Adresse mail / mot de passe) !'
                 ),

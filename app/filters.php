@@ -38,7 +38,7 @@ Route::filter('token', function()
     if (!isset($_GET['token']) || !Token::getWithToken($_GET['token']))
     {
         return Response::json(
-            array('success' => true,
+            array('success' => false,
                 'payload' => array(),
                 'error' => 'Non autorisé !'
             ),

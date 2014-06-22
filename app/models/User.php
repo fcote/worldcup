@@ -66,9 +66,9 @@ class User extends Eloquent {
      * @return mixed
      */
     public static function getUserWithToken($token){
-        return User::join('token', 'token.id', '=', $token)
-            ->where('user.id', 'token.user_id')
-            ->get();
+        return User::join('token', 'token.user_id', '=', 'user.id')
+            ->where('token.id', $token)
+            ->first();
     }
 
     /**

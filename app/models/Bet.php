@@ -22,6 +22,21 @@ class Bet extends Eloquent {
     protected $table = 'bet';
 
     /**
+     * Liste des champs assignable en masse
+     *
+     * @var array
+     */
+    protected $fillable = array('user_id', 'game_id', 'points', 'team1_goals', 'team2_goals');
+
+
+    /**
+     * Table corespondant au champ caché sur les retours JSON
+     *
+     * @var array
+     */
+    protected $hidden = array('updated_at');
+
+    /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
      * @var array

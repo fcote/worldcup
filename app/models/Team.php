@@ -21,6 +21,16 @@ class Team extends Eloquent {
      */
     protected $table = 'team';
 
+    public $timestamps = false;
+
+
+    /**
+     * Table corespondant au champ caché sur les retours JSON
+     *
+     * @var array
+     */
+    protected $hidden = array('created_at', 'updated_at');
+
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *

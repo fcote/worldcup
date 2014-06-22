@@ -1,6 +1,6 @@
 <?php
 /**
- * Modèle de donnée des étapes de la compétition
+ * Modèle de donnée des transactions
  *
  * PHP version 5.5
  *
@@ -12,24 +12,31 @@
  * @since      0.1
  */
 
-class Stage extends Eloquent {
+class Transaction extends Eloquent {
 
     /**
      * Table corespondant sur le SGBD
      *
      * @var string
      */
-    protected $table = 'stage';
-
-    public $timestamps = false;
-
+    protected $table = 'transaction';
 
     /**
-     * Table corespondant au champ caché sur les retours JSON
+     * Tableau indiquant les sous élements à imbriquer
      *
      * @var array
      */
-    protected $hidden = array('next_stage', 'created_at', 'updated_at');
+    protected $with = array('bet');
+
+    /**
+     * Récupère l'objet Bet indiqué dans cette transaction
+     *
+     * @var Stage
+     */
+    public function bet()
+    {
+        return $this->belongsTo('Bet', 'bet_id', 'id');
+    }
 
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
@@ -37,7 +44,9 @@ class Stage extends Eloquent {
      * @var array
      */
     public static $rules = array(
-        'name' => 'required|alpha_num|max:255',
-        /*'next_stage' => 'exists:stage,id',*/
+        'user_id' => 'exists:stage,id',
+        'bet_id' => 'exists:bet,id',
+        'value' => 'integer',
+        'type' => 'in:bet,gain',
     );
 }
