@@ -1,13 +1,8 @@
 /************************** Global **************************/
-
 .title{
     color: #00923E;
     margin-left: 8%;
     background-color: #F8C100;
-}
-
-#loading-bar .bar{
-    background: #fff;
 }
 
 /************************** Navbar **************************/
@@ -92,3 +87,23 @@
 
 /************************** Games **************************/
 
+
+
+.game{
+    margin: 50px auto;
+    width: 80%;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.team1{
+    display: inline;
+}
+
+.team2{
+    display: inline;
+}
+
+.score{
+    display: inline;
+}

@@ -32,12 +32,14 @@ angular.module('auth', [])
             if($rootScope.isConnected != null){
                 if($rootScope.isConnected){
                     $('body').css("background-color", "#fff");
+                    $('.bar').css("background-color", "#47a447");
                     User.getUser($cookies.user_id, $cookies.token)
                         .success(function(data) {
                             $rootScope.user = data;
                         })
                 }else{
                     $('body').css("background-color", "#333");
+                    $('.bar').css("background-color", "#F8C100");
                     $state.transitionTo('login');
                 }
             }
