@@ -45,3 +45,9 @@ angular.module('services', [])
 
         }
     })
+
+    .factory('serviceGame', function($http) {
+        return {
+
+        }
+    })

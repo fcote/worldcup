@@ -46,9 +46,3 @@ App::missing(function()
 {
     return View::make('index');
 });
-
-
-App::missing(function()
-{
-    return View::make('index');
-});

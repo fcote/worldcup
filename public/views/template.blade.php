@@ -56,7 +56,8 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a class="blacklink" href="#">Mes informations</a></li>
                             <li><a class="blacklink" href="#">Modifier mon mot de passe</a></li>
-                            <li><a class="blacklink" href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a class="blacklink" href="#">Administration</a></li>
                         </ul>
                     </li>
                     <li><a href="#" ng-click="logout()">Déconnexion</a></li>
@@ -75,7 +76,8 @@
 <!-- ANGULARJS -->
 <script src="/js/auth.js"></script>
 <script src="/js/services.js"></script>
-<script src="/js/controllers/accountController.js"></script>
+<script src="/js/controllers/accountsController.js"></script>
+<script src="/js/controllers/gamesController.js"></script>
 <script src="/js/app.js"></script>
 
 

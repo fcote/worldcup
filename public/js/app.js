@@ -11,7 +11,7 @@
  * @since      0.1
  */
 
-var worldcup = angular.module('worldcup', ['ui.router', 'ngCookies', 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountController', 'auth']);
+var worldcup = angular.module('worldcup', ['ui.router', 'ngCookies', 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'auth']);
 
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
@@ -22,18 +22,25 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
         .state('register', {
             url: '/register',
             templateUrl: '/views/partials/registerForm.html',
-            controller: 'accountControllerRegister'
+            controller: 'accountsControllerRegister'
         })
 
         .state('login', {
             url: '/login',
             templateUrl: '/views/partials/loginForm.html',
-            controller: 'accountControllerLogin',
+            controller: 'accountsControllerLogin',
+        })
+
+        .state('games', {
+            url: '/games',
+            templateUrl: '/views/partials/gamesList.html',
+            controller: 'gamesControllerList'
         })
 
         .state('index', {
             url: '/'
         })
+
 
 });
 
@@ -56,6 +63,10 @@ worldcup.config(['$httpProvider', function ($httpProvider) {
             }
         };
     });
+}]);
+
+worldcup.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
 }]);
 
 
