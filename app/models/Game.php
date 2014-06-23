@@ -24,18 +24,31 @@ class Game extends Eloquent {
 
     public $timestamps = false;
 
-    protected $attributes = array(
-        'team1_cote' => 0,
-        'team2_cote' => 0,
-    );
-
 
     /**
      * Table corespondant au champ caché sur les retours JSON
      *
      * @var array
      */
-    protected $hidden = array('stage_game_num', 'stage_id', 'winner_id', 'team1_id', 'team2_id', 'created_at', 'updated_at');
+    protected $hidden = array('stage_game_num', 'created_at', 'updated_at');
+
+    /**
+     * Liste des champs qui peuvent servir de filter dans l'url
+     *
+     * @var array
+     */
+    public $filters = array('team1_id',
+        'team2_id',
+        'stage_id',
+        'team1_goals',
+        'team2_goals',
+        'team1_kick_at_goal',
+        'team2_kick_at_goal',
+        'team1_tmp_name',
+        'team2_tmp_name',
+        'winner_id',
+        'stage_game_num',
+        'date');
 
     /**
      * Tableau indiquant les sous élements à imbriquer

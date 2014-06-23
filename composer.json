@@ -6,7 +6,7 @@
 	"require": {
 		"laravel/framework": "4.2.*",
         "rhumsaa/uuid": "2.8.*@dev"
-	},
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",

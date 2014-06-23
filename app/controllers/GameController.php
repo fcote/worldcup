@@ -25,7 +25,7 @@ class GameController extends BaseController {
     {
         return Response::json(
             array('success' => true,
-                'payload' => Game::get()->toArray(),
+                'payload' => $this->query_params(new Game())->toArray(),
             ));
     }
 
@@ -36,7 +36,6 @@ class GameController extends BaseController {
      */
     public function show($id)
     {
-
         return Response::json(
             array('success' => true,
                 'payload' => Game::find($id)->toArray(),
