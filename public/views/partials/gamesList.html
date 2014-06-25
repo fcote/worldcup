@@ -1,15 +1,44 @@
-<div class="games">
-    <div class="container">
-        <div class="game">
-            <div class="team1">
-                <img src="" alt=""/>
+<div class="container" ng-show="isConnected">
+    <div class="col-lg-12">
+        <ul class="nav nav-pills">
+            <li class="active" ><a href="#" id="filter-list" ng-click="filterList()">Liste des matchs</a></li>
+            <li><a href="#" id="filter-bracket" ng-click="filterBracket()">Arbre</a></li>
+        </ul>
+        <div class="my-points">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">@@ user.points @@ points</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Transaction 1</a></li>
+                    <li><a href="#">Transaction 2</a></li>
+                    <li><a href="#">Transaction 3</a></li>
+                </ul>
             </div>
-            <div class="score">
-                <p></p>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div id="games">
+            <div class="game row" ng-repeat="game in games">
+                <div class="col-lg-4">
+                    <div class="col-md-6"><img src="/images/flags/@@ game.team1.flag @@.png" alt=""/></div>
+                    <div class="col-md-6"><h2>@@ game.team1.name @@</h2></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="col-md-5"><h3 class="goals-team1">@@ game.team1_goals @@</h3></div>
+                    <div class="col-md-2"><h3>-</h3></div>
+                    <div class="col-md-5"><h3 class="goals-team2">@@ game.team2_goals @@</h3></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="col-md-6"><h2>@@ game.team2.name @@</h2></div>
+                    <div class="col-md-6"><img src="/images/flags/@@ game.team2.flag @@.png" alt=""/></div>
+                </div>
             </div>
-            <div class="team2">
-                <img src="" alt=""/>
-            </div>
+        </div>
+        <div id="bracket">
+
         </div>
     </div>
 </div>

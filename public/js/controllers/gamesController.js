@@ -13,6 +13,24 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "$http", "serviceGame", "$rootScope", "$state", function($scope, $http, Game, $rootScope, $state) {
+    .controller('gamesControllerList', ["$scope", "$http", "serviceGame", "$cookies", "$state", function($scope, $http, Game, $cookies, $state) {
+        Game.GetNext($cookies.token)
+            .success(function(data) {
+                $scope.games = data;
+            });
+
+        $scope.filterList = function(){
+            $('#filter-bracket').parent('li').removeClass('active');
+            $('#filter-list').parent('li').addClass('active');
+            $('#bracket').hide();
+            $('#games').show();
+        };
+
+        $scope.filterBracket = function(){
+            $('#filter-list').parent('li').removeClass('active');
+            $('#filter-bracket').parent('li').addClass('active');
+            $('#games').hide();
+            $('#bracket').show();
+        };
 
     }]);

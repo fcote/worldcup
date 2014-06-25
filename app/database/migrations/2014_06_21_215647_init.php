@@ -117,9 +117,9 @@ class Init extends Migration {
 	 */
 	public function down()
 	{
+        Schema::dropIfExists('transaction');
         Schema::dropIfExists('bet');
         Schema::dropIfExists('game');
-        Schema::dropIfExists('transaction');
 
         Schema::dropIfExists('token');
         Schema::dropIfExists('user');

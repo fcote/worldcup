@@ -22,23 +22,22 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
         .state('register', {
             url: '/register',
             templateUrl: '/views/partials/registerForm.html',
-            controller: 'accountsControllerRegister'
+            controller: 'accountsControllerRegister',
+            access: accessLevels.public
         })
 
         .state('login', {
             url: '/login',
             templateUrl: '/views/partials/loginForm.html',
             controller: 'accountsControllerLogin',
-        })
-
-        .state('games', {
-            url: '/games',
-            templateUrl: '/views/partials/gamesList.html',
-            controller: 'gamesControllerList'
+            access: accessLevels.public
         })
 
         .state('index', {
-            url: '/'
+            url: '/',
+            templateUrl: '/views/partials/gamesList.html',
+            controller: 'gamesControllerList',
+            access: accessLevels.user
         })
 
 
@@ -71,6 +70,11 @@ worldcup.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 
 
 worldcup.config(function($interpolateProvider) {
-    $interpolateProvider.startSymbol('*-*');
-    $interpolateProvider.endSymbol('*-*');
+    $interpolateProvider.startSymbol('@@');
+    $interpolateProvider.endSymbol('@@');
 });
+
+$( "#filter-list" ).click(function() {
+
+});
+

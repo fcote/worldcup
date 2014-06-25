@@ -14,8 +14,18 @@
 
 angular.module('services', [])
 
-    .factory('serviceUser', function($http) {
+    .factory('serviceUser', function($http, $rootScope) {
         return {
+
+            authorize: function(accessLevel, role) {
+                if(role === undefined)
+                    if($rootScope.user != null)
+                        role = userRoles.user;
+                    else
+                        role = userRoles.public;
+
+                return accessLevel & role;
+            },
 
             getUser : function(id, token) {
                 return $http.get('/api/users/' + id + '?token=' + token);
@@ -48,6 +58,8 @@ angular.module('services', [])
 
     .factory('serviceGame', function($http) {
         return {
-
+            GetNext : function(token){
+                return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderBy=date&order=ASC');
+            }
         }
     })

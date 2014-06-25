@@ -33,7 +33,7 @@ angular.module('accountsController', [])
                     $cookies.token = data.id;
                     $cookies.user_id = data.user_id;
 
-                    $state.transitionTo("games");
+                    $state.transitionTo("index");
                 });
         };
 

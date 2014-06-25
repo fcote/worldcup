@@ -60,12 +60,11 @@
                             <li><a class="blacklink" href="#">Administration</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" ng-click="logout()">Déconnexion</a></li>
+                    <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <h1 class="title">*-* title *-*</h1>
 </div>
 
 
@@ -74,6 +73,7 @@
 
 
 <!-- ANGULARJS -->
+<script src="/js/access.js"></script>
 <script src="/js/auth.js"></script>
 <script src="/js/services.js"></script>
 <script src="/js/controllers/accountsController.js"></script>

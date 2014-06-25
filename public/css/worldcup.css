@@ -5,6 +5,11 @@
     background-color: #F8C100;
 }
 
+#loading-bar .bar{
+    background-color: #47a447;
+}
+
+
 /************************** Navbar **************************/
 
 .navbar-inverse{
@@ -18,11 +23,11 @@
 }
 
 .navbar-inverse .nav li a{
-    color: #eee;
+    color: #fff;
 }
 
 .navbar-inverse .nav li a:hover{
-    color: #eee;
+    color: #fff;
 }
 
 .navbar-inverse .nav li.dropdown.open a.dropdown-toggle{
@@ -47,8 +52,8 @@
 
 .guest img{
     display: block;
-    margin: 15px auto;
-    width: 15%;
+    margin: 25px auto;
+    width: 10%;
 }
 
 .login-form {
@@ -87,23 +92,62 @@
 
 /************************** Games **************************/
 
+#games{
+    margin-top: 50px;
+}
+
+ul.nav.nav-pills{
+    float: left;
+}
+
+ul.nav.nav-pills li a{
+    color: #333;
+}
+
+ul.nav.nav-pills li a:hover{
+    background-color: #47a447;
+    color: #fff;
+    border-radius: 2px;
+}
+
+ul.nav.nav-pills li.active a{
+    background-color: #47a447;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.my-points .btn-group{
+    float: right;
+}
+
+.my-points .btn-default{
+    background-color: #47a447;
+    border-color: #00923E;
+    border-radius: 2px;
+    color: #fff;
+}
 
 
 .game{
-    margin: 50px auto;
-    width: 80%;
+    margin-top: 50px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
 }
 
-.team1{
-    display: inline;
+
+.game h2{
+    padding: 25px 0px;
 }
 
-.team2{
-    display: inline;
+.game h3{
+    padding: 30px 0px;
+    text-align: center;
 }
 
-.score{
-    display: inline;
+.game h3.goals-team1{
+    text-align: right;
+}
+
+.game h3.goals-team2{
+    text-align: left;
 }
