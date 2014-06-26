@@ -9,6 +9,11 @@
     background-color: #47a447;
 }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 
 /************************** Navbar **************************/
 
@@ -150,4 +155,83 @@ ul.nav.nav-pills li.active a{
 
 .game h3.goals-team2{
     text-align: left;
+}
+
+.game button.btn.btn-default{
+    display: block;
+    float: none;
+    border-radius: 3px;
+    padding: 10px 25px;
+    margin: 40px auto;
+    background-color: #F8C100;
+    color: #333;
+    font-weight: bold;
+}
+
+/************************** Bets **************************/
+
+.modal-content{
+    border-radius: 2px;
+}
+
+.bet .row{
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.bet .team1{
+    float: left;
+}
+
+.bet .team2{
+    float: right;
+}
+
+.bet .modal-body img{
+    display: inline;
+    width: 50px;
+}
+
+.bet .modal-body h4{
+    display: inline;
+}
+
+.bet .modal-body select{
+    border-radius: 2px;
+}
+
+.bet .modal-body input[type="text"]{
+    border-radius: 2px;
+}
+
+.bet .modal-body input[type="text"].team{
+    width: 40px;
+    display: inline;
+    margin: 6px 0px;
+}
+
+.bet .modal-body input[type="text"].team.one{
+    float: right;
+}
+
+.bet .modal-body input[type="text"].team.two{
+    float: left;
+}
+
+.bet button.btn{
+    border-radius: 2px;
+}
+
+.bet button.btn-primary{
+    background-color: #47a447;
+    border-color: #419641;
+}
+
+.bet button.btn-warning{
+    background-color: #f0ad4e;
+}
+
+.bet .dash{
+    text-align: center;
+    margin: 12px 0px;
 }

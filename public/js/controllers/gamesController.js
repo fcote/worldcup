@@ -13,7 +13,7 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "$http", "serviceGame", "$cookies", "$state", function($scope, $http, Game, $cookies, $state) {
+    .controller('gamesControllerList', ["$scope", "$http", "serviceGame", "$cookies", "$modal", function($scope, $http, Game, $cookies, $modal) {
         Game.GetNext($cookies.token)
             .success(function(data) {
                 $scope.games = data;
@@ -33,4 +33,5 @@ angular.module('gamesController', [])
             $('#bracket').show();
         };
 
-    }]);
+    }])
+

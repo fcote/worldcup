@@ -16,6 +16,7 @@
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript" ></script>
     <script src="/bower_components/angular-cookies/angular-cookies.js" type="text/javascript"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js" type="text/javascript"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js" type="text/javascript"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -78,6 +79,7 @@
 <script src="/js/services.js"></script>
 <script src="/js/controllers/accountsController.js"></script>
 <script src="/js/controllers/gamesController.js"></script>
+<script src="/js/controllers/betsController.js"></script>
 <script src="/js/app.js"></script>
 
 

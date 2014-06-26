@@ -11,7 +11,7 @@
  * @since      0.1
  */
 
-var worldcup = angular.module('worldcup', ['ui.router', 'ngCookies', 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'auth']);
+var worldcup = angular.module('worldcup', ['ui.router', 'ngCookies', 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'betsController', 'auth']);
 
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
@@ -72,9 +72,5 @@ worldcup.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 worldcup.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('@@');
     $interpolateProvider.endSymbol('@@');
-});
-
-$( "#filter-list" ).click(function() {
-
 });
 

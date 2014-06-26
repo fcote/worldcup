@@ -58,8 +58,21 @@ angular.module('services', [])
 
     .factory('serviceGame', function($http) {
         return {
-            GetNext : function(token){
-                return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderBy=date&order=ASC');
+                GetNext : function(token){
+                    return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderBy=date&order=ASC');
+                }
+            }
+    })
+
+    .factory('serviceBet', function($http) {
+        return {
+            placeBet : function(token, userId, gameId, points, team1Goals, team2Goals){
+                return $http({
+                   method: 'POST',
+                    url: 'api/bets?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "team1_goals" : team1Goals, "team2_goals" : team2Goals})
+                });
             }
         }
     })
