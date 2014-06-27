@@ -11,6 +11,9 @@
                 <th>
                     Somme
                 </th>
+                <th>
+                    Date
+                </th>
             </thead>
             <tr ng-repeat="transaction in transactions" >
                 <td ng-show="transaction.type=='bet'" >
@@ -25,7 +28,11 @@
                 <td ng-show="transaction.type=='gain'" >
                     <font color="green" >+ @@ transaction.value @@ points</font>
                 </td>
+                <td>
+                    @@ transaction.created_at | dateToISO | date:'dd/MM/yyyy @ H:mm'@@
+                </td>
             </tr>
         </table>
+        <div class="alert alert-info" ng-show="transactions.length == 0" role="alert">Aucune transactions pour le moment !</div>
     </div>
 </div>

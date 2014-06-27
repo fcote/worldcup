@@ -43,11 +43,11 @@ angular.module('betsController', [])
             $scope.bet = {};
 
         $scope.ok = function () {
-            if(user.points > $scope.bet.points){
+            if(user.points >= $scope.bet.points){
                 $modalInstance.close(
                         Bet.placeBet($cookies.token, user.id, game.id, $scope.bet.points, $scope.bet.team1_goals, $scope.bet.team2_goals)
                             .success(function() {
-                                user.points = parseInt(user.points) - parseInt($scope.points);
+                                user.points = parseInt(user.points) - parseInt($scope.bet.points);
                             })
                 );
             }

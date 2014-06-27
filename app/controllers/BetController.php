@@ -71,6 +71,15 @@ class BetController extends BaseController {
                 ),
                 400);
 
+        //On vérifie si la date du match n'est pas dépassé
+        if(new DateTime() > new DateTime(Game::find($input['game_id'])->first()->date))
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Le date du match est dépassé !"
+                ),
+                400);
+
         $bet = Bet::whereRaw('user_id = ? && game_id = ?', array($input['user_id'], $input['game_id']))->first();
         //Si un paris sur le même match pour cet utilisateur existe, erreur envoyée.
         if($bet)
