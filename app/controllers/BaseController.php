@@ -64,7 +64,7 @@ class BaseController extends Controller {
 
             if (Input::get('limit')) $query = $query->take(Input::get('limit'))->skip(Input::get('offset'));
             if (Input::get('orderby'))	$query = $query->orderBy(Input::get('orderby'), Input::get('order'));
-            if ($query->count() == 1 || Input::get('limit') == 1) return $query->first();
+            //if ($query->count() == 1 || Input::get('limit') == 1) return $query->first();
 
             return $query->get();
         }

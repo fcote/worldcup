@@ -19,9 +19,11 @@
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js" type="text/javascript"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.bracket.min.js"></script>
 
     <!-- CUSTOM -->
     <link rel="stylesheet" type="text/css" href="/css/worldcup.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery.bracket.min.css" media="screen" />
 
     @yield('scripts')
 
@@ -68,7 +70,25 @@
     </div>
 </div>
 
-
+<div class="container" ng-hide="!exception" >
+    <div class="row">
+        <div class="large-12 columns">
+            <div data-alert class="alert-box alert radius" style="font-size: 16px;">
+                @@ exception.message @@ <small>@@ exception.type @@</small><br />
+                @@ exception.file @@ <small>@@ exception.line @@</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" ng-hide="!error" >
+    <div class="row">
+        <div class="large-12 columns">
+            <div data-alert class="alert-box warning radius" style="font-size: 16px;">
+                @@ error @@
+            </div>
+        </div>
+    </div>
+</div>
 
 @yield('content')
 
@@ -80,6 +100,7 @@
 <script src="/js/controllers/accountsController.js"></script>
 <script src="/js/controllers/gamesController.js"></script>
 <script src="/js/controllers/betsController.js"></script>
+<script src="/js/controllers/transactionsController.js"></script>
 <script src="/js/app.js"></script>
 
 

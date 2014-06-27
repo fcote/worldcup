@@ -1,6 +1,6 @@
 angular.module('auth', [])
 
-    .run(["$rootScope", "serviceUser", "$state", "$cookies", function($rootScope, User, $state, $cookies) {
+    .run(["$rootScope", "serviceUser", "serviceTransaction", "$state", "$cookies", function($rootScope, User, Transaction, $state, $cookies) {
 
         if($cookies.token != null){
             $rootScope.isConnected = true;

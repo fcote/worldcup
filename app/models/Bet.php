@@ -22,12 +22,25 @@ class Bet extends Eloquent {
     protected $table = 'bet';
 
     /**
+     * Tableau indiquant les sous élements à imbriquer
+     *
+     * @var array
+     */
+    protected $with = array('game');
+
+    /**
      * Liste des champs assignable en masse
      *
      * @var array
      */
     protected $fillable = array('user_id', 'game_id', 'points', 'team1_goals', 'team2_goals');
 
+    /**
+     * Liste des champs qui peuvent servir de filter dans l'url
+     *
+     * @var array
+     */
+    public $filters = array('game_id', 'user_id', 'points', 'team1_goals', 'team2_goals');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -35,6 +48,16 @@ class Bet extends Eloquent {
      * @var array
      */
     protected $hidden = array('updated_at');
+
+    /**
+     * Récupère l'objet Match indiqué
+     *
+     * @var Stage
+     */
+    public function game()
+    {
+        return $this->belongsTo('Game', 'game_id', 'id');
+    }
 
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql

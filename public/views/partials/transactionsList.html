@@ -1,0 +1,31 @@
+<div class="transactions">
+    <div class="modal-header">
+        <h3 class="modal-title">Liste des transactions sur votre compte</h3>
+    </div>
+    <div class="modal-body">
+        <table class="table">
+            <thead>
+                <th>
+                    Intitulé de l'opération
+                </th>
+                <th>
+                    Somme
+                </th>
+            </thead>
+            <tr ng-repeat="transaction in transactions" >
+                <td ng-show="transaction.type=='bet'" >
+                    Pari sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
+                </td>
+                <td ng-show="transaction.type=='gain'" >
+                    Gains sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
+                </td>
+                <td ng-show="transaction.type=='bet'" >
+                    <font color="red" >- @@ transaction.value @@ points</font>
+                </td>
+                <td ng-show="transaction.type=='gain'" >
+                    <font color="green" >+ @@ transaction.value @@ points</font>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

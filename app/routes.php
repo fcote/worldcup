@@ -35,6 +35,9 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
     Route::resource('bets', 'BetController',
         array('only' => array('index', 'show', 'store')));
+
+    Route::resource('bracket', 'BracketController',
+        array('only' => array('index')));
 });
 
 // =============================================

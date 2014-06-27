@@ -7,20 +7,22 @@
             <div class="col-lg-5">
                 <img src="/images/flags/@@ game.team1.flag @@.png"/>
                 <h4>@@ game.team1.name @@</h4>
-                <input ng-model="bet.team1_goals" type="text" class="form-control team one" required/>
+
+                <input ng-model="bet.team1_goals" ng-disabled="bet.id != null" type="text" class="form-control team one" required/>
             </div>
             <div class="col-lg-2 dash"> - </div>
             <div class="col-lg-5">
-                <input ng-model="bet.team2_goals" type="text" class="form-control team two" required/>
+                <input ng-model="bet.team2_goals" ng-disabled="bet.id != null" type="text" class="form-control team two" required/>
+
                 <div class="team2">
                     <h4>@@ game.team2.name @@</h4>
                     <img src="/images/flags/@@ game.team2.flag @@.png"/>
                 </div>
             </div>
         </div>
-        <input ng-model="bet.points" type="text" class="form-control" placeholder="Points à miser" required/>
+        <input ng-model="bet.points" ng-disabled="bet.id != null" type="text" class="form-control" placeholder="Points à miser" required/>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer" ng-hide="bet.id != null">
         <button class="btn btn-primary" ng-click="ok()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
     </div>

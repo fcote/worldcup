@@ -64,6 +64,22 @@ angular.module('services', [])
             }
     })
 
+    .factory('serviceTransaction', function($http) {
+        return {
+            GetTransactions : function(token){
+                return $http.get('api/transactions?token=' + token + '&orderby=updated_at&order=DESC');
+            }
+        }
+    })
+
+    .factory('serviceBracket', function($http) {
+        return {
+            GetBracket : function(token){
+                return $http.get('api/bracket?token=' + token);
+            }
+        }
+    })
+
     .factory('serviceBet', function($http) {
         return {
             placeBet : function(token, userId, gameId, points, team1Goals, team2Goals){
@@ -73,6 +89,9 @@ angular.module('services', [])
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "team1_goals" : team1Goals, "team2_goals" : team2Goals})
                 });
+            },
+            GetBet : function(token, gameId){
+                return $http.get('api/bets?token=' + token + '&game_id=' + gameId);
             }
         }
     })

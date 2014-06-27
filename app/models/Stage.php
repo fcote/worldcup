@@ -29,7 +29,7 @@ class Stage extends Eloquent {
      *
      * @var array
      */
-    protected $hidden = array('next_stage', 'created_at', 'updated_at');
+    protected $hidden = array('created_at', 'updated_at');
 
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql

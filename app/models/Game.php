@@ -104,11 +104,13 @@ class Game extends Eloquent {
      */
     public function getTeam1CoteAttribute()
     {
-        $sumPoints = Bet::whereRaw('team1_goals != NULL && team2_goals != NULL && game_id = ? && team1_goals < team2_goals', array($this->id))->sum('points');
+        $sumPoints = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->sum('points');
         $sumBet = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->count();
 
         if($sumPoints != 0 && $sumBet != 0)
             return $sumPoints/$sumBet;
+        if($sumPoints != 0 && $sumBet == 0)
+            return $sumPoints;
         else
             return 0;
     }
@@ -120,11 +122,13 @@ class Game extends Eloquent {
      */
     public function getTeam2CoteAttribute()
     {
-        $sumPoints = Bet::whereRaw('team1_goals != NULL && team2_goals != NULL && game_id = ? && team1_goals > team2_goals', array($this->id))->sum('points');
+        $sumPoints = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->sum('points');
         $sumBet = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->count();
 
         if($sumPoints != 0 && $sumBet != 0)
             return $sumPoints/$sumBet;
+        if($sumPoints != 0 && $sumBet == 0)
+            return $sumPoints;
         else
             return 0;
     }

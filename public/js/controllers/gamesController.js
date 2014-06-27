@@ -13,11 +13,19 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "$http", "serviceGame", "$cookies", "$modal", function($scope, $http, Game, $cookies, $modal) {
-        Game.GetNext($cookies.token)
-            .success(function(data) {
-                $scope.games = data;
-            });
+    .controller('gamesControllerList', ["$scope", "$http", "serviceGame", "$cookies", "$modal", "games", "bracket", function($scope, $http, Game, $cookies, $modal, games, bracket) {
+        $scope.games = games.data;
+
+        $('#bracket').bracket({
+            init: bracket.data, /* data to initialize the bracket with */
+            decorator: {
+                edit: acRenderFn,
+                render: acRenderFn
+            }
+        })
+
+        $('#bracket').hide();
+        $('#games').show();
 
         $scope.filterList = function(){
             $('#filter-bracket').parent('li').removeClass('active');
@@ -35,3 +43,10 @@ angular.module('gamesController', [])
 
     }])
 
+function acRenderFn(container, data, score) {
+    if (!data.flag || !data.name)
+        container.append(data.tmp)
+    else{
+        container.append('<img width="15px" src="/images/flags/'+data.flag+'.png" /> ').append(data.name)
+    }
+}
