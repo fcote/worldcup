@@ -55,7 +55,7 @@ angular.module('services', [])
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param({"email" : email, "password" : pass, "firstname" : first, "lastname" : last})
                 });
-            }
+            },
 
         }
     })

@@ -18,12 +18,7 @@ angular.module('auth', [])
                     .success(function(data) {
                         $rootScope.user = data;
                     });
-                User.getRanking($cookies.token)
-                    .success(function(data) {
-                        $rootScope.users = data;
-                    });
             }
-
 
 
             if (!User.authorize(toState.access)) {
@@ -60,13 +55,5 @@ angular.module('auth', [])
                     $cookieStore.remove('token');
                     $cookieStore.remove('user_id');
                 });
-        }
-
-        $scope.ranking = function(){
-            User.getRanking($cookies.token)
-                .success(function(data){
-                    $rootScope.users = data;
-                    $state.transitionTo("ranking")
-                })
         }
     }]);

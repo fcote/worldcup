@@ -1,0 +1,42 @@
+<div class="account">
+    <div class="modal-header">
+        <h2 class="modal-title">Mon compte</h2>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-5"><label>Email :</label></div>
+                <div class="col-lg-7"><input type="text" ng-model="userData.email" class="form-control" placeholder="@@ user.email @@"/></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-5"><label>Ancien mot de passe :</label></div>
+                <div class="col-lg-7"><input type="password" ng-model="oldpassword" class="form-control"/></div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-5"><label>Nouveau mot de passe :</label></div>
+                <div class="col-lg-7"><input type="password" ng-model="newpassword" class="form-control"/></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-5"><label>Prénom :</label></div>
+                <div class="col-lg-7"><input type="text" ng-model="userData.firstname" class="form-control" placeholder="@@ user.firstname @@"/></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-5"><label>Nom :</label></div>
+                <div class="col-lg-7"><input type="text" ng-model="userData.lastname" class="form-control" placeholder="@@ user.lastname @@"/></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+    </div>
+</div>

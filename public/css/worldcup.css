@@ -137,7 +137,6 @@ header{
 
 /************************** Games / Ranking **************************/
 
-#ranking-panel,
 #games-panel{
     position: relative;
     margin-top: 125px;
@@ -145,7 +144,10 @@ header{
     padding-top: 20px;
 }
 
-#ranking-list,
+#account-panel{
+    width: 40%;
+}
+
 #games-list{
     background-color: #fff;
     box-shadow: 0px 4px 2px #aaa;
@@ -198,8 +200,7 @@ ul.nav.nav-pills li.active a{
     color: #fff;
 }
 
-.bracket-header,
-.ranking-header,
+
 .game-header{
     background-color: #333;
     color: #fff;
@@ -208,7 +209,7 @@ ul.nav.nav-pills li.active a{
     border-bottom: 2px solid #aaa;
 }
 
-.user,
+
 .game{
     margin-bottom: 30px;
     border-top: 1px solid #eee;
@@ -228,7 +229,7 @@ ul.nav.nav-pills li.active a{
     padding: 25px 0px;
 }
 
-.game h2.stage{
+.game h2.subheader{
     padding: 0;
 }
 
@@ -263,6 +264,38 @@ ul.nav.nav-pills li.active a{
 
 .game .label{
     margin: 0 10px;
+}
+
+/************************** Ranking *************************/
+
+.users .table h3{
+    display: inline-block;
+    padding: 5px 5px;
+}
+
+.users .table img{
+    display: inline-block;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+}
+
+/************************** Account *************************/
+
+.account .row{
+    margin-bottom: 15px;
+}
+
+.account label{
+    display: inline;
+}
+
+.account input{
+    display: inline;
+    border-radius: 2px;
+}
+
+.account input[type="text"]{
+
 }
 
 /************************** Bracket *************************/

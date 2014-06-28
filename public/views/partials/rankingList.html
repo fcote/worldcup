@@ -1,23 +1,27 @@
-<div class="container" id="ranking-panel" ng-show="isConnected">
-    <div class="col-lg-12 ranking-header">
-        <h2 class="stage">Classement</h2>
+<div class="users">
+    <div class="modal-header">
+        <h3 class="modal-title">Classement</h3>
     </div>
-    <div class="col-lg-12" id="ranking-list">
-        <div id="users">
-            <table class="table">
-                <thead>
-                    <th>Position</th>
-                    <th>Points</th>
-                    <th>Utilisateur</th>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="user in users">
-                        <td><h3>@@ $index + 1 @@</h3></td>
-                        <td><h3>@@ user.points @@</h3></td>
-                        <td><h3>@@ user.firstname @@ @@ user.lastname @@</h3></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="modal-body">
+        <table class="table">
+            <thead>
+                <th>Position</th>
+                <th>Points</th>
+                <th>Utilisateur</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td>
+                        <h3>@@ $index + 1 @@</h3>
+                        <img src="/images/medals/medal1.png" ng-show="$index + 1 == 1"/>
+                        <img src="/images/medals/medal2.png" ng-show="$index + 1 == 2"/>
+                        <img src="/images/medals/medal3.png" ng-show="$index + 1 == 3"/>
+                    </td>
+                    <td><h3>@@ user.points @@</h3></td>
+                    <td><h3>@@ user.firstname @@ @@ user.lastname @@</h3></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+

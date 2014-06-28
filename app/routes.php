@@ -19,13 +19,14 @@
 //Permet la connexion, création et déconnexion d'un compte utilisateur
 Route::get('/api/users/logout', array('before' => 'token', 'uses' => 'AuthController@logout'));
 Route::post('/api/users/login', 'AuthController@login');
+Route::post('/api/users/updateMail/{id}', 'AuthController@updateMail');
 Route::post('/api/users/', 'UserController@store');
 
 //Tout les ressources disponibles avec un token
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
     Route::resource('users', 'UserController',
-        array('only' => array('index', 'show')));
+        array('only' => array('index', 'show', 'update')));
 
     Route::resource('games', 'GameController',
         array('only' => array('index', 'show')));

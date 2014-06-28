@@ -11,7 +11,7 @@
  * @since      0.1
  */
 
-var worldcup = angular.module('worldcup', ['ui.router', 'ngCookies', 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'auth']);
+var worldcup = angular.module('worldcup', ['ui.router', 'ngCookies', 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'usersController', 'auth']);
 
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
@@ -34,10 +34,9 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
             access: accessLevels.public
         })
 
-        .state('ranking', {
-            url: '/ranking',
-            templateUrl: '/views/partials/rankingList.html',
-            controller: 'mainController',
+        .state('account', {
+            url: '/account',
+            templateUrl: '/views/partials/accountForm.html',
             access: accessLevels.user
         })
 
@@ -52,6 +51,9 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
                 }],
                 bracket: [ "serviceBracket", "$cookies", function(Bracket, $cookies){
                     return Bracket.GetBracket($cookies.token);
+                }],
+                users: ["serviceUser", "$cookies", function(User, $cookies){
+                    return User.getRanking($cookies.token);
                 }]
             }
         })
