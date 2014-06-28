@@ -41,7 +41,7 @@ class Init extends Migration {
         {
             $table->increments('id')->unsigned();
             $table->string('name', 255);
-            $table->string('code', 2);
+            $table->string('code', 3);
         });
 
 

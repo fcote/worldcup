@@ -192,6 +192,7 @@ class Game extends Eloquent {
         else
             $game->team2_id = $this->winner_id;
 
+        $game->save();
         $this->save();
     }
 

@@ -44,6 +44,38 @@ class UserController extends BaseController {
     }
 
     /**
+     * Met à jour un bt
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        $input = Input::all();
+        $input['password'] = Hash::make($input['password']);
+
+        $validator = Validator::make($input, User::$rules);
+
+        if ($validator->fails())
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => $this->errorsArraytoString($validator->messages())
+                ),
+                400);
+
+        $user = User::find($id);
+
+        $user->fill($input);
+        $user->save();
+
+        return Response::json(
+            array('success' => true,
+                'payload' => $user->toArray(),
+            ));
+    }
+
+    /**
      * Enregistre un nouvel utilisateur
      *
      * @return Response
@@ -64,6 +96,8 @@ class UserController extends BaseController {
                 400);
 
         $user = User::create($input);
+        $user->points = Config::get('app.points');
+        $user->save();
 
         return Response::json(
             array('success' => true,
