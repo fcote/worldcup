@@ -25,52 +25,52 @@ class TeamTableSeeder extends Seeder {
         DB::table('team')->delete();
 
         //Groupe A
-        Team::create(array('name' => 'Brésil', 'flag' => 'BR'));
-        Team::create(array('name' => 'Mexique', 'flag' => 'MX'));
-        Team::create(array('name' => 'Croatie', 'flag' => 'HR'));
-        Team::create(array('name' => 'Cameroun', 'flag' => 'CM'));
+        Team::create(array('name' => 'Brésil', 'code' => 'BRA'));
+        Team::create(array('name' => 'Mexique', 'code' => 'MEX'));
+        Team::create(array('name' => 'Croatie', 'code' => 'CRO'));
+        Team::create(array('name' => 'Cameroun', 'code' => 'CMR'));
 
         //Groupe B
-        Team::create(array('name' => 'Pays-Bas', 'flag' => 'NL'));
-        Team::create(array('name' => 'Chili', 'flag' => 'CL'));
-        Team::create(array('name' => 'Australie', 'flag' => 'AU'));
-        Team::create(array('name' => 'Espagne', 'flag' => 'ES'));
+        Team::create(array('name' => 'Pays-Bas', 'code' => 'NED'));
+        Team::create(array('name' => 'Chili', 'code' => 'CHI'));
+        Team::create(array('name' => 'Australie', 'code' => 'AUS'));
+        Team::create(array('name' => 'Espagne', 'code' => 'ESP'));
 
         //Groupe C
-        Team::create(array('name' => 'Colombie', 'flag' => 'CO'));
-        Team::create(array('name' => 'Côte d\'ivoire', 'flag' => 'CI'));
-        Team::create(array('name' => 'Japon', 'flag' => 'JP'));
-        Team::create(array('name' => 'Grèce', 'flag' => 'GR'));
+        Team::create(array('name' => 'Colombie', 'code' => 'COL'));
+        Team::create(array('name' => 'Côte d\'ivoire', 'code' => 'CIV'));
+        Team::create(array('name' => 'Japon', 'code' => 'JPN'));
+        Team::create(array('name' => 'Grèce', 'code' => 'GRE'));
 
         //Groupe D
-        Team::create(array('name' => 'Costa Rica', 'flag' => 'CR'));
-        Team::create(array('name' => 'Italie', 'flag' => 'IT'));
-        Team::create(array('name' => 'Uruguay', 'flag' => 'UY'));
-        Team::create(array('name' => 'Angleterre', 'flag' => 'GB'));
+        Team::create(array('name' => 'Costa Rica', 'code' => 'CRC'));
+        Team::create(array('name' => 'Italie', 'code' => 'ITA'));
+        Team::create(array('name' => 'Uruguay', 'code' => 'URU'));
+        Team::create(array('name' => 'Angleterre', 'code' => 'ENG'));
 
         //Groupe E
-        Team::create(array('name' => 'France', 'flag' => 'FR'));
-        Team::create(array('name' => 'Équateur', 'flag' => 'EC'));
-        Team::create(array('name' => 'Suisse', 'flag' => 'CH'));
-        Team::create(array('name' => 'Honduras', 'flag' => 'HN'));
+        Team::create(array('name' => 'France', 'code' => 'FRA'));
+        Team::create(array('name' => 'Équateur', 'code' => 'ECU'));
+        Team::create(array('name' => 'Suisse', 'code' => 'SUI'));
+        Team::create(array('name' => 'Honduras', 'code' => 'HON'));
 
         //Groupe F
-        Team::create(array('name' => 'Argentine', 'flag' => 'AR'));
-        Team::create(array('name' => 'Nigeria', 'flag' => 'NG'));
-        Team::create(array('name' => 'Iran', 'flag' => 'IR'));
-        Team::create(array('name' => 'Bosnie-Herzégovine', 'flag' => 'BA'));
+        Team::create(array('name' => 'Argentine', 'code' => 'ARG'));
+        Team::create(array('name' => 'Nigeria', 'code' => 'NGA'));
+        Team::create(array('name' => 'Iran', 'code' => 'IRN'));
+        Team::create(array('name' => 'Bosnie-Herzégovine', 'code' => 'BIH'));
 
         //Groupe G
-        Team::create(array('name' => 'Allemagne', 'flag' => 'DE'));
-        Team::create(array('name' => 'États-Unis', 'flag' => 'US'));
-        Team::create(array('name' => 'Ghana', 'flag' => 'GH'));
-        Team::create(array('name' => 'Portugal', 'flag' => 'PT'));
+        Team::create(array('name' => 'Allemagne', 'code' => 'GER'));
+        Team::create(array('name' => 'États-Unis', 'code' => 'USA'));
+        Team::create(array('name' => 'Ghana', 'code' => 'GHA'));
+        Team::create(array('name' => 'Portugal', 'code' => 'POR'));
 
         //Groupe H
-        Team::create(array('name' => 'Belgique', 'flag' => 'BE'));
-        Team::create(array('name' => 'Corée du Sud', 'flag' => 'KR'));
-        Team::create(array('name' => 'Russie', 'flag' => 'RU'));
-        Team::create(array('name' => 'Algérie', 'flag' => 'DZ'));
+        Team::create(array('name' => 'Belgique', 'code' => 'BEL'));
+        Team::create(array('name' => 'Corée du Sud', 'code' => 'KOR'));
+        Team::create(array('name' => 'Russie', 'code' => 'RUS'));
+        Team::create(array('name' => 'Algérie', 'code' => 'ALG'));
     }
 
 }
@@ -82,9 +82,9 @@ class StageTableSeeder extends Seeder {
         DB::table('stage')->delete();
 
         Stage::create(array('name' => 'Finale'));
-        Stage::create(array('name' => 'Demi', 'next_stage' => 1));
-        Stage::create(array('name' => 'Quarts', 'next_stage' => 2));
-        Stage::create(array('name' => '8e', 'next_stage' => 3));
+        Stage::create(array('name' => '1/2 finale', 'next_stage' => 1));
+        Stage::create(array('name' => '1/4 de finale', 'next_stage' => 2));
+        Stage::create(array('name' => '1/8 de finale', 'next_stage' => 3));
     }
 
 }

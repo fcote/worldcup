@@ -32,13 +32,13 @@ class Bracket extends Eloquent {
 
             $team1 = array(
                 "name" => ($value->team1()->first() != null)?$value->team1()->first()->name:"",
-                "flag" => ($value->team1()->first() != null)?$value->team1()->first()->flag:"",
+                "flag" => ($value->team1()->first() != null)?$value->team1()->first()->code:"",
                 "tmp" => $value->team1_tmp_name
             );
 
             $team2 = array(
                 "name" => ($value->team2()->first() != null)?$value->team2()->first()->name:"",
-                "flag" => ($value->team2()->first() != null)?$value->team2()->first()->flag:"",
+                "flag" => ($value->team2()->first() != null)?$value->team2()->first()->code:"",
                 "tmp" => $value->team2_tmp_name
             );
 
