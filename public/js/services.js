@@ -31,6 +31,10 @@ angular.module('services', [])
                 return $http.get('/api/users/' + id + '?token=' + token);
             },
 
+            getRanking : function(token) {
+              return $http.get('/api/users?token=' + token + '&orderby=points&order=DESC');
+            },
+
             login : function(email, pass) {
                 return $http({
                     method: 'POST',
@@ -58,10 +62,10 @@ angular.module('services', [])
 
     .factory('serviceGame', function($http) {
         return {
-                GetNext : function(token){
-                    return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderBy=date&order=ASC');
-                }
+            GetNext : function(token){
+                return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderby=date&order=ASC');
             }
+        }
     })
 
     .factory('serviceTransaction', function($http) {

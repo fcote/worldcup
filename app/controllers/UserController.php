@@ -25,7 +25,7 @@ class UserController extends BaseController {
     {
         return Response::json(
             array('success' => true,
-                'payload' => User::get()->toArray(),
+                'payload' => $this->query_params(new User())->toArray(),
             ));
     }
 
