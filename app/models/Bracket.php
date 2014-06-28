@@ -68,7 +68,7 @@ class Bracket extends Eloquent {
                     $games[] = array($value->team1_goals, $value->team2_goals, $value->team1_goals.' - '.$value->team2_goals);
             }
 
-            $next_stage_id = Stage::find($next_stage_id)->first()->next_stage;
+            $next_stage_id = Stage::find($next_stage_id)->next_stage;
             $this->result[] = $games;
         }
     }
