@@ -5,15 +5,9 @@
     <div class="modal-body">
         <table class="table">
             <thead>
-                <th>
-                    Intitulé de l'opération
-                </th>
-                <th>
-                    Somme
-                </th>
-                <th>
-                    Date
-                </th>
+                <th>Intitulé de l'opération</th>
+                <th>Somme</th>
+                <th>Date</th>
             </thead>
             <tr ng-repeat="transaction in transactions" >
                 <td ng-show="transaction.type=='bet'" >
@@ -29,7 +23,7 @@
                     <font color="green" >+ @@ transaction.value @@ points</font>
                 </td>
                 <td>
-                    @@ transaction.created_at | dateToISO | date:'dd/MM/yyyy @ H:mm'@@
+                    @@ transaction.created_at | dateToISO | date:'dd/MM/yyyy à H:mm'@@h
                 </td>
             </tr>
         </table>

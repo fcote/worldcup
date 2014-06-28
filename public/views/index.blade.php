@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('body')
-ng-app="worldcup" ng-controller="authController"
+ng-app="worldcup" ng-controller="mainController"
 @stop
 
 @section('content')

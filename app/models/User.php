@@ -38,6 +38,16 @@ class User extends Eloquent {
     protected $hidden = array('password');
 
     /**
+     * Liste des champs qui peuvent servir de filter dans l'url
+     *
+     * @var array
+     */
+    public $filters = array('email',
+        'firstname',
+        'lastname',
+        'points');
+
+    /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
      * @var array

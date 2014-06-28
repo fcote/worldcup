@@ -6,7 +6,12 @@
 }
 
 #loading-bar .bar{
-    background-color: #47a447;
+    background-color: #fff;
+}
+
+#loading-bar-spinner .spinner-icon {
+    border-top-color:  #fff;
+    border-left-color: #fff;
 }
 
 .col-centered{
@@ -14,22 +19,51 @@
     margin: 0 auto;
 }
 
+.container{
+    width: 1170px;
+}
 
 /************************** Navbar **************************/
 
-.navbar-inverse{
-    margin-top: 30px;
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 400px;
+    width: 100%;
+    border-bottom: 2px solid #333;
     background-color: #47a447;
+    z-index: -1;
+}
+
+.navbar-inverse{
+    height: 90px;
+    margin-top: 10px;
+    margin-left: 15px;
+    background-color: transparent;
     border: none;
     border-radius: 0px;
     border-color: #fff;
     border-width: 1px;
-    color: #fff;
+    color: #333;
 }
 
 .navbar-inverse .nav li a{
     color: #fff;
 }
+
+.navbar-inverse .nav li a .fa{
+    font-size: 18px;
+}
+
+.navbar-inverse .nav li a .fa.fa-users{
+    font-size: 16px;
+}
+
+.navbar-inverse .nav li a .fa:hover{
+    color: #eee;
+}
+
 
 .navbar-inverse .nav li a:hover{
     color: #fff;
@@ -71,6 +105,7 @@
     border-radius: 0;
     background-color: #F8C100;
     border: none;
+    margin-bottom: 10px;
 }
 
 .login-form button:hover{
@@ -95,10 +130,40 @@
     margin-bottom: 10px;
 }
 
-/************************** Games **************************/
+.login-form a{
+    text-decoration: none;
+    color: #F8C100;
+}
 
-#games{
-    margin-top: 50px;
+/************************** Games / Ranking **************************/
+
+#ranking-panel,
+#games-panel{
+    position: relative;
+    margin-top: 125px;
+    z-index: 10;
+    padding-top: 20px;
+}
+
+#ranking-list,
+#games-list{
+    background-color: #fff;
+    box-shadow: 0px 4px 2px #aaa;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+#games-list .jumbotron{
+    margin-top: 15px;
+    border-radius: 2px;
+}
+
+#menu-games{
+    position: relative;
+    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 1px;
 }
 
 ul.nav.nav-pills{
@@ -126,21 +191,45 @@ ul.nav.nav-pills li.active a{
 }
 
 .my-points .btn-default{
+    margin-top: 2px;
     background-color: #47a447;
     border-color: #00923E;
     border-radius: 2px;
     color: #fff;
 }
 
+.bracket-header,
+.ranking-header,
+.game-header{
+    background-color: #333;
+    color: #fff;
+    height: 80px;
+    padding: 5px 30px;
+    border-bottom: 2px solid #aaa;
+}
 
+.user,
 .game{
+    margin-bottom: 30px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
+}
+
+.user{
+    text-align: center;
+}
+
+.game:first-child{
+    border-top: none;
 }
 
 
 .game h2{
     padding: 25px 0px;
+}
+
+.game h2.stage{
+    padding: 0;
 }
 
 .game h3{
@@ -164,13 +253,21 @@ ul.nav.nav-pills li.active a{
     margin: 40px auto;
     margin-bottom:20px;
     background-color: #F8C100;
-    color: #333;
+    color: #222;
     font-weight: bold;
 }
 
-/************************** GAMES *************************/
+.game .col-md-6 img{
+    margin: 0 auto;
+}
+
+.game .label{
+    margin: 0 10px;
+}
+
+/************************** Bracket *************************/
 #bracket {
-    padding:20px;
+    padding:30px;
 }
 
 /************************** Bets **************************/
@@ -210,7 +307,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .modal-body input[type="text"].team{
-    width: 40px;
+    width: 45px;
     display: inline;
     margin: 6px 0px;
 }

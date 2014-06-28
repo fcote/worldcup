@@ -13,7 +13,7 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "$http", "serviceGame", "$cookies", "$modal", "games", "bracket", function($scope, $http, Game, $cookies, $modal, games, bracket) {
+    .controller('gamesControllerList', ["$scope", "games", "bracket", function($scope, games, bracket) {
         $scope.games = games.data;
 
         $('#bracket').bracket({
@@ -30,14 +30,18 @@ angular.module('gamesController', [])
         $scope.filterList = function(){
             $('#filter-bracket').parent('li').removeClass('active');
             $('#filter-list').parent('li').addClass('active');
+            $('.bracket-header').hide();
             $('#bracket').hide();
+            $('.game-header').show();
             $('#games').show();
         };
 
         $scope.filterBracket = function(){
             $('#filter-list').parent('li').removeClass('active');
             $('#filter-bracket').parent('li').addClass('active');
+            $('.game-header').hide();
             $('#games').hide();
+            $('.bracket-header').show();
             $('#bracket').show();
         };
 

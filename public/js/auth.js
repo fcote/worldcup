@@ -17,8 +17,14 @@ angular.module('auth', [])
                 User.getUser($cookies.user_id, $cookies.token)
                     .success(function(data) {
                         $rootScope.user = data;
-                    })
+                    });
+                User.getRanking($cookies.token)
+                    .success(function(data) {
+                        $rootScope.users = data;
+                    });
             }
+
+
 
             if (!User.authorize(toState.access)) {
                 if(!$rootScope.isConnected)event.preventDefault();
@@ -35,7 +41,7 @@ angular.module('auth', [])
 
             if($rootScope.isConnected != null){
                 if($rootScope.isConnected){
-                    $('body').css("background-color", "#fff");
+                    $('body').css("background-color", "#f5f5f5");
                 }else{
                     $('body').css("background-color", "#333");
                     $state.transitionTo('login');
@@ -44,7 +50,7 @@ angular.module('auth', [])
         })
     }])
 
-    .controller('authController', ["$rootScope", "$scope", "serviceUser", "$cookies", "$cookieStore", function($rootScope, $scope, User, $cookies, $cookieStore) {
+    .controller('mainController', ["$rootScope", "$scope", "serviceUser", "$cookies", "$cookieStore", "$state", function($rootScope, $scope, User, $cookies, $cookieStore, $state) {
 
         $scope.logout = function(){
             User.logout($cookies.token)
@@ -56,4 +62,11 @@ angular.module('auth', [])
                 });
         }
 
+        $scope.ranking = function(){
+            User.getRanking($cookies.token)
+                .success(function(data){
+                    $rootScope.users = data;
+                    $state.transitionTo("ranking")
+                })
+        }
     }]);
