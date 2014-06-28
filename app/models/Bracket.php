@@ -62,10 +62,13 @@ class Bracket extends Eloquent {
             $games = array();
 
             foreach(Game::whereRaw('stage_id = ?', array($next_stage_id))->orderBy('stage_game_num', 'ASC')->get() as $value){
-                if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
-                    $games[] = array($value->team1_goals+$value->team1_kick_at_goal, $value->team2_goals+$value->team2_kick_at_goal, $value->team1_goals.' - '.$value->team2_goals.', t.a.b : '.$value->team1_kick_at_goal.' - '.$value->team2_kick_at_goal);
-                else
-                    $games[] = array($value->team1_goals, $value->team2_goals, $value->team1_goals.' - '.$value->team2_goals);
+                if($value->winner_id != null){
+                    if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
+                        $games[] = array($value->team1_goals+$value->team1_kick_at_goal, $value->team2_goals+$value->team2_kick_at_goal);
+                    else
+                        $games[] = array($value->team1_goals, $value->team2_goals);
+                }
+                    $gammes[] = array(null, null);
             }
 
             $next_stage_id = Stage::find($next_stage_id)->next_stage;

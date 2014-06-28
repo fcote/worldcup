@@ -21,8 +21,7 @@ angular.module('gamesController', [])
             decorator: {
                 edit: acRenderFn,
                 render: acRenderFn
-            },
-            onMatchHover: onhover
+            }
         })
 
         $('#bracket').hide();
@@ -54,11 +53,4 @@ function acRenderFn(container, data, score) {
     else{
         container.append('<img width="15px" src="/images/flags/'+data.flag+'.png" /> ').append(data.name)
     }
-}
-
-function onhover(data, hover) {
-    if(hover)
-        $('.team.highlight').tooltip({'title' : data});
-    else
-        $('.team.highlight').tooltip('destroy');
 }

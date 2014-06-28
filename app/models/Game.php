@@ -149,13 +149,13 @@ class Game extends Eloquent {
 
             if($sumPoints != 0 && $sumBet != 0){
                 foreach(Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->get() as $bet){
-                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                    Transaction::addTransaction($bet->user_id, $bet->id, ($sumPoints/$sumBet) + $bet->points, 'gain');
                 }
             }
 
             if($sumBet2 == 0){
                 foreach(Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->get() as $bet){
-                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                    Transaction::addTransaction($bet->user_id, $bet->id, $bet->points, 'gain');
                 }
             }
 
@@ -169,13 +169,13 @@ class Game extends Eloquent {
 
             if($sumPoints != 0 && $sumBet != 0){
                 foreach(Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->get() as $bet){
-                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                    Transaction::addTransaction($bet->user_id, $bet->id, ($sumPoints/$sumBet) + $bet->points, 'gain');
                 }
             }
 
             if($sumBet2 == 0){
                 foreach(Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->get() as $bet){
-                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                    Transaction::addTransaction($bet->user_id, $bet->id, $bet->points, 'gain');
                 }
             }
 
@@ -192,7 +192,6 @@ class Game extends Eloquent {
         else
             $game->team2_id = $this->winner_id;
 
-        $game->save();
         $this->save();
     }
 
