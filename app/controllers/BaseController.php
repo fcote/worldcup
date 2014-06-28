@@ -25,9 +25,11 @@ class BaseController extends Controller {
             $columns = $query->filters;
 
             if($columns != null){
+
                 $i = 0;
-                foreach (Input::get() as $key => $param)
+                foreach ($_GET as $key => $param)
                 {
+
                     if(substr($key, strlen($key)-1, 1) == "!"){
                         $key = substr($key, 0, strlen($key)-1);
 

@@ -25,7 +25,7 @@ class TransactionController extends BaseController {
     {
         $user = User::getUserWithToken($_GET['token']);
         $transaction = new Transaction();
-        $transaction->where('user_id', $user->id, "AND");
+        $_GET['user_id'] = $user->id;
 
         return Response::json(
             array('success' => true,
@@ -47,40 +47,6 @@ class TransactionController extends BaseController {
             array('success' => true,
                 'payload' => Transaction::whereRaw('user_id = ? && id = ?', array($user->id), $id)->toArray(),
             ));
-    }
-
-    /**
-     * Ajoute une transaction
-     * Utilisé uniquement par le code
-     *
-     * @param $user_id
-     * @param $bet_id
-     * @param $value
-     * @param $type
-     * @return bool
-     */
-    public static function addTransaction($user_id, $bet_id, $value, $type){
-        if(in_array($type, array('gain', 'bet')) && Bet::find($bet_id)){
-            $transaction = new Transaction();
-            $transaction->user_id = $user_id;
-            $transaction->bet_id = $bet_id;
-            $transaction->value = $value;
-            $transaction->type = $type;
-
-            $transaction->save();
-
-            //On déduit/ajoute les point de la transaction
-            $user = User::find($user_id);
-
-            if($transaction->type == "bet")
-                $user->points -= $transaction->value;
-            else if ($transaction->type == "gain")
-                $user->points += $transaction->value;
-
-            $user->save();
-        }
-
-        return false;
     }
 
 }

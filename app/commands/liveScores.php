@@ -7,20 +7,6 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class liveScores extends Command {
 
-    private $stage_assoc_api = array(
-        "4" => "16",
-        "3" => "17",
-        "2" => "18",
-        "1" => "19"
-    );
-
-    private function getApiRoundId($localId, $stage_game_num){
-        if($localId == 1 && $stage_game_num == 1){
-            return $this->stage_assoc_api[$localId] + 1;
-        }else
-            return $this->stage_assoc_api[$localId];
-    }
-
 	/**
 	 * The console command name.
 	 *
@@ -55,34 +41,45 @@ class liveScores extends Command {
 
 		while(true){
             $date = new DateTime();
-            $games = Game::whereRaw('date < ? && winner_id IS NULL', array(new DateTime("2014-06-28 20:26:20")))->get();
+            $games = Game::whereRaw('date < ? && winner_id IS NULL', array(new DateTime()))->get();
 
             if(count($games) > 0){
+                $response = Unirest::get("http://live.mobileapp.fifa.com/api/wc/matches");
 
                 foreach($games as $value){
 
-                    $response = Unirest::get("http://live.mobileapp.fifa.com/api/wc/matches");
-
                     //On regarde tout les matchs de la liste retourné par l'API
-                    /*foreach($response->body->games as $match){
+                    foreach($response->body->data->second as $match){
 
                         //Si le match corespond a celui qu'on veut mettre à jour
-                        if($match->team1_code == $value->team1()->get()->code && $match->team2_code == $value->team2()->get()->code){
+                        if(isset($match->c_HomeNatioShort) && isset($match->c_AwayNatioShort) && $match->c_HomeNatioShort == $value->team1()->first()->code && $match->c_AwayNatioShort == $value->team2()->first()->code){
                             //Si le match à commencé
-                            if($match->score1 != "" && $match->score2 != ""){
-                                //Si le match est en temps additionel (prolongation)
-                                if($match->score1ot != "" && $match->score2ot != ""){
-                                    $value->team1_goals = $match->score1ot;
-                                    $value->team2_goals = $match->score2ot;
-                                }else{
-                                    $value->team1_goals = $match->score1;
-                                    $value->team2_goals = $match->score2;
-                                }
+                            if($match->b_Started == true){
+                                $value->team1_goals = $match->n_HomeGoals;
+                                $value->team2_goals = $match->n_AwayGoals;
 
-                                //Si but par penalties
-                                if($match->score1p != "" && $match->score2p != ""){
-                                    $value->team1_kick_at_goal = $match->score1p;
-                                    $value->team2_kick_at_goal = $match->score2p;
+                                $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : '.$value->team1()->first()->name.' '.$value->team1_goals.'-'.$value->team2_goals.' '.$value->team2()->first()->name.'.');
+                            }
+
+                            if($match->b_Finished == true){
+                                if($value->team1_goals > $value->team2_goals){
+                                    $value->setFinished(1);
+                                    $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team1()->first()->name.' gagnant.');
+                                }else if($value->team1_goals < $value->team2_goals){
+                                    $value->setFinished(2);
+                                    $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team2()->first()->name.' gagnant.');
+                                }else if($value->team1_goals == $value->team2_goals){
+
+                                    $value->team1_kick_at_goal = $match->n_HomeGoalsShootout;
+                                    $value->team2_kick_at_goal = $match->n_AwayGoalsShootout;
+
+                                    if($match->n_HomeGoalsShootout > $match->n_AwayGoalsShootout){
+                                        $value->setFinished(1);
+                                        $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team1()->first()->name.' gagnant.');
+                                    }else{
+                                        $value->setFinished(2);
+                                        $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team2()->first()->name.' gagnant.');
+                                    }
                                 }
                             }
 
@@ -90,10 +87,7 @@ class liveScores extends Command {
                         }
                     }
 
-                    $value->save();*/
-
-                    print_r($response);
-
+                    $value->save();
                 }
 
             }else

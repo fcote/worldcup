@@ -51,6 +51,7 @@ class UserController extends BaseController {
     public function store()
     {
         $input = Input::all();
+        $input['password'] = Hash::make($input['password']);
 
         $validator = Validator::make($input, User::$rules);
 
@@ -62,7 +63,6 @@ class UserController extends BaseController {
                 ),
                 400);
 
-        $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
 
         return Response::json(

@@ -54,7 +54,7 @@ class User extends Eloquent {
      */
     public static $rules = array(
         'email' => 'required|email|max:255',
-        'password' => 'required|alpha_num|max:255',
+        'password' => 'required|max:255',
         /*'points' => 'required|integer',*/
         'firstname' => 'required|alpha_num|max:255',
         'lastname' => 'required|alpha_num|max:255',

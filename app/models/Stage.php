@@ -23,6 +23,15 @@ class Stage extends Eloquent {
 
     public $timestamps = false;
 
+    /**
+     * Récupère l'objet Stage suivant
+     *
+     * @var Stage
+     */
+    public function next_stage()
+    {
+        return $this->belongsTo('Stage', 'next_stage', 'id');
+    }
 
     /**
      * Table corespondant au champ caché sur les retours JSON

@@ -107,10 +107,8 @@ class Game extends Eloquent {
         $sumPoints = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->sum('points');
         $sumBet = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->count();
 
-        if($sumPoints != 0 && $sumBet != 0)
-            return $sumPoints/$sumBet;
-        if($sumPoints != 0 && $sumBet == 0)
-            return $sumPoints;
+        if($sumPoints != 0)
+            return $sumPoints/++$sumBet;
         else
             return 0;
     }
@@ -125,10 +123,8 @@ class Game extends Eloquent {
         $sumPoints = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->sum('points');
         $sumBet = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->count();
 
-        if($sumPoints != 0 && $sumBet != 0)
-            return $sumPoints/$sumBet;
-        if($sumPoints != 0 && $sumBet == 0)
-            return $sumPoints;
+        if($sumPoints != 0)
+            return $sumPoints/++$sumBet;
         else
             return 0;
     }
@@ -143,6 +139,61 @@ class Game extends Eloquent {
             }
         }
         return $array;
+    }
+
+    public function setFinished($num_team){
+        if($num_team == 1){
+            $sumPoints = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->sum('points');
+            $sumBet = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->count();
+            $sumBet2 = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->count();
+
+            if($sumPoints != 0 && $sumBet != 0){
+                foreach(Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->get() as $bet){
+                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                }
+            }
+
+            if($sumBet2 == 0){
+                foreach(Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->get() as $bet){
+                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                }
+            }
+
+            $this->winner_id = $this->team1_id;
+
+        }else{
+
+            $sumPoints = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->sum('points');
+            $sumBet = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->count();
+            $sumBet2 = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->count();
+
+            if($sumPoints != 0 && $sumBet != 0){
+                foreach(Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->get() as $bet){
+                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                }
+            }
+
+            if($sumBet2 == 0){
+                foreach(Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->get() as $bet){
+                    Transaction::addTransaction($bet->user_id, $bet->id, $value, 'gain');
+                }
+            }
+
+            $this->winner_id = $this->team2_id;
+        }
+
+        $id = $this->stage()->first()->next_stage()->first()->id;
+        $num_game = round($this->stage_game_num / 2);
+
+        $game = Game::whereRaw("stage_id = ? && stage_game_num = ?", array($id, $num_game))->first();
+
+        if(($this->stage_game_num % 2) == 1)
+            $game->team1_id = $this->winner_id;
+        else
+            $game->team2_id = $this->winner_id;
+
+        $game->save();
+        $this->save();
     }
 
     /**

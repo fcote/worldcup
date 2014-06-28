@@ -24,8 +24,9 @@ class BetController extends BaseController {
     public function index()
     {
         $user = User::getUserWithToken($_GET['token']);
+
         $bet = new Bet();
-        $bet->where('user_id', $user->id, "AND");
+        $_GET['user_id'] = $user->id;
 
         return Response::json(
             array('success' => true,
@@ -72,7 +73,7 @@ class BetController extends BaseController {
                 400);
 
         //On vérifie si la date du match n'est pas dépassé
-        if(new DateTime() > new DateTime(Game::find($input['game_id'])->first()->date))
+        if(new DateTime() > new DateTime(Game::find($input['game_id'])->date))
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
@@ -101,7 +102,7 @@ class BetController extends BaseController {
 
         $bet = Bet::create($input);
 
-        TransactionController::addTransaction($input['user_id'], $bet->id, $input['points'], 'bet');
+        Transaction::addTransaction($input['user_id'], $bet->id, $input['points'], 'bet');
 
         return Response::json(
             array('success' => true,
