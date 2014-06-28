@@ -52,9 +52,16 @@ class UserController extends BaseController {
     public function update($id)
     {
         $input = Input::all();
-        $input['password'] = Hash::make($input['password']);
+        $user = User::find($id);
 
-        $validator = Validator::make($input, User::$rules);
+        if(isset($input['password'])){
+            if(Hash::check($input["oldpassword"], $user->password)){
+                $input['password'] = Hash::make($input['password']);
+                var_dump($input['password']);
+            }
+        }
+
+        $validator = Validator::make($input, User::$rulesUpdate);
 
         if ($validator->fails())
             return Response::json(
@@ -64,7 +71,7 @@ class UserController extends BaseController {
                 ),
                 400);
 
-        $user = User::find($id);
+
 
         $user->fill($input);
         $user->save();

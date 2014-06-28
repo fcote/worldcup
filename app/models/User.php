@@ -61,6 +61,19 @@ class User extends Eloquent {
     );
 
     /**
+     * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql pour la mise à jour
+     *
+     * @var array
+     */
+    public static $rulesUpdate = array(
+        'email' => 'email|max:255',
+        'password' => 'max:255',
+        /*'points' => 'required|integer',*/
+        'firstname' => 'alpha_num|max:255',
+        'lastname' => 'alpha_num|max:255',
+    );
+
+    /**
      * Méthode pour récupérer un objet utilisateur avec un email
      * @param $email
      * @param $password

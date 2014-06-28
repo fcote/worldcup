@@ -1,6 +1,6 @@
 # Worldcup
 
-#### Online bet website based on Laravel and AngularJS designed for the worldcup.
+#### Online bet single page web application based on Laravel and AngularJS designed for the worldcup.
 
 <br/><br/>
 

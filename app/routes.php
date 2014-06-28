@@ -19,7 +19,6 @@
 //Permet la connexion, création et déconnexion d'un compte utilisateur
 Route::get('/api/users/logout', array('before' => 'token', 'uses' => 'AuthController@logout'));
 Route::post('/api/users/login', 'AuthController@login');
-Route::post('/api/users/updateMail/{id}', 'AuthController@updateMail');
 Route::post('/api/users/', 'UserController@store');
 
 //Tout les ressources disponibles avec un token

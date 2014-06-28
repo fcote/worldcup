@@ -57,6 +57,15 @@ angular.module('services', [])
                 });
             },
 
+            update : function(token,userId,userData) {
+                return $http({
+                    method: 'PUT',
+                    url: 'api/users/' + userId + '?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param(userData)
+                })
+            }
+
         }
     })
 

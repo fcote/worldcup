@@ -29,7 +29,7 @@ angular.module('usersController', [])
         }
 
         $scope.account = function(user){
-            var modalInstance = $modal.open({
+            $modal.open({
                 templateUrl:'/views/partials/accountForm.html',
                 controller: 'usersControllerAccountModalInstance',
                 resolve:{
@@ -37,10 +37,6 @@ angular.module('usersController', [])
                         return user;
                     }
                 }
-            });
-
-            modalInstance.result.then(function (user, email) {
-
             });
         }
 
@@ -56,7 +52,11 @@ angular.module('usersController', [])
         $scope.userData = {};
 
         $scope.ok = function () {
-            //Code here
+            User.update($cookies.token, $cookies.user_id, $scope.userData)
+                .success(function(data){
+                    $rootScope.user = data;
+                });
+
             $modalInstance.dismiss('ok');
         };
 
