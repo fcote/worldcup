@@ -12,7 +12,7 @@
         </div>
         <div class="col-lg-12" id="games-list">
             <div id="games">
-                <div class="game row" ng-repeat="game in games | groupBy:[stage_id]">
+                <div class="game row" ng-repeat="game in games | groupBy:['stage_id']">
                     <div class="col-lg-12 game-header" ng-show="game.group_by_CHANGED">
                         <h2 class="subheader">@@ game.stage.name @@</h2>
                     </div>
