@@ -87,6 +87,7 @@ class Init extends Migration {
             $table->integer('points');
             $table->integer('team1_goals');
             $table->integer('team2_goals');
+            $table->integer('winner_id')->unsigned()->nullable();
 
             $table->foreign('user_id')->references('id')->on('user');
             $table->foreign('game_id')->references('id')->on('game');

@@ -70,5 +70,6 @@ class Bet extends Eloquent {
         'points' => 'required|integer',
         'team1_goals' => 'required|integer',
         'team2_goals' => 'required|integer',
+        'winner_id' => 'exists:team,id',
     );
 }

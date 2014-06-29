@@ -334,7 +334,7 @@ ul.nav.nav-pills li.active a{
 
 /* secondary-bracket */
 .container-secondary { position: relative; overflow: hidden; }
-.secondary-bracket { bottom: 40px; left: 690px; position: absolute; width: 450px; }
+.secondary-bracket { bottom: 200px; left: 690px; position: absolute; width: 450px; }
 #bracket h4 { color: #CCCCCC; font-weight: normal; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999; }
 .secondary-bracket .g_round_label { top: -30px; }
 .secondary-bracket > div { padding-top: 35px;}

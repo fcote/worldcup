@@ -100,6 +100,17 @@ class BetController extends BaseController {
                 ),
                 400);
 
+        $game = Game::find($input['game_id']);
+
+        //On vérifie si le winner est bien une équipe du match
+        if($input['winner_id'] == $game->team1_id || $input['winner_id'] == $game->team2_id)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Veuillez mettre une équipe du match !"
+                ),
+                400);
+
         $bet = Bet::create($input);
 
         Transaction::addTransaction($input['user_id'], $bet->id, $input['points'], 'bet');
