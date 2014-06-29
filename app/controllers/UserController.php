@@ -57,7 +57,13 @@ class UserController extends BaseController {
         if(isset($input['password'])){
             if(Hash::check($input["oldpassword"], $user->password)){
                 $input['password'] = Hash::make($input['password']);
-                var_dump($input['password']);
+            }else{
+                return Response::json(
+                    array('success' => false,
+                        'payload' => array(),
+                        'error' => "Le mot de passe ne correspond pas"
+                    ),
+                    400);
             }
         }
 

@@ -20,7 +20,18 @@
 }
 
 .container{
+    max-width: none !important;
     width: 1170px;
+}
+
+.modal-dialog{
+    max-width: none !important;
+    width: 600px;
+    margin: 50px auto;
+}
+
+.modal-dialog.modal-lg{
+    width: 900px;
 }
 
 /************************** Navbar **************************/
@@ -39,7 +50,6 @@ header{
 .navbar-inverse{
     height: 90px;
     margin-top: 10px;
-    margin-left: 15px;
     background-color: transparent;
     border: none;
     border-radius: 0px;
@@ -78,9 +88,8 @@ header{
 }
 
 .navbar-inverse .navbar-brand img{
-    width: 89px;
-    margin-left: 0px;
-    padding: -15px;
+    width: 60px;
+    margin-left: 15px;
 }
 
 .navbar-inverse .navbar-brand{
@@ -135,7 +144,7 @@ header{
     color: #F8C100;
 }
 
-/************************** Games / Ranking **************************/
+/************************** Games **************************/
 
 #games-panel{
     position: relative;
@@ -216,9 +225,7 @@ ul.nav.nav-pills li.active a{
     border-bottom: 1px solid #eee;
 }
 
-.user{
-    text-align: center;
-}
+
 
 .game:first-child{
     border-top: none;
@@ -249,11 +256,12 @@ ul.nav.nav-pills li.active a{
 .game button.btn.btn-default{
     display: block;
     float: none;
-    border-radius: 3px;
+    border-radius: 1px;
     padding: 10px 25px;
     margin: 40px auto;
     margin-bottom:20px;
-    background-color: #47a447;
+    background-color: #333;
+    border: none;
     color: #fff;
     font-weight: bold;
 }
@@ -294,10 +302,6 @@ ul.nav.nav-pills li.active a{
     border-radius: 2px;
 }
 
-.account input[type="text"]{
-
-}
-
 /************************** Bracket *************************/
 #bracket {
     padding:30px;
@@ -316,6 +320,7 @@ ul.nav.nav-pills li.active a{
 .g_game { position: relative; margin-bottom: 15px; box-shadow: 3px 4px 0px #ddd; border: 1px solid #fff; border-top: 0; border-left: 0; }
 .g_gracket h3 { min-width: 180px; margin: 0; padding: 10px 8px 8px; font-size: 18px; font-weight: normal; color: #b3afa7; font-size: 20px; text-shadow: 1px 1px 1px #333;} /* @note: this width determinds node size */
 .g_team { background: #423c3c; }
+.g_team h3 small{font-size: 65%;color: #fff;float: right;font-weight: bold;margin-right: 10px;margin-top: 5px;}
 .g_round_label { top: -5px; font-weight: normal; color: #ccc; text-align: center; font-size: 18px}
 .g_team:last-child {  /*background: #FCB821;*/ border-top: 1px solid #47a447; }
 .g_round:last-child { margin-right: 20px; }

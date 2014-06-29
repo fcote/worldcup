@@ -56,7 +56,6 @@ angular.module('usersController', [])
                 .success(function(data){
                     $rootScope.user = data;
                 });
-
             $modalInstance.dismiss('ok');
         };
 
