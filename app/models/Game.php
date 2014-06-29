@@ -131,6 +131,18 @@ class Game extends Eloquent {
         return $cote;
     }
 
+
+    public function getUserHasBetAttribute()
+    {
+        $user = User::getUserWithToken($_GET['token']);
+        $bet = Bet::whereRaw('game_id = ? && user_id = ?', array($this->id, $user->id))->first();
+
+        if($bet)
+            return true;
+        else
+            return false;
+    }
+
     /**
      * Calcule la "cote" de l'équipe 2
      *
