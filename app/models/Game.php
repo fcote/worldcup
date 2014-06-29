@@ -21,8 +21,9 @@ class Game extends Eloquent {
      */
     protected $table = 'game';
 
-    private $MAX = 10;
-    private $MIN = 1.10;
+    private $MAX_COTE = 10;
+    private $MIN_COTE = 1.10;
+    private $DEFAULT_COTE = 1.5;
 
 
     public $timestamps = false;
@@ -113,15 +114,19 @@ class Game extends Eloquent {
         $sumBet1++;
         $sumBet2++;
 
-        $cote = ($sumBet2 / $sumBet1);
+        if($sumBet1 != 1 || $sumBet2 != 1)
+            $cote = ($sumBet2 / $sumBet1);
+        else
+            $cote = $this->DEFAULT_COTE;
+
         if($cote < 1)
             $cote = 1 + $cote;
 
-        if($cote > $this->MAX)
-            $cote = $this->MAX;
+        if($cote > $this->MAX_COTE)
+            $cote = $this->MAX_COTE;
 
-        if($cote < $this->MIN)
-            $cote = $this->MIN;
+        if($cote < $this->MIN_COTE)
+            $cote = $this->MIN_COTE;
 
         return $cote;
     }
@@ -133,21 +138,25 @@ class Game extends Eloquent {
      */
     public function getTeam2CoteAttribute()
     {
-        $sumBet1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
-        $sumBet2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
+        $sumBet1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
+        $sumBet2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
 
         $sumBet1++;
         $sumBet2++;
 
-        $cote = ($sumBet2 / $sumBet1);
+        if($sumBet1 != 1 || $sumBet2 != 1)
+            $cote = ($sumBet1 / $sumBet2);
+        else
+            $cote = $this->DEFAULT_COTE;
+
         if($cote < 1)
             $cote = 1 + $cote;
 
-        if($cote > $this->MAX)
-            $cote = $this->MAX;
+        if($cote > $this->MAX_COTE)
+            $cote = $this->MAX_COTE;
 
-        if($cote < $this->MIN)
-            $cote = $this->MIN;
+        if($cote < $this->MIN_COTE)
+            $cote = $this->MIN_COTE;
 
         return $cote;
     }
