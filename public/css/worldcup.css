@@ -407,3 +407,7 @@ ul.nav.nav-pills li.active a{
     text-align: center;
     margin: 12px 0px;
 }
+
+.bet #winner{
+    display: none;
+}

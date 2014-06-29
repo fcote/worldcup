@@ -42,6 +42,16 @@ angular.module('betsController', [])
         else
             $scope.bet = {};
 
+        $scope.check = function(){
+            var team1Score = $('#team1Score').val();
+            var team2Score = $('#team2Score').val();
+            if(team1Score == team2Score && team1Score != '' && team2Score != ''){
+                $('#winner').show();
+            }else{
+                $('#winner').hide();
+            }
+        }
+
         $scope.ok = function () {
             if(user.points >= $scope.bet.points){
                 $modalInstance.close(

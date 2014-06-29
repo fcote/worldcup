@@ -9,17 +9,25 @@
                     <img src="/images/flags/@@ game.team1.code @@.png"/>
                     <h4>@@ game.team1.name @@</h4>
 
-                    <input ng-model="bet.team1_goals" ng-disabled="bet.id != null" type="text" class="form-control team one" required/>
+                    <input ng-model="bet.team1_goals" ng-disabled="bet.id != null" id="team1Score" type="text" class="form-control team one" ng-change="check()" required/>
                 </div>
                 <div class="col-xs-2 dash"> - </div>
                 <div class="col-xs-5">
-                    <input ng-model="bet.team2_goals" ng-disabled="bet.id != null" type="text" class="form-control team two" required/>
+                    <input ng-model="bet.team2_goals" ng-disabled="bet.id != null" id="team2Score" type="text" class="form-control team two" ng-change="check()" required/>
 
                     <div class="team2">
                         <h4>@@ game.team2.name @@</h4>
                         <img src="/images/flags/@@ game.team2.code @@.png"/>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row" id="winner">
+            <div class="col-xs-12">
+                <select ng-model="bet.winner_id" class="form-control">
+                    <option value="@@ game.team1.id @@">@@ game.team1.name @@</option>
+                    <option value="@@ game.team2.id @@">@@ game.team2.name @@</option>
+                </select>
             </div>
         </div>
         <div class="row">
