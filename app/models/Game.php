@@ -21,6 +21,9 @@ class Game extends Eloquent {
      */
     protected $table = 'game';
 
+    private $MAX = 10;
+    private $MIN = 1.10;
+
 
     public $timestamps = false;
 
@@ -104,13 +107,23 @@ class Game extends Eloquent {
      */
     public function getTeam1CoteAttribute()
     {
-        $sumPoints = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
-        $sumBet = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
+        $sumBet1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
+        $sumBet2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
 
-        if($sumPoints != 0)
-            return $sumPoints/++$sumBet;
-        else
-            return 0;
+        $sumBet1++;
+        $sumBet2++;
+
+        $cote = ($sumBet2 / $sumBet1);
+        if($cote < 1)
+            $cote = 1 + $cote;
+
+        if($cote > $this->MAX)
+            $cote = $this->MAX;
+
+        if($cote < $this->MIN)
+            $cote = $this->MIN;
+
+        return $cote;
     }
 
     /**
@@ -120,13 +133,23 @@ class Game extends Eloquent {
      */
     public function getTeam2CoteAttribute()
     {
-        $sumPoints = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-        $sumBet = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
+        $sumBet1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
+        $sumBet2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
 
-        if($sumPoints != 0)
-            return $sumPoints/++$sumBet;
-        else
-            return 0;
+        $sumBet1++;
+        $sumBet2++;
+
+        $cote = ($sumBet2 / $sumBet1);
+        if($cote < 1)
+            $cote = 1 + $cote;
+
+        if($cote > $this->MAX)
+            $cote = $this->MAX;
+
+        if($cote < $this->MIN)
+            $cote = $this->MIN;
+
+        return $cote;
     }
 
     public function toArray()
@@ -145,18 +168,13 @@ class Game extends Eloquent {
 
         //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
         if($num_team == 1){
-            $sumPoints = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
-            $sumBet = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
-
-            if($sumPoints != 0 && $sumBet != 0)
-                $points = ($sumPoints/$sumBet);
-            else
-                $points = 0;
-
             foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
 
+                $cote = $this->getTeam1CoteAttribute();
+                $points = $bet->points * $cote;
+
                 if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
-                    $points += 100;
+                    $points += (($bet->points/10)*$cote);
 
                 Transaction::addTransaction($bet->user_id, $bet->id, $points + $bet->points, 'gain');
             }
@@ -165,18 +183,13 @@ class Game extends Eloquent {
 
         //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
         }else{
-            $sumPoints = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-            $sumBet = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
-
-            if($sumPoints != 0 && $sumBet != 0)
-                $points = ($sumPoints/$sumBet);
-            else
-                $points = 0;
-
             foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
 
+                $cote = $this->getTeam2CoteAttribute();
+                $points = $bet->points * $cote;
+
                 if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
-                    $points += 100;
+                    $points += (($bet->points/10)*$cote);
 
                 Transaction::addTransaction($bet->user_id, $bet->id, $points + $bet->points, 'gain');
             }
