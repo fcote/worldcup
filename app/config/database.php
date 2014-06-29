@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'worldcup',
 			'username'  => 'worldcup',
-			'password'  => 'fcote.loc',
+			'password'  => 'fcotechemidy8nk',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
