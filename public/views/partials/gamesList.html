@@ -29,18 +29,21 @@
                     </div>
                     <div class="col-xs-1" ng-show="game.team1_goals == null && game.team2_goals == null">
                         <div class="col-xs-12" style="padding: 50px 0px;">
-                            <div tooltip="Gains potentiel si vous misez sur : @@ game.team1.name @@" class="label label-success" style="padding:11px;" >+@@ game.team1_cote @@</div>
+                            <div class="label label-success" style="padding:11px;" >@@ game.team1_cote @@</div>
                         </div>
                     </div>
                     <div class="col-xs-2" ng-show="game.team1_goals == null && game.team2_goals == null">
                         <div class="col-xs-12 col-centered text-center" >
-                            <button class="btn btn-default" ng-controller="betsControllerModal" ng-click="open(game, user)"><div>Parier</div></button>
+                            <button class="btn btn-default" ng-controller="betsControllerModal" ng-click="open(game, user)">
+                                <div ng-hide="game.user_has_bet">Parier</div>
+                                <div ng-show="game.user_has_bet">Mon pari</div>
+                            </button>
                             <h5>@@game.date | dateToISO | date:'dd/MM/yyyy à H:mm'@@h</h5>
                         </div>
                     </div>
                     <div class="col-xs-1" ng-show="game.team1_goals == null && game.team2_goals == null">
                         <div class="col-xs-12" style="padding: 50px 0px;">
-                            <div tooltip="Gains potentiel si vous misez sur : @@ game.team2.name @@" class="label label-success" style="padding:11px;" >+@@ game.team2_cote @@</div>
+                            <div class="label label-success" style="padding:11px;" >@@ game.team2_cote @@</div>
                         </div>
                     </div>
                     <div class="col-xs-4">
