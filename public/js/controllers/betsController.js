@@ -43,6 +43,8 @@ angular.module('betsController', [])
             $scope.bet = {};
         }
 
+        $scope.teams = [game.team1, game.team2];
+
         $scope.ok = function () {
             if($scope.bet.winner_id == undefined){
                 if($scope.bet.team1_goals > $scope.bet.team2_goals){
