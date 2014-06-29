@@ -103,7 +103,7 @@ class BetController extends BaseController {
         $game = Game::find($input['game_id']);
 
         //On vérifie si le winner est bien une équipe du match
-        if($input['winner_id'] == $game->team1_id || $input['winner_id'] == $game->team2_id)
+        if($input['winner_id'] != $game->team1_id && $input['winner_id'] != $game->team2_id)
             return Response::json(
                 array('success' => false,
                     'payload' => array(),

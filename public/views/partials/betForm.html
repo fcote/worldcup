@@ -22,11 +22,11 @@
                 </div>
             </div>
         </div>
-        <div class="row" id="winner">
+        <div class="row" id="winner" ng-show="bet.team1_goals == bet.team2_goals && bet.team1_goals != null && bet.team2_goals != null">
             <div class="col-xs-12">
-                <select ng-model="bet.winner_id" class="form-control">
-                    <option value="@@ game.team1.id @@">@@ game.team1.name @@</option>
-                    <option value="@@ game.team2.id @@">@@ game.team2.name @@</option>
+                <select class="form-control" ng-disabled="bet.id != null">
+                    <option ng-model="bet.winner_id" value="@@ game.team1.id @@">@@ game.team1.name @@</option>
+                    <option ng-model="bet.winner_id" value="@@ game.team2.id @@">@@ game.team2.name @@</option>
                 </select>
             </div>
         </div>

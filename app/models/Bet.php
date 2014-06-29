@@ -33,7 +33,7 @@ class Bet extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = array('user_id', 'game_id', 'points', 'team1_goals', 'team2_goals');
+    protected $fillable = array('user_id', 'game_id', 'points', 'team1_goals', 'team2_goals', 'winner_id');
 
     /**
      * Liste des champs qui peuvent servir de filter dans l'url
@@ -70,6 +70,6 @@ class Bet extends Eloquent {
         'points' => 'required|integer',
         'team1_goals' => 'required|integer',
         'team2_goals' => 'required|integer',
-        'winner_id' => 'exists:team,id',
+        'winner_id' => 'required|exists:team,id',
     );
 }

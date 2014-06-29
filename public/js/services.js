@@ -95,12 +95,12 @@ angular.module('services', [])
 
     .factory('serviceBet', function($http) {
         return {
-            placeBet : function(token, userId, gameId, points, team1Goals, team2Goals){
+            placeBet : function(token, userId, gameId, points, team1Goals, team2Goals, winnerId){
                 return $http({
                    method: 'POST',
                     url: 'api/bets?token=' + token,
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "team1_goals" : team1Goals, "team2_goals" : team2Goals})
+                    data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "team1_goals" : team1Goals, "team2_goals" : team2Goals, "winner_id" : winnerId})
                 });
             },
             GetBet : function(token, gameId){

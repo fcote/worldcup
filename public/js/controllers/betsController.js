@@ -37,25 +37,23 @@ angular.module('betsController', [])
     .controller('betsControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "user", "serviceBet", "bet" , function ($scope, $modalInstance, $cookies, game, user, Bet, bet) {
         $scope.game = game;
 
-        if(bet.data[0] != undefined)
+        if(bet.data[0] != undefined){
             $scope.bet = bet.data[0];
-        else
+        }else{
             $scope.bet = {};
-
-        $scope.check = function(){
-            var team1Score = $('#team1Score').val();
-            var team2Score = $('#team2Score').val();
-            if(team1Score == team2Score && team1Score != '' && team2Score != ''){
-                $('#winner').show();
-            }else{
-                $('#winner').hide();
-            }
         }
 
         $scope.ok = function () {
+            if($scope.bet.winner_id == undefined){
+                if($scope.bet.team1_goals > $scope.bet.team2_goals){
+                    $scope.bet.winner_id = $scope.game.team1_id;
+                }else{
+                    $scope.bet.winner_id = $scope.game.team2_id;
+                }
+            }
             if(user.points >= $scope.bet.points){
                 $modalInstance.close(
-                        Bet.placeBet($cookies.token, user.id, game.id, $scope.bet.points, $scope.bet.team1_goals, $scope.bet.team2_goals)
+                        Bet.placeBet($cookies.token, user.id, game.id, $scope.bet.points, $scope.bet.team1_goals, $scope.bet.team2_goals, $scope.bet.winner_id)
                             .success(function() {
                                 user.points = parseInt(user.points) - parseInt($scope.bet.points);
                             })
