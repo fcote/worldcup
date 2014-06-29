@@ -16,13 +16,29 @@ angular.module('gamesController', [])
     .controller('gamesControllerList', ["$scope", "games", "bracket", function($scope, games, bracket) {
         $scope.games = games.data;
 
-        $('#bracket').bracket({
-            init: bracket.data, /* data to initialize the bracket with */
-            decorator: {
-                edit: acRenderFn,
-                render: acRenderFn
-            }
-        })
+        $("#rounds").gracket({
+            src : bracket.data['rounds'],
+            cornerRadius : 10,
+            canvasLineGap : 10,
+            roundLabels : bracket.data['labels']
+        });
+
+        $("#third").gracket({
+            src : bracket.data['third'],
+            cornerRadius : 10,
+            canvasLineGap : 10
+        });
+
+        // add some labels
+        $("#bracket .secondary-bracket .g_winner")
+            .parent()
+            .css("position", "relative")
+            .prepend("<h4>3ème place</h4>")
+
+        $("#bracket > div").eq(0).find(".g_winner")
+            .parent()
+            .css("position", "relative")
+            .prepend("<h4>Gagnant</h4>")
 
         $('#bracket').hide();
         $('#games').show();
@@ -46,11 +62,3 @@ angular.module('gamesController', [])
         };
 
     }])
-
-function acRenderFn(container, data, score) {
-    if (!data.flag || !data.name)
-        container.append(data.tmp)
-    else{
-        container.append('<img width="15px" src="/images/flags/'+data.flag+'.png" /> ').append(data.name)
-    }
-}

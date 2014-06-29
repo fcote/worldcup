@@ -18,11 +18,10 @@
     <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js" type="text/javascript"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js" type="text/javascript"></script>
-    <script src="/js/jquery.bracket.min.js"></script>
+    <script src="/js/jquery.gracket.min.js"></script>
 
     <!-- CUSTOM -->
     <link rel="stylesheet" type="text/css" href="/css/worldcup.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/css/jquery.bracket.min.css" media="screen" />
 
     @yield('scripts')
 

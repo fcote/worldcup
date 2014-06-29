@@ -14,39 +14,11 @@
 
 class Bracket extends Eloquent {
 
-    private $teams = array();
-    private $result = array();
+    private $rounds = array();
+    private $third = array();
+    private $labels = array();
 
-    private function setTeams(){
-
-        $nexts_id = array();
-        foreach(Stage::select('next_stage')->where('next_stage', '<>', 'NULL')->get() as $value){
-            $nexts_id[] = $value->next_stage;
-        }
-
-        $stage_id = Stage::whereNotIn('id',
-            $nexts_id
-        )->first()->id;
-
-        foreach(Game::whereRaw('stage_id = ?', array($stage_id))->orderBy('stage_game_num', 'ASC')->get() as $value){
-
-            $team1 = array(
-                "name" => ($value->team1()->first() != null)?$value->team1()->first()->name:"",
-                "flag" => ($value->team1()->first() != null)?$value->team1()->first()->code:"",
-                "tmp" => $value->team1_tmp_name
-            );
-
-            $team2 = array(
-                "name" => ($value->team2()->first() != null)?$value->team2()->first()->name:"",
-                "flag" => ($value->team2()->first() != null)?$value->team2()->first()->code:"",
-                "tmp" => $value->team2_tmp_name
-            );
-
-            $this->teams[] = array($team1, $team2);
-        }
-    }
-
-    private function setResults(){
+    private function setRound(){
         $nexts_id = array();
         foreach(Stage::select('next_stage')->where('next_stage', '<>', 'NULL')->get() as $value){
             $nexts_id[] = $value->next_stage;
@@ -61,28 +33,67 @@ class Bracket extends Eloquent {
         while($next_stage_id){
             $games = array();
 
+            $this->labels[] = Stage::find($next_stage_id)->name;
+
+            $next_stage_id_tmp = Stage::find($next_stage_id)->next_stage;
+
             foreach(Game::whereRaw('stage_id = ?', array($next_stage_id))->orderBy('stage_game_num', 'ASC')->get() as $value){
-                if($value->winner_id != null){
-                    if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
-                        $games[] = array($value->team1_goals+$value->team1_kick_at_goal, $value->team2_goals+$value->team2_kick_at_goal);
-                    else
-                        $games[] = array($value->team1_goals, $value->team2_goals);
+
+                $name1 = ($value->team1()->first())?$value->team1()->first()->name:"-";
+                $name2 = ($value->team2()->first())?$value->team2()->first()->name:"-";
+                $id1 = $value->team1_id;
+                $id2 = $value->team2_id;
+                $score1 = $value->team1_goals;
+                $score2 = $value->team2_goals;
+
+                if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
+                    $score1 .= " (".$value->team1_kick_at_goal.")";
+                if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
+                    $score2 .= " (".$value->team2_kick_at_goal.")";
+
+                if($next_stage_id_tmp == null && $value->stage_game_num == 2){
+                    $this->third[] = array( array(
+                        array('name' => $name1, 'id' => $id1, 'score' => $score1),
+                        array('name' => $name2, 'id' => $id2, 'score' => $score2)
+                    ));
+                }else{
+                    $games[] = array(
+                        array('name' => $name1, 'id' => $id1, 'score' => $score1),
+                        array('name' => $name2, 'id' => $id2, 'score' => $score2)
+                    );
                 }
-                    $gammes[] = array(null, null);
             }
 
-            $next_stage_id = Stage::find($next_stage_id)->next_stage;
-            $this->result[] = $games;
+            $this->rounds[] = $games;
+
+            if($next_stage_id_tmp == null){
+                $gamme = Game::whereRaw('stage_id = ? && stage_game_num = 1', array($next_stage_id))->first();
+
+                //Vinqueur
+                $this->rounds[] = array( array(
+                    array('name' => ($gamme->winner()->first())?$gamme->winner()->first()->name:"-", 'id' => $gamme->winner_id),
+                ));
+
+                $gammeLooser = Game::whereRaw('stage_id = ? && stage_game_num = 2', array($next_stage_id))->first();
+
+                //Vinqueur
+                $this->third[] = array( array(
+                    array('name' => ($gammeLooser->winner()->first())?$gammeLooser->winner()->first()->name:"-", 'id' => $gammeLooser->winner_id),
+                ));
+            }
+
+            $next_stage_id = $next_stage_id_tmp;
         }
     }
 
     public function getArray(){
-        $this->setTeams();
-        $this->setResults();
+        $this->setRound();
 
         return array(
-            "teams" => $this->teams,
-            "results" => $this->result
+            'rounds' => $this->rounds,
+            'third' => $this->third,
+            'labels' => $this->labels
         );
     }
+
 }
