@@ -39,7 +39,7 @@
 <header ng-show="isConnected">
     <div class="navbar navbar-inverse" role="navigation" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/images/WClogo.png"/></a>
+            <a class="navbar-brand" href="/"><img src="/images/WCLogo.png"/></a>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a></li>
