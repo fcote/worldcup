@@ -142,6 +142,8 @@ class Game extends Eloquent {
     }
 
     public function setFinished($num_team){
+
+        //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
         if($num_team == 1){
             $sumPoints = Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->sum('points');
             $sumBet = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->count();
@@ -153,6 +155,7 @@ class Game extends Eloquent {
                 }
             }
 
+            //Si personne n'avait parié pour l'autre équipe, les personne récupère leurs paris
             if($sumBet2 == 0){
                 foreach(Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->get() as $bet){
                     Transaction::addTransaction($bet->user_id, $bet->id, $bet->points, 'gain');
@@ -161,6 +164,8 @@ class Game extends Eloquent {
 
             $this->winner_id = $this->team1_id;
 
+
+        //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
         }else{
 
             $sumPoints = Bet::whereRaw('game_id = ? && team1_goals > team2_goals', array($this->id))->sum('points');
@@ -173,6 +178,7 @@ class Game extends Eloquent {
                 }
             }
 
+            //Si personne n'avait parié pour l'autre équipe, les personne récupère leurs paris
             if($sumBet2 == 0){
                 foreach(Bet::whereRaw('game_id = ? && team1_goals < team2_goals', array($this->id))->get() as $bet){
                     Transaction::addTransaction($bet->user_id, $bet->id, $bet->points, 'gain');
@@ -182,6 +188,11 @@ class Game extends Eloquent {
             $this->winner_id = $this->team2_id;
         }
 
+        /////////////////////////////////////////////////
+        //******************* ROUND X *****************//
+        /////////////////////////////////////////////////
+
+        //On inscrit l'équipe gagnante dans son prochain match
         $id = $this->stage()->first()->next_stage()->first()->id;
         $num_game = round($this->stage_game_num / 2);
 
@@ -193,6 +204,34 @@ class Game extends Eloquent {
             $game->team2_id = $this->winner_id;
 
         $game->save();
+
+        /////////////////////////////////////////////////
+        //******************* 3e place ****************//
+        /////////////////////////////////////////////////
+
+        //Si on est lors des demi, on va définir aussi la 3e finale
+        if($this->stage()->first()->next_stage()->first()->next_stage == null){
+
+            $stage_third = Stage::getThirdStage()->id;
+
+            $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
+
+            //Si équipe 1 a gagné on met l'équipe 2 en 3e place
+            if($num_game == 1){
+                if(($this->stage_game_num % 2) == 1)
+                    $gamme_third->team1_id = $this->team1_id;
+                else
+                    $gamme_third->team2_id = $this->team1_id;
+            }else{
+                if(($this->stage_game_num % 2) == 1)
+                    $gamme_third->team1_id = $this->team2_id;
+                else
+                    $gamme_third->team2_id = $this->team2_id;
+            }
+
+            $gamme_third->save();
+        }
+
         $this->save();
     }
 

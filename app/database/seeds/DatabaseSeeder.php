@@ -85,6 +85,8 @@ class StageTableSeeder extends Seeder {
         Stage::create(array('name' => '1/2 finales', 'next_stage' => 1));
         Stage::create(array('name' => '1/4 de finale', 'next_stage' => 2));
         Stage::create(array('name' => '1/8 de finale', 'next_stage' => 3));
+
+        Stage::create(array('name' => '3e place'));
     }
 
 }
@@ -120,7 +122,7 @@ class GameTableSeeder extends Seeder {
         Game::create(array('stage_id' => 1, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1405278000)));
 
         //Petite Finale
-        Game::create(array('stage_id' => 1, 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', 1405195200)));
+        Game::create(array('stage_id' => 5, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1405195200)));
 
     }
 

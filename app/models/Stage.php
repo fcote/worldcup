@@ -49,4 +49,30 @@ class Stage extends Eloquent {
         'name' => 'required|alpha_num|max:255',
         /*'next_stage' => 'exists:stage,id',*/
     );
+
+    public static function getThirdStage(){
+        $nexts_id = array();
+        foreach(Stage::select('next_stage')->where('next_stage', '<>', 'NULL')->get() as $value){
+            $nexts_id[] = $value->next_stage;
+        }
+
+        $stage_third = Stage::whereNotIn('id',
+            $nexts_id
+        )->where('next_stage', null)->first();
+
+        return $stage_third;
+    }
+
+    public static function getStartStage(){
+        $nexts_id = array();
+        foreach(Stage::select('next_stage')->where('next_stage', '<>', 'NULL')->get() as $value){
+            $nexts_id[] = $value->next_stage;
+        }
+
+        $start_stage_id = Stage::whereNotIn('id',
+            $nexts_id
+        )->first();
+
+        return $start_stage_id;
+    }
 }

@@ -19,14 +19,7 @@ class Bracket extends Eloquent {
     private $labels = array();
 
     private function setRound(){
-        $nexts_id = array();
-        foreach(Stage::select('next_stage')->where('next_stage', '<>', 'NULL')->get() as $value){
-            $nexts_id[] = $value->next_stage;
-        }
-
-        $start_stage_id = Stage::whereNotIn('id',
-            $nexts_id
-        )->first()->id;
+        $start_stage_id = Stage::getStartStage()->id;
 
         $next_stage_id = $start_stage_id;
 
@@ -39,10 +32,6 @@ class Bracket extends Eloquent {
 
             foreach(Game::whereRaw('stage_id = ?', array($next_stage_id))->orderBy('stage_game_num', 'ASC')->get() as $value){
 
-                $name1 = ($value->team1()->first())?$value->team1()->first()->name:"-";
-                $name2 = ($value->team2()->first())?$value->team2()->first()->name:"-";
-                $id1 = $value->team1_id;
-                $id2 = $value->team2_id;
                 $score1 = $value->team1_goals;
                 $score2 = $value->team2_goals;
 
@@ -51,17 +40,10 @@ class Bracket extends Eloquent {
                 if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
                     $score2 .= " (".$value->team2_kick_at_goal.")";
 
-                if($next_stage_id_tmp == null && $value->stage_game_num == 2){
-                    $this->third[] = array( array(
-                        array('name' => $name1, 'id' => $id1, 'score' => $score1),
-                        array('name' => $name2, 'id' => $id2, 'score' => $score2)
-                    ));
-                }else{
-                    $games[] = array(
-                        array('name' => $name1, 'id' => $id1, 'score' => $score1),
-                        array('name' => $name2, 'id' => $id2, 'score' => $score2)
-                    );
-                }
+                $games[] = array(
+                    array('name' => ($value->team1()->first())?$value->team1()->first()->name:"-", 'id' => $value->team1_id, 'score' => $score1),
+                    array('name' => ($value->team2()->first())?$value->team2()->first()->name:"-", 'id' => $value->team2_id, 'score' => $score2)
+                );
             }
 
             $this->rounds[] = $games;
@@ -73,16 +55,36 @@ class Bracket extends Eloquent {
                 $this->rounds[] = array( array(
                     array('name' => ($gamme->winner()->first())?$gamme->winner()->first()->name:"-", 'id' => $gamme->winner_id),
                 ));
-
-                $gammeLooser = Game::whereRaw('stage_id = ? && stage_game_num = 2', array($next_stage_id))->first();
-
-                //Vinqueur
-                $this->third[] = array( array(
-                    array('name' => ($gammeLooser->winner()->first())?$gammeLooser->winner()->first()->name:"-", 'id' => $gammeLooser->winner_id),
-                ));
             }
 
             $next_stage_id = $next_stage_id_tmp;
+        }
+
+        /////////////////////////////////////////////////
+        //******************* 3e place ****************//
+        /////////////////////////////////////////////////
+        $stage_third = Stage::getThirdStage()->id;
+
+        $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
+
+        if($gamme_third != null){
+            $score1 = $value->team1_goals;
+            $score2 = $value->team2_goals;
+
+            if($gamme_third->team1_kick_at_goal != null && $gamme_third->team2_kick_at_goal != null)
+                $score1 .= " (".$gamme_third->team1_kick_at_goal.")";
+            if($gamme_third->team1_kick_at_goal != null && $gamme_third->team2_kick_at_goal != null)
+                $score2 .= " (".$gamme_third->team2_kick_at_goal.")";
+
+            $this->third[] = array( array(
+                array('name' => ($gamme_third->team1()->first())?$gamme_third->team1()->first()->name:"-", 'id' => $gamme_third->team1_id, 'score' => $score2),
+                array('name' => ($gamme_third->team2()->first())?$gamme_third->team2()->first()->name:"-", 'id' => $gamme_third->team2_id, 'score' => $score2)
+            ));
+
+            //Vinqueur 3e place
+            $this->third[] = array( array(
+                array('name' => ($gamme_third->winner()->first())?$gamme_third->winner()->first()->name:"-", 'id' => $gamme_third->winner_id),
+            ));
         }
     }
 
