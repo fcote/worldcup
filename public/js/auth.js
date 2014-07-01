@@ -47,6 +47,11 @@ angular.module('auth', [])
 
     .controller('mainController', ["$rootScope", "$scope", "serviceUser", "$cookies", "$cookieStore", "$state", function($rootScope, $scope, User, $cookies, $cookieStore, $state) {
 
+
+        $rootScope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+        };
+
         $scope.logout = function(){
             User.logout($cookies.token)
                 .success(function(){
@@ -56,4 +61,5 @@ angular.module('auth', [])
                     $cookieStore.remove('user_id');
                 });
         }
+
     }]);

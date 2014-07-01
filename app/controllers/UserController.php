@@ -61,13 +61,13 @@ class UserController extends BaseController {
                 return Response::json(
                     array('success' => false,
                         'payload' => array(),
-                        'error' => "Le mot de passe ne correspond pas"
+                        'error' => "Le mot de passe actuel ne correspond pas"
                     ),
                     400);
             }
         }
 
-        $validator = Validator::make($input, User::$rulesUpdate);
+        $validator = Validator::make($input, User::$rulesUpdate, BaseController::$messages);
 
         if ($validator->fails())
             return Response::json(

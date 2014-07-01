@@ -52,25 +52,17 @@
 </header>
 
 
-<div class="container" ng-hide="!exception" >
-    <div class="row">
-        <div class="large-12 columns">
-            <div data-alert class="alert-box alert radius" style="font-size: 16px;">
-                @@ exception.message @@ <small>@@ exception.type @@</small><br />
-                @@ exception.file @@ <small>@@ exception.line @@</small>
-            </div>
-        </div>
+
+<alert ng-repeat="alert in alerts" type="@@ alert.class @@" close="closeAlert($index)" id="infos" >
+    <div ng-show="alert.cat == 'success'">
+        @@ alert.message @@
     </div>
-</div>
-<div class="container" ng-hide="!error" >
-    <div class="row">
-        <div class="large-12 columns">
-            <div data-alert class="alert-box warning radius" style="font-size: 16px;">
-                @@ error @@
-            </div>
-        </div>
+    <div ng-show="alert.cat == 'exception'">
+        @@ alert.message @@ <small>@@ alert.type @@</small><br />
+        @@ alert.file @@ <small>@@ alert.line @@</small>
     </div>
-</div>
+    <div ng-show="alert.cat == 'error'" ng-bind-html="alert.message | unsafe"></div>
+</alert>
 
 @yield('content')
 

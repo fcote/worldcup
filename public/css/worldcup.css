@@ -34,6 +34,22 @@
     width: 900px;
 }
 
+.alert-danger{
+    background-color: #c83c24;
+    color: #fff;
+}
+
+#infos{
+    position:absolute;
+    font-size: 16px;
+    width: 40%;
+    top: 30px;
+    left: 30%;
+    z-index: 10;
+    border: none;
+    border-radius: 1px;
+}
+
 /************************** Navbar **************************/
 
 header{
@@ -287,6 +303,11 @@ ul.nav.nav-pills li.active a{
     margin-bottom: 10px;
 }
 
+.users .table h3 .lastname{
+    display: inline;
+    text-transform: uppercase;
+}
+
 /************************** Account *************************/
 
 .account .row{
@@ -356,7 +377,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .row:last-child{
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .bet .team1{

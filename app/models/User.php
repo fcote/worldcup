@@ -68,7 +68,6 @@ class User extends Eloquent {
     public static $rulesUpdate = array(
         'email' => 'email|max:255',
         'password' => 'max:255',
-        /*'points' => 'required|integer',*/
         'firstname' => 'max:255',
         'lastname' => 'max:255',
     );

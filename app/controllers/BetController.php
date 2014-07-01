@@ -62,13 +62,13 @@ class BetController extends BaseController {
         $input = Input::all();
         $input['user_id'] = $user->id;
 
-        $validator = Validator::make($input, Bet::$rules);
+        $validator = Validator::make($input, Bet::$rules, BaseController::$messages);
 
         if ($validator->fails())
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'error' => $validator->messages()
+                    'error' => $this->errorsArraytoString($validator->messages())
                 ),
                 400);
 
@@ -96,7 +96,7 @@ class BetController extends BaseController {
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'error' => "Vous avez miser plus de points que vous avez !"
+                    'error' => "Vous avez miser plus de points que vous en avez !"
                 ),
                 400);
 
@@ -118,6 +118,7 @@ class BetController extends BaseController {
         return Response::json(
             array('success' => true,
                 'payload' => $bet->toArray(),
+                'message' => 'Pari enregistré ('.$bet->points.' points) sur : '.$game->team1->name.' ('.$bet->team1_goals.') - ('.$bet->team2_goals.') '.$game->team2->name
             ));
     }
 
