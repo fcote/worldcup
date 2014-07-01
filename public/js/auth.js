@@ -1,3 +1,16 @@
+/**
+ * Module d'authentification AngularJS
+ *
+ * AngularJS version 1.2.0
+ *
+ * @category   angular controller
+ * @package    worldcup\public\js
+ * @author     Clément Hémidy <clement@hemidy.fr>, Fabien Côté <fabien.cote@me.com>
+ * @copyright  2014 Clément Hémidy, Fabien Côté
+ * @version    1.0
+ * @since      0.1
+ */
+
 angular.module('auth', [])
 
     .run(["$rootScope", "serviceUser", "serviceTransaction", "$state", "$cookies", function($rootScope, User, Transaction, $state, $cookies) {

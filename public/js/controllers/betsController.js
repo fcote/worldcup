@@ -7,7 +7,7 @@
  * @package    worldcup\public\js\controllers
  * @author     Clément Hémidy <clement@hemidy.fr>, Fabien Côté <fabien.cote@me.com>
  * @copyright  2014 Clément Hémidy, Fabien Côté
- * @version    0.1
+ * @version    1.0
  * @since      0.1
  */
 
