@@ -7,7 +7,7 @@
  * @package    worldcup\public\js\controllers
  * @author     Clément Hémidy <clement@hemidy.fr>, Fabien Côté <fabien.cote@me.com>
  * @copyright  2014 Clément Hémidy, Fabien Côté
- * @version    0.1
+ * @version    1.0
  * @since      0.1
  */
 
@@ -53,14 +53,12 @@ angular.module('betsController', [])
                     $scope.bet.winner_id = $scope.game.team2_id;
                 }
             }
-            if(user.points >= $scope.bet.points){
-                $modalInstance.close(
-                        Bet.placeBet($cookies.token, user.id, game.id, $scope.bet.points, $scope.bet.team1_goals, $scope.bet.team2_goals, $scope.bet.winner_id)
-                            .success(function() {
-                                user.points = parseInt(user.points) - parseInt($scope.bet.points);
-                            })
-                );
-            }
+            $modalInstance.close(
+                    Bet.placeBet($cookies.token, user.id, game.id, $scope.bet.points, $scope.bet.team1_goals, $scope.bet.team2_goals, $scope.bet.winner_id)
+                        .success(function() {
+                            user.points = parseInt(user.points) - parseInt($scope.bet.points);
+                        })
+            );
         };
 
         $scope.cancel = function () {

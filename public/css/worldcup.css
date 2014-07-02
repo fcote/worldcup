@@ -34,6 +34,22 @@
     width: 900px;
 }
 
+.alert-danger{
+    background-color: #c83c24;
+    color: #fff;
+}
+
+#infos{
+    position:absolute;
+    font-size: 16px;
+    width: 40%;
+    top: 30px;
+    left: 30%;
+    z-index: 10;
+    border: none;
+    border-radius: 1px;
+}
+
 /************************** Navbar **************************/
 
 header{
@@ -287,6 +303,11 @@ ul.nav.nav-pills li.active a{
     margin-bottom: 10px;
 }
 
+.users .table h3 .lastname{
+    display: inline;
+    text-transform: uppercase;
+}
+
 /************************** Account *************************/
 
 .account .row{
@@ -347,8 +368,16 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .row{
-    margin-top: 15px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.bet .row:first-child{
+    margin-top: 0px;
+}
+
+.bet .row:last-child{
+    margin-bottom: 5px;
 }
 
 .bet .team1{
@@ -357,6 +386,15 @@ ul.nav.nav-pills li.active a{
 
 .bet .team2{
     float: right;
+}
+
+.bet .modal-body{
+    padding: 0px 15px;
+    background-color: #fff;
+}
+
+.bet .modal-footer{
+    margin-top: 0px;
 }
 
 .bet .modal-body img{
@@ -378,6 +416,7 @@ ul.nav.nav-pills li.active a{
 
 .bet .modal-body input[type="text"].team{
     width: 45px;
+    height: 37px;
     display: inline;
     margin: 6px 0px;
 }
@@ -388,6 +427,16 @@ ul.nav.nav-pills li.active a{
 
 .bet .modal-body input[type="text"].team.two{
     float: left;
+}
+
+.bet .modal-body .row{
+    padding: 5px 0px;
+    background-color: #fff;
+}
+
+.bet .modal-body .row .score{
+    padding: 10px 0px;
+    box-shadow: 0px 2px 2px #aaa;
 }
 
 .bet button.btn{

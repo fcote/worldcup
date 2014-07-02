@@ -100,10 +100,10 @@ class GameTableSeeder extends Seeder {
         //8e
         Game::create(array('team1_id' => 1, 'team2_id' => 6,'stage_id' => 4, 'team1_tmp_name' => '1A', 'team2_tmp_name' => '2B', 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1403971200)));
         Game::create(array('team1_id' => 9, 'team2_id' => 15,'stage_id' => 4, 'team1_tmp_name' => '1C', 'team2_tmp_name' => '2D', 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', 1403985600)));
-        Game::create(array('team1_id' => 5, 'team2_id' => 2,'stage_id' => 4, 'team1_tmp_name' => '1E', 'team2_tmp_name' => '2F', 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', 1404057600)));
-        Game::create(array('team1_id' => 13, 'team2_id' => 12,'stage_id' => 4, 'team1_tmp_name' => '1G', 'team2_tmp_name' => '2H', 'stage_game_num' => 4, 'date' => DateTime::createFromFormat('U', 1404072000)));
-        Game::create(array('team1_id' => 17, 'team2_id' => 22,'stage_id' => 4, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 5, 'date' => DateTime::createFromFormat('U', 1404144000)));
-        Game::create(array('team1_id' => 25, 'team2_id' => 32,'stage_id' => 4, 'team1_tmp_name' => '1D', 'team2_tmp_name' => '2C', 'stage_game_num' => 6, 'date' => DateTime::createFromFormat('U', 1404158400)));
+        Game::create(array('team1_id' => 17, 'team2_id' => 22,'stage_id' => 4, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', 1404144000)));
+        Game::create(array('team1_id' => 25, 'team2_id' => 32,'stage_id' => 4, 'team1_tmp_name' => '1D', 'team2_tmp_name' => '2C', 'stage_game_num' => 4, 'date' => DateTime::createFromFormat('U', 1404158400)));
+        Game::create(array('team1_id' => 5, 'team2_id' => 2,'stage_id' => 4, 'team1_tmp_name' => '1E', 'team2_tmp_name' => '2F', 'stage_game_num' => 5, 'date' => DateTime::createFromFormat('U', 1404057600)));
+        Game::create(array('team1_id' => 13, 'team2_id' => 12,'stage_id' => 4, 'team1_tmp_name' => '1G', 'team2_tmp_name' => '2H', 'stage_game_num' => 6, 'date' => DateTime::createFromFormat('U', 1404072000)));
         Game::create(array('team1_id' => 21, 'team2_id' => 19,'stage_id' => 4, 'team1_tmp_name' => '1F', 'team2_tmp_name' => '2E', 'stage_game_num' => 7, 'date' => DateTime::createFromFormat('U', 1404230400)));
         Game::create(array('team1_id' => 29, 'team2_id' => 26,'stage_id' => 4, 'team1_tmp_name' => '1H', 'team2_tmp_name' => '2G', 'stage_game_num' => 8, 'date' => DateTime::createFromFormat('U', 1404244800)));
 

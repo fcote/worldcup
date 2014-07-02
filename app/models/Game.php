@@ -8,7 +8,7 @@
  * @package    worldcup\app\models
  * @author     Clément Hémidy <clement@hemidy.fr>, Fabien Côté <fabien.cote@me.com>
  * @copyright  2014 Clément Hémidy, Fabien Côté
- * @version    0.1
+ * @version    1.0
  * @since      0.1
  */
 
@@ -23,7 +23,6 @@ class Game extends Eloquent {
 
     private $MAX_COTE = 10;
     private $MIN_COTE = 1.10;
-    private $DEFAULT_COTE = 1.5;
 
 
     public $timestamps = false;
@@ -108,19 +107,12 @@ class Game extends Eloquent {
      */
     public function getTeam1CoteAttribute()
     {
-        $sumBet1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
-        $sumBet2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
+        $sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
+        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
 
-        $sumBet1++;
-        $sumBet2++;
+        $cote = ((($sumPoints2+1)/($sumPoints1+1))+1);
 
-        if($sumBet1 != 1 || $sumBet2 != 1)
-            $cote = ($sumBet2 / $sumBet1);
-        else
-            $cote = $this->DEFAULT_COTE;
-
-        if($cote < 1)
-            $cote = 1 + $cote;
+        $cote = round($cote, 2);
 
         if($cote > $this->MAX_COTE)
             $cote = $this->MAX_COTE;
@@ -150,19 +142,11 @@ class Game extends Eloquent {
      */
     public function getTeam2CoteAttribute()
     {
-        $sumBet1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->count();
-        $sumBet2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->count();
+        $sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
+        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
 
-        $sumBet1++;
-        $sumBet2++;
-
-        if($sumBet1 != 1 || $sumBet2 != 1)
-            $cote = ($sumBet1 / $sumBet2);
-        else
-            $cote = $this->DEFAULT_COTE;
-
-        if($cote < 1)
-            $cote = 1 + $cote;
+        $cote = ((($sumPoints1+1)/($sumPoints2+1))+1);
+        $cote = round($cote,2);
 
         if($cote > $this->MAX_COTE)
             $cote = $this->MAX_COTE;
@@ -197,7 +181,7 @@ class Game extends Eloquent {
                 if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
                     $points += (($bet->points/10)*$cote);
 
-                Transaction::addTransaction($bet->user_id, $bet->id, $points + $bet->points, 'gain');
+                Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
             }
 
             $this->winner_id = $this->team1_id;
@@ -212,7 +196,7 @@ class Game extends Eloquent {
                 if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
                     $points += (($bet->points/10)*$cote);
 
-                Transaction::addTransaction($bet->user_id, $bet->id, $points + $bet->points, 'gain');
+                Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
             }
 
             $this->winner_id = $this->team2_id;

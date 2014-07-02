@@ -8,7 +8,7 @@
  * @package    worldcup\app\models
  * @author     Clément Hémidy <clement@hemidy.fr>, Fabien Côté <fabien.cote@me.com>
  * @copyright  2014 Clément Hémidy, Fabien Côté
- * @version    0.1
+ * @version    1.0
  * @since      0.1
  */
 
@@ -56,8 +56,8 @@ class User extends Eloquent {
         'email' => 'required|email|max:255',
         'password' => 'required|max:255',
         /*'points' => 'required|integer',*/
-        'firstname' => 'required|alpha_num|max:255',
-        'lastname' => 'required|alpha_num|max:255',
+        'firstname' => 'required|max:255',
+        'lastname' => 'required|max:255',
     );
 
     /**
@@ -68,9 +68,8 @@ class User extends Eloquent {
     public static $rulesUpdate = array(
         'email' => 'email|max:255',
         'password' => 'max:255',
-        /*'points' => 'required|integer',*/
-        'firstname' => 'alpha_num|max:255',
-        'lastname' => 'alpha_num|max:255',
+        'firstname' => 'max:255',
+        'lastname' => 'max:255',
     );
 
     /**

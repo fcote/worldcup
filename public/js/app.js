@@ -7,7 +7,7 @@
  * @package    worldcup\public\js
  * @author     Clément Hémidy <clement@hemidy.fr>, Fabien Côté <fabien.cote@me.com>
  * @copyright  2014 Clément Hémidy, Fabien Côté
- * @version    0.1
+ * @version    1.0
  * @since      0.1
  */
 
@@ -71,6 +71,9 @@ worldcup.config(['$httpProvider', function ($httpProvider) {
                 $rootScope.error = null;
                 $rootScope.exception = null;
 
+                if(response.data.message != undefined)
+                    worldcup.alert($rootScope, response.data);
+
                 if(response.data.payload != undefined)
                     response.data = response.data.payload;
 
@@ -78,7 +81,7 @@ worldcup.config(['$httpProvider', function ($httpProvider) {
             },
             'responseError': function (rejection) {
 
-                worldcup.error($rootScope, rejection);
+                worldcup.alert($rootScope, rejection);
 
                 if(rejection.status == 401){
                     $rootScope.user = null;
@@ -93,18 +96,32 @@ worldcup.config(['$httpProvider', function ($httpProvider) {
     });
 }]);
 
-worldcup.error = function($scope, rejection){
-    $scope.error = null;
-    $scope.exception = null;
+worldcup.alert = function($scope, infos){
+    $scope.alerts = [];
 
-    if(rejection.status == 500){
-        $scope.exception = rejection.data.error;
+    if(infos.success){
+        $scope.alerts.push({message: infos.message, cat: 'success', class: 'success'});
     }
 
-    if(rejection.status != 500){
-        $scope.error = rejection.data.error;
+    if(infos.status != undefined){
+        if(infos.status == 500)
+            $scope.alerts.push({message: infos.data.error.message, type: infos.data.error.type, file: infos.data.error.file, line: infos.data.error.line, cat: 'exception', class: 'danger'});
+
+
+        if(infos.status != 500)
+            $scope.alerts.push({message: infos.data.error, cat: 'error', class: 'danger'});
     }
 }
+
+worldcup.closeAlert = function($scope ,index) {
+    $scope.alerts.splice(index, 1);
+};
+
+worldcup.filter('unsafe', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
+});
 
 
 worldcup.config(function($interpolateProvider) {
