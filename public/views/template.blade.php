@@ -32,7 +32,7 @@
 
 <div class="guest" ng-hide="isConnected">
     <div class="container">
-        <img src="/images/WCLoginLogo.png" alt=""/>
+        <img src="/images/WCLogo.png" alt=""/>
     </div>
 </div>
 

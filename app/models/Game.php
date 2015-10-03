@@ -176,10 +176,11 @@ class Game extends Eloquent {
                 $cote = $this->getTeam1CoteAttribute();
                 $points = $bet->points * $cote;
 
-                if($bet->inDistance($this->team1_points-$this->team2_points))
-                    $points += (($bet->points/10)*$cote);
-
                 Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
+
+                if($bet->inDistance($this->team1_points-$this->team2_points))
+                    Transaction::addTransaction($bet->user_id, $bet->id, (($bet->points/10)*$cote), 'gain');
+
             }
 
             $this->winner_id = $this->team1_id;
@@ -191,10 +192,11 @@ class Game extends Eloquent {
                 $cote = $this->getTeam2CoteAttribute();
                 $points = $bet->points * $cote;
 
-                if($bet->inDistance($this->team2_points-$this->team1_points))
-                    $points += (($bet->points/10)*$cote);
-
                 Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
+
+                if($bet->inDistance($this->team2_points-$this->team1_points))
+                    Transaction::addTransaction($bet->user_id, $bet->id, (($bet->points/10)*$cote), 'gain');
+
             }
 
             $this->winner_id = $this->team2_id;
