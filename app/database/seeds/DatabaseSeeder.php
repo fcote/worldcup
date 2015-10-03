@@ -76,12 +76,8 @@ class GameTableSeeder extends Seeder {
     {
         DB::table('game')->delete();
 
-        //FOR TEST
-        Game::create(array('stage_id' => 3, 'team1_id' => 8, 'team2_id' => 9, 'stage_game_num' => 1, 'pulselive_match_id' => '14200', 'date' => DateTime::createFromFormat('U', 1443879000)));
-
-
         //Quarts
-        //Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 1, 'pulselive_match_id' => '14226', 'date' => DateTime::createFromFormat('U', 1445094000)));
+        Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 1, 'pulselive_match_id' => '14226', 'date' => DateTime::createFromFormat('U', 1445094000)));
         Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1C', 'team2_tmp_name' => '2D', 'stage_game_num' => 2, 'pulselive_match_id' => '14230', 'date' => DateTime::createFromFormat('U', 1445108400)));
         Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1D', 'team2_tmp_name' => '2C', 'stage_game_num' => 3, 'pulselive_match_id' => '13223', 'date' => DateTime::createFromFormat('U', 1445169600)));
         Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1A', 'team2_tmp_name' => '2B', 'stage_game_num' => 4, 'pulselive_match_id' => '14219', 'date' => DateTime::createFromFormat('U', 1445180400)));
