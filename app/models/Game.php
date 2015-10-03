@@ -171,31 +171,31 @@ class Game extends Eloquent {
 
         //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
         if($num_team == 1){
-            /*foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
+            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
 
                 $cote = $this->getTeam1CoteAttribute();
                 $points = $bet->points * $cote;
 
-                if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
+                if($bet->inDistance($this->team1_points-$this->team2_points))
                     $points += (($bet->points/10)*$cote);
 
                 Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
-            }*/
+            }
 
             $this->winner_id = $this->team1_id;
 
         //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
         }else{
-            /*foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
+            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
 
                 $cote = $this->getTeam2CoteAttribute();
                 $points = $bet->points * $cote;
 
-                if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
+                if($bet->inDistance($this->team2_points-$this->team1_points))
                     $points += (($bet->points/10)*$cote);
 
                 Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
-            }*/
+            }
 
             $this->winner_id = $this->team2_id;
         }
