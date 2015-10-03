@@ -2,6 +2,7 @@
         <div class="col-xs-12" id="menu-games">
             <ul class="nav nav-pills">
                 <li class="active" ><a href="#" id="filter-list" ng-click="filterList()">Liste des matchs</a></li>
+                <li><a href="#" id="filter-gamesPrevious" ng-click="filterGamesPrevious()">Matchs terminés</a></li>
                 <li><a href="#" id="filter-bracket" ng-click="filterBracket()">Arbre</a></li>
             </ul>
             <div class="my-points">
@@ -17,22 +18,22 @@
                         <h2 class="subheader">@@ game.stage.name @@</h2>
                     </div>
                     <div class="col-xs-4">
-                        <div class="col-xs-6"><img src="/images/flags/@@ game.team1.code @@.png"/></div>
+                        <div class="col-xs-6"><div class="tLogo50 @@ game.team1.code @@"></div></div>
                         <div class="col-xs-6"><h2>@@ game.team1.name @@</h2></div>
                     </div>
-                    <div class="col-xs-4 text-center" ng-show="game.team1_goals != null || game.team2_goals != null">
+                    <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">
                         <br />
                         <h5>En cours</h5>
-                        <div class="col-xs-5"><h3 class="goals-team1">@@ game.team1_goals @@</h3></div>
+                        <div class="col-xs-5"><h3 class="goals-team1">@@ game.team1_points @@</h3></div>
                         <div class="col-xs-2"><h3>—</h3></div>
-                        <div class="col-xs-5"><h3 class="goals-team2">@@ game.team2_goals @@</h3></div>
+                        <div class="col-xs-5"><h3 class="goals-team2">@@ game.team2_points @@</h3></div>
                     </div>
-                    <div class="col-xs-1" ng-show="game.team1_goals == null && game.team2_goals == null">
+                    <div class="col-xs-1" ng-show="game.team1_points == null && game.team2_points == null">
                         <div class="col-xs-12" style="padding: 50px 0px;">
                             <div class="label label-success" style="padding:11px;" >@@ game.team1_cote @@</div>
                         </div>
                     </div>
-                    <div class="col-xs-2" ng-show="game.team1_goals == null && game.team2_goals == null">
+                    <div class="col-xs-2" ng-show="game.team1_points == null && game.team2_points == null">
                         <div class="col-xs-12 col-centered text-center" >
                             <button class="btn btn-default" ng-controller="betsControllerModal" ng-click="open(game, user)">
                                 <div ng-hide="game.user_has_bet">Parier</div>
@@ -41,14 +42,36 @@
                             <h5>@@game.date | dateToISO | date:'dd/MM/yyyy à H:mm'@@h</h5>
                         </div>
                     </div>
-                    <div class="col-xs-1" ng-show="game.team1_goals == null && game.team2_goals == null">
+                    <div class="col-xs-1" ng-show="game.team1_points == null && game.team2_points == null">
                         <div class="col-xs-12" style="padding: 50px 0px;">
                             <div class="label label-success" style="padding:11px;" >@@ game.team2_cote @@</div>
                         </div>
                     </div>
                     <div class="col-xs-4">
                         <div class="col-xs-6"><h2>@@ game.team2.name @@</h2></div>
-                        <div class="col-xs-6"><img src="/images/flags/@@ game.team2.code @@.png" alt=""/></div>
+                        <div class="col-xs-6"><div class="tLogo50 @@ game.team2.code @@"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="gamesPrevious">
+                <div class="game row" ng-repeat="game in gamesPrevious | groupBy:['stage_id']" >
+                    <div class="col-xs-12 game-previous-header animated fadeIn" ng-show="game.group_by_CHANGED">
+                        <h2 class="subheader">@@ game.stage.name @@</h2>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="col-xs-6"><div class="tLogo50 @@ game.team1.code @@"></div></div>
+                        <div class="col-xs-6"><h2>@@ game.team1.name @@</h2></div>
+                    </div>
+                    <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">
+                        <br />
+                        <h5>Terminé</h5>
+                        <div class="col-xs-5"><h3 class="goals-team1">@@ game.team1_points @@</h3></div>
+                        <div class="col-xs-2"><h3>—</h3></div>
+                        <div class="col-xs-5"><h3 class="goals-team2">@@ game.team2_points @@</h3></div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="col-xs-6"><h2>@@ game.team2.name @@</h2></div>
+                        <div class="col-xs-6"><div class="tLogo50 @@ game.team2.code @@"></div></div>
                     </div>
                 </div>
             </div>

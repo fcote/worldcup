@@ -234,6 +234,14 @@ ul.nav.nav-pills li.active a{
     border-bottom: 2px solid #aaa;
 }
 
+.game-previous-header {
+    background-color: #333;
+    color: #fff;
+    height: 80px;
+    padding: 5px 30px;
+    border-bottom: 2px solid #aaa;
+}
+
 
 .game{
     margin-bottom: 30px;
@@ -355,7 +363,7 @@ ul.nav.nav-pills li.active a{
 
 /* secondary-bracket */
 .container-secondary { position: relative; overflow: hidden; }
-.secondary-bracket { bottom: 200px; left: 690px; position: absolute; width: 450px; }
+.secondary-bracket { bottom: 100px; left: 690px; position: absolute; width: 450px; }
 #bracket h4 { color: #CCCCCC; font-weight: normal; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999; }
 .secondary-bracket .g_round_label { top: -30px; }
 .secondary-bracket > div { padding-top: 35px;}
@@ -455,4 +463,764 @@ ul.nav.nav-pills li.active a{
 .bet .dash{
     text-align: center;
     margin: 12px 0px;
+}
+
+.game .tLogo50 {
+    margin-top:25px;
+}
+
+.bet .tLogoSmall {
+    margin-top:10px;
+}
+
+.bet h4 {
+    line-height: 40px;
+}
+
+.tLogo50 {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 65px;
+    background-position: 0 0;
+    background-image: url("/images/tLogo50.png");
+}
+
+.tLogo50.AND {
+     background-position: 0 -70px;
+ }
+.tLogo50.ARG {
+    background-position: 0 -140px;
+}
+.tLogo50.ARM {
+    background-position: 0 -210px;
+}
+.tLogo50.ASA {
+    background-position: 0 -280px;
+}
+.tLogo50.AUS {
+    background-position: 0 -350px;
+}
+.tLogo50.AUT {
+    background-position: 0 -420px;
+}
+.tLogo50.AZE {
+    background-position: 0 -490px;
+}
+.tLogo50.BEL {
+    background-position: 0 -560px;
+}
+.tLogo50.BER {
+    background-position: 0 -630px;
+}
+.tLogo50.BHS {
+    background-position: 0 -700px;
+}
+.tLogo50.BIH {
+    background-position: 0 -770px;
+}
+.tLogo50.BRB {
+    background-position: 0 -840px;
+}
+.tLogo50.BRU {
+    background-position: 0 -910px;
+}
+.tLogo50.BUL {
+    background-position: 0 -980px;
+}
+.tLogo50.BUR {
+    background-position: 0 -1050px;
+}
+.tLogo50.BWA {
+    background-position: 0 -1120px;
+}
+.tLogo50.BRA {
+    background-position: 0 -1190px;
+}
+.tLogo50.CAM {
+    background-position: 0 -1260px;
+}
+.tLogo50.CAN {
+    background-position: 0 -1330px;
+}
+.tLogo50.CAY {
+    background-position: 0 -1400px;
+}
+.tLogo50.CHL {
+    background-position: 0 -1470px;
+}
+.tLogo50.CHN {
+    background-position: 0 -1540px;
+}
+.tLogo50.CMB {
+    background-position: 0 -1610px;
+}
+.tLogo50.COK {
+    background-position: 0 -1680px;
+}
+.tLogo50.COL {
+    background-position: 0 -1750px;
+}
+.tLogo50.CRO {
+    background-position: 0 -1820px;
+}
+.tLogo50.CTR {
+    background-position: 0 -1890px;
+}
+.tLogo50.CZE {
+    background-position: 0 -1960px;
+}
+.tLogo50.DEN {
+    background-position: 0 -2030px;
+}
+.tLogo50.ENG {
+    background-position: 0 -2100px;
+}
+.tLogo50.ESP {
+    background-position: 0 -2170px;
+}
+.tLogo50.FIN {
+    background-position: 0 -2240px;
+}
+.tLogo50.FJI, .tLogo50.FIJ, .tLogo50.Fiji {
+    background-position: 0 -2310px;
+}
+.tLogo50.FRA {
+    background-position: 0 -2380px;
+}
+.tLogo50.GEO {
+    background-position: 0 -2450px;
+}
+.tLogo50.GER {
+    background-position: 0 -2520px;
+}
+.tLogo50.GHA {
+    background-position: 0 -2590px;
+}
+.tLogo50.GUM {
+    background-position: 0 -2660px;
+}
+.tLogo50.GUY {
+    background-position: 0 -2730px;
+}
+.tLogo50.HEL {
+    background-position: 0 -2800px;
+}
+.tLogo50.HKG {
+    background-position: 0 -2870px;
+}
+.tLogo50.HUN {
+    background-position: 0 -2940px;
+}
+.tLogo50.IDO {
+    background-position: 0 -3010px;
+}
+.tLogo50.IND {
+    background-position: 0 -3080px;
+}
+.tLogo50.IRE {
+    background-position: 0 -3150px;
+}
+.tLogo50.IRI {
+    background-position: 0 -3220px;
+}
+.tLogo50.ISR {
+    background-position: 0 -3290px;
+}
+.tLogo50.ITA {
+    background-position: 0 -3360px;
+}
+.tLogo50.CIV {
+    background-position: 0 -3430px;
+}
+.tLogo50.JAM {
+    background-position: 0 -3500px;
+}
+.tLogo50.JPN {
+    background-position: 0 -3570px;
+}
+.tLogo50.KAZ {
+    background-position: 0 -3640px;
+}
+.tLogo50.KEN {
+    background-position: 0 -3710px;
+}
+.tLogo50.KGZ {
+    background-position: 0 -3780px;
+}
+.tLogo50.KOR {
+    background-position: 0 -3850px;
+}
+.tLogo50.LAO {
+    background-position: 0 -3920px;
+}
+.tLogo50.LAT {
+    background-position: 0 -3990px;
+}
+.tLogo50.LCA {
+    background-position: 0 -4060px;
+}
+.tLogo50.LTU {
+    background-position: 0 -4130px;
+}
+.tLogo50.LUX {
+    background-position: 0 -4200px;
+}
+.tLogo50.MAD {
+    background-position: 0 -4270px;
+}
+.tLogo50.MAR {
+    background-position: 0 -4340px;
+}
+.tLogo50.MAS {
+    background-position: 0 -4410px;
+}
+.tLogo50.MDA {
+    background-position: 0 -4480px;
+}
+.tLogo50.MEX {
+    background-position: 0 -4550px;
+}
+.tLogo50.MLI {
+    background-position: 0 -4620px;
+}
+.tLogo50.MLT {
+    background-position: 0 -4690px;
+}
+.tLogo50.MOG {
+    background-position: 0 -4760px;
+}
+.tLogo50.MON {
+    background-position: 0 -4830px;
+}
+.tLogo50.MRT {
+    background-position: 0 -4900px;
+}
+.tLogo50.MUS {
+    background-position: 0 -4970px;
+}
+.tLogo50.NAM {
+    background-position: 0 -5040px;
+}
+.tLogo50.NED {
+    background-position: 0 -5110px;
+}
+.tLogo50.NGA {
+    background-position: 0 -5180px;
+}
+.tLogo50.NIU {
+    background-position: 0 -5250px;
+}
+.tLogo50.NOR {
+    background-position: 0 -5320px;
+}
+.tLogo50.NZL {
+    background-position: 0 -5390px;
+}
+.tLogo50.PAK {
+    background-position: 0 -5460px;
+}
+.tLogo50.PAR {
+    background-position: 0 -5530px;
+}
+.tLogo50.PER {
+    background-position: 0 -5600px;
+}
+.tLogo50.PHP {
+    background-position: 0 -5670px;
+}
+.tLogo50.PNG {
+    background-position: 0 -5740px;
+}
+.tLogo50.POL {
+    background-position: 0 -5810px;
+}
+.tLogo50.POR {
+    background-position: 0 -5880px;
+}
+.tLogo50.PYF {
+    background-position: 0 -5950px;
+}
+.tLogo50.ROM {
+    background-position: 0 -6020px;
+}
+.tLogo50.RSA {
+    background-position: 0 -6090px;
+}
+.tLogo50.RUS {
+    background-position: 0 -6160px;
+}
+.tLogo50.RWA {
+    background-position: 0 -6230px;
+}
+.tLogo50.SAM {
+    background-position: 0 -6300px;
+}
+.tLogo50.SCO {
+    background-position: 0 -6370px;
+}
+.tLogo50.SEN {
+    background-position: 0 -6440px;
+}
+.tLogo50.SIN {
+    background-position: 0 -6510px;
+}
+.tLogo50.SOL {
+    background-position: 0 -6580px;
+}
+.tLogo50.SRB {
+    background-position: 0 -6650px;
+}
+.tLogo50.SRI {
+    background-position: 0 -6720px;
+}
+.tLogo50.SUI {
+    background-position: 0 -6790px;
+}
+.tLogo50.SVN {
+    background-position: 0 -6860px;
+}
+.tLogo50.SWE {
+    background-position: 0 -6930px;
+}
+.tLogo50.SWZ {
+    background-position: 0 -7000px;
+}
+.tLogo50.TBD {
+    background-position: 0 -7070px;
+}
+.tLogo50.TGA {
+    background-position: 0 -7140px;
+}
+.tLogo50.THA {
+    background-position: 0 -7210px;
+}
+.tLogo50.TOG {
+    background-position: 0 -7280px;
+}
+.tLogo50.TPE {
+    background-position: 0 -7350px;
+}
+.tLogo50.TRI {
+    background-position: 0 -7420px;
+}
+.tLogo50.TUN {
+    background-position: 0 -7490px;
+}
+.tLogo50.TZA {
+    background-position: 0 -7560px;
+}
+.tLogo50.UAE {
+    background-position: 0 -7630px;
+}
+.tLogo50.UGA {
+    background-position: 0 -7700px;
+}
+.tLogo50.UKR {
+    background-position: 0 -7770px;
+}
+.tLogo50.URU {
+    background-position: 0 -7840px;
+}
+.tLogo50.USA {
+    background-position: 0 -7910px;
+}
+.tLogo50.UZB {
+    background-position: 0 -7980px;
+}
+.tLogo50.VAN {
+    background-position: 0 -8050px;
+}
+.tLogo50.VEN {
+    background-position: 0 -8120px;
+}
+.tLogo50.VGB {
+    background-position: 0 -8190px;
+}
+.tLogo50.WAL {
+    background-position: 0 -8260px;
+}
+.tLogo50.ZAM {
+    background-position: 0 -8330px;
+}
+.tLogo50.ZIM {
+    background-position: 0 -8400px;
+}
+.tLogo50.SVG {
+    background-position: 0 -8472px;
+}
+
+
+.tLogoSmall {
+    width: 19px;
+    height: 24px;
+    float: left;
+    margin-right: 10px;
+    display: block;
+    background-position: 0 0;
+    background-image: url("/images/tLogoSmall.png");
+}
+
+.tLogoSmall.AND {
+     background-position: 0 -29px;
+ }
+.tLogoSmall.ARG, .tLogoSmall.Argentina {
+    background-position: 0 -58px;
+}
+.tLogoSmall.ARM {
+    background-position: 0 -87px;
+}
+.tLogoSmall.ASA, .tLogoSmall.American.Samoa {
+    background-position: 0 -116px;
+}
+.tLogoSmall.AUS, .tLogoSmall.Australia {
+    background-position: 0 -145px;
+}
+.tLogoSmall.AUT {
+    background-position: 0 -174px;
+}
+.tLogoSmall.AZE {
+    background-position: 0 -203px;
+}
+.tLogoSmall.BEL {
+    background-position: 0 -232px;
+}
+.tLogoSmall.BER {
+    background-position: 0 -261px;
+}
+.tLogoSmall.BHS {
+    background-position: 0 -290px;
+}
+.tLogoSmall.BIH {
+    background-position: 0 -319px;
+}
+.tLogoSmall.BRB {
+    background-position: 0 -348px;
+}
+.tLogoSmall.BRU {
+    background-position: 0 -377px;
+}
+.tLogoSmall.BUL {
+    background-position: 0 -406px;
+}
+.tLogoSmall.BUR {
+    background-position: 0 -435px;
+}
+.tLogoSmall.BWA {
+    background-position: 0 -464px;
+}
+.tLogoSmall.BRA {
+    background-position: 0 -493px;
+}
+.tLogoSmall.CAM {
+    background-position: 0 -522px;
+}
+.tLogoSmall.CAN, .tLogoSmall.Canada {
+    background-position: 0 -551px;
+}
+.tLogoSmall.CAY {
+    background-position: 0 -580px;
+}
+.tLogoSmall.CHL {
+    background-position: 0 -609px;
+}
+.tLogoSmall.CHN {
+    background-position: 0 -638px;
+}
+.tLogoSmall.CMB {
+    background-position: 0 -667px;
+}
+.tLogoSmall.COK {
+    background-position: 0 -696px;
+}
+.tLogoSmall.COL {
+    background-position: 0 -725px;
+}
+.tLogoSmall.CRO {
+    background-position: 0 -754px;
+}
+.tLogoSmall.CTR {
+    background-position: 0 -783px;
+}
+.tLogoSmall.CZE {
+    background-position: 0 -812px;
+}
+.tLogoSmall.DEN {
+    background-position: 0 -841px;
+}
+.tLogoSmall.ENG, .tLogoSmall.England {
+    background-position: 0 -870px;
+}
+.tLogoSmall.ESP, .tLogoSmall.Spain {
+    background-position: 0 -899px;
+}
+.tLogoSmall.FIN {
+    background-position: 0 -928px;
+}
+.tLogoSmall.FJI, .tLogoSmall.FIJ, .tLogoSmall.Fiji {
+    background-position: 0 -957px;
+}
+.tLogoSmall.FRA, .tLogoSmall.France {
+    background-position: 0 -986px;
+}
+.tLogoSmall.GEO {
+    background-position: 0 -1015px;
+}
+.tLogoSmall.GER {
+    background-position: 0 -1044px;
+}
+.tLogoSmall.GHA {
+    background-position: 0 -1073px;
+}
+.tLogoSmall.GUM {
+    background-position: 0 -1102px;
+}
+.tLogoSmall.GUY {
+    background-position: 0 -1131px;
+}
+.tLogoSmall.HEL {
+    background-position: 0 -1160px;
+}
+.tLogoSmall.HKG {
+    background-position: 0 -1189px;
+}
+.tLogoSmall.HUN {
+    background-position: 0 -1218px;
+}
+.tLogoSmall.IDO {
+    background-position: 0 -1247px;
+}
+.tLogoSmall.IND {
+    background-position: 0 -1276px;
+}
+.tLogoSmall.IRE {
+    background-position: 0 -1305px;
+}
+.tLogoSmall.IRI {
+    background-position: 0 -1334px;
+}
+.tLogoSmall.ISR {
+    background-position: 0 -1363px;
+}
+.tLogoSmall.ITA {
+    background-position: 0 -1392px;
+}
+.tLogoSmall.CIV {
+    background-position: 0 -1421px;
+}
+.tLogoSmall.JAM {
+    background-position: 0 -1450px;
+}
+.tLogoSmall.JPN, .tLogoSmall.Japan {
+    background-position: 0 -1479px;
+}
+.tLogoSmall.KAZ {
+    background-position: 0 -1508px;
+}
+.tLogoSmall.KEN, .tLogoSmall.Kenya {
+    background-position: 0 -1537px;
+}
+.tLogoSmall.KGZ {
+    background-position: 0 -1566px;
+}
+.tLogoSmall.KOR {
+    background-position: 0 -1595px;
+}
+.tLogoSmall.LAO {
+    background-position: 0 -1624px;
+}
+.tLogoSmall.LAT {
+    background-position: 0 -1653px;
+}
+.tLogoSmall.LCA {
+    background-position: 0 -1682px;
+}
+.tLogoSmall.LTU {
+    background-position: 0 -1711px;
+}
+.tLogoSmall.LUX {
+    background-position: 0 -1740px;
+}
+.tLogoSmall.MAD {
+    background-position: 0 -1769px;
+}
+.tLogoSmall.MAR {
+    background-position: 0 -1798px;
+}
+.tLogoSmall.MAS {
+    background-position: 0 -1827px;
+}
+.tLogoSmall.MDA {
+    background-position: 0 -1856px;
+}
+.tLogoSmall.MEX {
+    background-position: 0 -1885px;
+}
+.tLogoSmall.MLI {
+    background-position: 0 -1914px;
+}
+.tLogoSmall.MLT {
+    background-position: 0 -1943px;
+}
+.tLogoSmall.MOG {
+    background-position: 0 -1972px;
+}
+.tLogoSmall.MON {
+    background-position: 0 -2001px;
+}
+.tLogoSmall.MRT {
+    background-position: 0 -2030px;
+}
+.tLogoSmall.MUS {
+    background-position: 0 -2059px;
+}
+.tLogoSmall.NAM {
+    background-position: 0 -2088px;
+}
+.tLogoSmall.NED {
+    background-position: 0 -2117px;
+}
+.tLogoSmall.NGA {
+    background-position: 0 -2146px;
+}
+.tLogoSmall.NIU {
+    background-position: 0 -2175px;
+}
+.tLogoSmall.NOR {
+    background-position: 0 -2204px;
+}
+.tLogoSmall.NZL, .tLogoSmall.New.Zealand {
+    background-position: 0 -2233px;
+}
+.tLogoSmall.PAK {
+    background-position: 0 -2262px;
+}
+.tLogoSmall.PAR {
+    background-position: 0 -2291px;
+}
+.tLogoSmall.PER {
+    background-position: 0 -2320px;
+}
+.tLogoSmall.PHP {
+    background-position: 0 -2349px;
+}
+.tLogoSmall.PNG {
+    background-position: 0 -2378px;
+}
+.tLogoSmall.POL {
+    background-position: 0 -2407px;
+}
+.tLogoSmall.POR, .tLogoSmall.Portugal {
+    background-position: 0 -2436px;
+}
+.tLogoSmall.PYF {
+    background-position: 0 -2465px;
+}
+.tLogoSmall.ROM {
+    background-position: 0 -2494px;
+}
+.tLogoSmall.RSA, .tLogoSmall.South.Africa {
+    background-position: 0 -2523px;
+}
+.tLogoSmall.RUS, .tLogoSmall.Russia {
+    background-position: 0 -2552px;
+}
+.tLogoSmall.RWA {
+    background-position: 0 -2581px;
+}
+.tLogoSmall.SAM, .tLogoSmall.Samoa {
+    background-position: 0 -2610px;
+}
+.tLogoSmall.SCO, .tLogoSmall.Scotland {
+    background-position: 0 -2639px;
+}
+.tLogoSmall.SEN {
+    background-position: 0 -2668px;
+}
+.tLogoSmall.SIN {
+    background-position: 0 -2697px;
+}
+.tLogoSmall.SOL {
+    background-position: 0 -2726px;
+}
+.tLogoSmall.SRB {
+    background-position: 0 -2755px;
+}
+.tLogoSmall.SRI, .tLogoSmall.Sri.Lanka {
+    background-position: 0 -2784px;
+}
+.tLogoSmall.SUI {
+    background-position: 0 -2813px;
+}
+.tLogoSmall.SVN {
+    background-position: 0 -2842px;
+}
+.tLogoSmall.SWE {
+    background-position: 0 -2871px;
+}
+.tLogoSmall.SWZ {
+    background-position: 0 -2900px;
+}
+.tLogoSmall.TBD {
+    background-position: 0 -2929px;
+}
+.tLogoSmall.TGA {
+    background-position: 0 -2958px;
+}
+.tLogoSmall.THA {
+    background-position: 0 -2987px;
+}
+.tLogoSmall.TOG, .tLogoSmall.Tonga {
+    background-position: 0 -3016px;
+}
+.tLogoSmall.TPE {
+    background-position: 0 -3045px;
+}
+.tLogoSmall.TRI {
+    background-position: 0 -3074px;
+}
+.tLogoSmall.TUN {
+    background-position: 0 -3103px;
+}
+.tLogoSmall.TZA {
+    background-position: 0 -3132px;
+}
+.tLogoSmall.UAE {
+    background-position: 0 -3161px;
+}
+.tLogoSmall.UGA {
+    background-position: 0 -3190px;
+}
+.tLogoSmall.UKR {
+    background-position: 0 -3219px;
+}
+.tLogoSmall.URU, .tLogoSmall.Uraguay {
+    background-position: 0 -3248px;
+}
+.tLogoSmall.USA {
+    background-position: 0 -3277px;
+}
+.tLogoSmall.UZB {
+    background-position: 0 -3306px;
+}
+.tLogoSmall.VAN {
+    background-position: 0 -3335px;
+}
+.tLogoSmall.VEN {
+    background-position: 0 -3364px;
+}
+.tLogoSmall.VGB {
+    background-position: 0 -3393px;
+}
+.tLogoSmall.WAL, .tLogoSmall.Wales {
+    background-position: 0 -3422px;
+}
+.tLogoSmall.ZAM {
+    background-position: 0 -3451px;
+}
+.tLogoSmall.ZIM, .tLogoSmall.Zimbabwe {
+    background-position: 0 -3480px;
+}
+.tLogoSmall.SVG {
+    background-position: 0 -3511px;
 }

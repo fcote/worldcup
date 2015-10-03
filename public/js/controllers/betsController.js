@@ -27,14 +27,17 @@ angular.module('betsController', [])
                         return user;
                     },
                     bet: [ "serviceBet", "$cookies", function(Bet, $cookies){
-                        return Bet.GetBet($cookies.token, game.id);
+                        return Bet.GetBet($cookies.get('token'), game.id);
+                    }],
+                    distances: [ "serviceBet", "$cookies", function(Bet, $cookies){
+                        return Bet.GetDistances($cookies.get('token'));
                     }]
                 }
             });
         };
     })
 
-    .controller('betsControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "user", "serviceBet", "bet" , function ($scope, $modalInstance, $cookies, game, user, Bet, bet) {
+    .controller('betsControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "user", "serviceBet", "bet", "distances" , function ($scope, $modalInstance, $cookies, game, user, Bet, bet, distances) {
         $scope.game = game;
 
         if(bet.data[0] != undefined){
@@ -45,19 +48,14 @@ angular.module('betsController', [])
 
         $scope.teams = [game.team1, game.team2];
 
+        $scope.distances = distances.data;
+
         $scope.ok = function () {
-            if($scope.bet.winner_id == undefined){
-                if($scope.bet.team1_goals > $scope.bet.team2_goals){
-                    $scope.bet.winner_id = $scope.game.team1_id;
-                }else{
-                    $scope.bet.winner_id = $scope.game.team2_id;
-                }
-            }
             $modalInstance.close(
-                    Bet.placeBet($cookies.token, user.id, game.id, $scope.bet.points, $scope.bet.team1_goals, $scope.bet.team2_goals, $scope.bet.winner_id)
-                        .success(function() {
-                            user.points = parseInt(user.points) - parseInt($scope.bet.points);
-                        })
+                Bet.placeBet($cookies.get('token'), user.id, game.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
+                    .success(function() {
+                        user.points = parseInt(user.points) - parseInt($scope.bet.points);
+                    })
             );
         };
 

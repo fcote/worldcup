@@ -21,6 +21,8 @@ Route::get('/api/users/logout', array('before' => 'token', 'uses' => 'AuthContro
 Route::post('/api/users/login', 'AuthController@login');
 Route::post('/api/users/', 'UserController@store');
 
+Route::get('/api/bets/distances', 'BetController@distances');
+
 //Tout les ressources disponibles avec un token
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 

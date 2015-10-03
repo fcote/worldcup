@@ -15,9 +15,13 @@ var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-l
 
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 
     $urlRouterProvider.otherwise('/');
+
 
     $stateProvider
         .state('register', {
@@ -47,13 +51,16 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
             access: accessLevels.user,
             resolve: {
                 games: [ "serviceGame", "$cookies", function(Game, $cookies){
-                    return Game.GetNext($cookies.token);
+                    return Game.GetNext($cookies.get('token'));
+                }],
+                gamesPrevious: [ "serviceGame", "$cookies", function(Game, $cookies){
+                    return Game.GetPrevious($cookies.get('token'));
                 }],
                 bracket: [ "serviceBracket", "$cookies", function(Bracket, $cookies){
-                    return Bracket.GetBracket($cookies.token);
+                    return Bracket.GetBracket($cookies.get('token'));
                 }],
                 users: ["serviceUser", "$cookies", function(User, $cookies){
-                    return User.getRanking($cookies.token);
+                    return User.getRanking($cookies.get('token'));
                 }]
             }
         })
@@ -86,8 +93,8 @@ worldcup.config(['$httpProvider', function ($httpProvider) {
                 if(rejection.status == 401){
                     $rootScope.user = null;
                     $rootScope.isConnected = false;
-                    $cookieStore.remove('token');
-                    $cookieStore.remove('user_id');
+                    $cookies.remove('token');
+                    $cookies.remove('user_id');
                 }
 
                 return $q.reject(rejection);

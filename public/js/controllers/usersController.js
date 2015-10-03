@@ -22,7 +22,7 @@ angular.module('usersController', [])
                 size: 'lg',
                 resolve: {
                     users: [ "serviceUser", "$cookies", function(User, $cookies){
-                        return User.getRanking($cookies.token);
+                        return User.getRanking($cookies.get('token'));
                     }]
                 }
             });
@@ -52,7 +52,7 @@ angular.module('usersController', [])
         $scope.userData = {};
 
         $scope.ok = function () {
-            User.update($cookies.token, $cookies.user_id, $scope.userData)
+            User.update($cookies.get('token'), $cookies.get('user_id'), $scope.userData)
                 .success(function(data){
                     $rootScope.user = data;
                 });

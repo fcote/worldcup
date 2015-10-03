@@ -35,6 +35,19 @@ class BetController extends BaseController {
     }
 
     /**
+     * Renvoi toutes les écarts possibles
+     *
+     * @return Response
+     */
+    public function distances()
+    {
+        return Response::json(
+            array('success' => true,
+                'payload' => Bet::getDistances(),
+            ));
+    }
+
+    /**
      * Renvoi un paris
      *
      * @return Response
@@ -118,7 +131,7 @@ class BetController extends BaseController {
         return Response::json(
             array('success' => true,
                 'payload' => $bet->toArray(),
-                'message' => 'Pari enregistré ('.$bet->points.' points) sur : '.$game->team1->name.' ('.$bet->team1_goals.') - ('.$bet->team2_goals.') '.$game->team2->name
+                'message' => 'Pari enregistré ('.$bet->points.' points) sur : '.$game->team1->name.' - '.$game->team2->name
             ));
     }
 

@@ -15,7 +15,7 @@ angular.module('auth', [])
 
     .run(["$rootScope", "serviceUser", "serviceTransaction", "$state", "$cookies", function($rootScope, User, Transaction, $state, $cookies) {
 
-        if($cookies.token != null){
+        if($cookies.get('token') != null){
             $rootScope.isConnected = true;
         }else{
             $rootScope.isConnected = false;
@@ -27,7 +27,7 @@ angular.module('auth', [])
             $("#content").html("");
 
             if($rootScope.isConnected){
-                User.getUser($cookies.user_id, $cookies.token)
+                User.getUser($cookies.get('user_id'), $cookies.get('token'))
                     .success(function(data) {
                         $rootScope.user = data;
                     });
@@ -58,7 +58,7 @@ angular.module('auth', [])
         })
     }])
 
-    .controller('mainController', ["$rootScope", "$scope", "serviceUser", "$cookies", "$cookieStore", "$state", function($rootScope, $scope, User, $cookies, $cookieStore, $state) {
+    .controller('mainController', ["$rootScope", "$scope", "serviceUser", "$cookies", "$state", function($rootScope, $scope, User, $cookies, $state) {
 
 
         $rootScope.closeAlert = function(index) {
@@ -66,12 +66,12 @@ angular.module('auth', [])
         };
 
         $scope.logout = function(){
-            User.logout($cookies.token)
+            User.logout($cookies.get('token'))
                 .success(function(){
                     $rootScope.user = null;
                     $rootScope.isConnected = false;
-                    $cookieStore.remove('token');
-                    $cookieStore.remove('user_id');
+                    $cookies.remove('token');
+                    $cookies.remove('user_id');
                 });
         }
 

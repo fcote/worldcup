@@ -7,29 +7,33 @@
         <div class="row">
             <div class="col-xs-12 score">
                 <div class="col-xs-5">
-                    <img src="/images/flags/@@ game.team1.code @@.png"/>
+                    <div class="tLogoSmall @@ game.team1.code @@"></div>
                     <h4>@@ game.team1.name @@</h4>
-
-                    <input ng-model="bet.team1_goals" ng-disabled="bet.id != null" id="team1Score" type="text" class="form-control team one" ng-change="check()" required/>
                 </div>
                 <div class="col-xs-2 dash"> - </div>
                 <div class="col-xs-5">
-                    <input ng-model="bet.team2_goals" ng-disabled="bet.id != null" id="team2Score" type="text" class="form-control team two" ng-change="check()" required/>
-
                     <div class="team2">
                         <h4>@@ game.team2.name @@</h4>
-                        <img src="/images/flags/@@ game.team2.code @@.png"/>
+                        <div class="tLogoSmall @@ game.team2.code @@"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" id="winner" ng-show="bet.team1_goals == bet.team2_goals && bet.team1_goals != null && bet.team2_goals != null">
+        <div class="row" id="winner">
             <div class="col-xs-12">
+                Pays gagnant :
                 <select class="form-control" ng-model="bet.winner_id" ng-disabled="bet.id != null" ng-options="team.id as team.name for team in teams"></select>
+            </div>
+        </div>
+        <div class="row" id="distance">
+            <div class="col-xs-12">
+                Nombre de points d'écart dans le score :
+                <select class="form-control" ng-model="bet.distance_points" ng-disabled="bet.id != null" ng-options="distance.id as distance.name for distance in distances"></select>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
+                Points à miser :
                 <input ng-model="bet.points" ng-disabled="bet.id != null" type="text" class="form-control" placeholder="Points à miser" required/>
             </div>
         </div>

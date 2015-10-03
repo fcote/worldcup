@@ -30,8 +30,8 @@ angular.module('accountsController', [])
                 .success(function(data) {
                     $rootScope.isConnected = true;
 
-                    $cookies.token = data.id;
-                    $cookies.user_id = data.user_id;
+                    $cookies.put('token', data.id);
+                    $cookies.put('user_id', data.user_id);
 
                     $state.transitionTo("index");
                 });

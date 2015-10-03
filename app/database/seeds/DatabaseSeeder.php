@@ -2,19 +2,19 @@
 
 class DatabaseSeeder extends Seeder {
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Eloquent::unguard();
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Eloquent::unguard();
 
-		$this->call('TeamTableSeeder');
+        $this->call('TeamTableSeeder');
         $this->call('StageTableSeeder');
         $this->call('GameTableSeeder');
-	}
+    }
 
 }
 
@@ -25,52 +25,32 @@ class TeamTableSeeder extends Seeder {
         DB::table('team')->delete();
 
         //Groupe A
-        Team::create(array('name' => 'Brésil', 'code' => 'BRA'));
-        Team::create(array('name' => 'Mexique', 'code' => 'MEX'));
-        Team::create(array('name' => 'Croatie', 'code' => 'CRO'));
-        Team::create(array('name' => 'Cameroun', 'code' => 'CMR'));
+        Team::create(array('name' => 'Wales', 'code' => 'WAL'));
+        Team::create(array('name' => 'Autralie', 'code' => 'AUS'));
+        Team::create(array('name' => 'Angleterre', 'code' => 'ENG'));
+        Team::create(array('name' => 'Fiji', 'code' => 'FJI'));
+        Team::create(array('name' => 'Uruguay', 'code' => 'URU'));
 
         //Groupe B
-        Team::create(array('name' => 'Pays-Bas', 'code' => 'NED'));
-        Team::create(array('name' => 'Chili', 'code' => 'CHI'));
-        Team::create(array('name' => 'Australie', 'code' => 'AUS'));
-        Team::create(array('name' => 'Espagne', 'code' => 'ESP'));
+        Team::create(array('name' => 'Ecosse', 'code' => 'SCO'));
+        Team::create(array('name' => 'Afrique du sud', 'code' => 'RSA'));
+        Team::create(array('name' => 'Samoa', 'code' => 'SAM'));
+        Team::create(array('name' => 'Japon', 'code' => 'JPN'));
+        Team::create(array('name' => 'États-Unis', 'code' => 'USA'));
 
         //Groupe C
-        Team::create(array('name' => 'Colombie', 'code' => 'COL'));
-        Team::create(array('name' => 'Côte d\'ivoire', 'code' => 'CIV'));
-        Team::create(array('name' => 'Japon', 'code' => 'JPN'));
-        Team::create(array('name' => 'Grèce', 'code' => 'GRE'));
+        Team::create(array('name' => 'Nouvelle Zélande', 'code' => 'NZL'));
+        Team::create(array('name' => 'Tonga', 'code' => 'TGA'));
+        Team::create(array('name' => 'Argentine', 'code' => 'ARG'));
+        Team::create(array('name' => 'Géorgie', 'code' => 'GEO'));
+        Team::create(array('name' => 'Namibie', 'code' => 'NAM'));
 
         //Groupe D
-        Team::create(array('name' => 'Costa Rica', 'code' => 'CRC'));
-        Team::create(array('name' => 'Italie', 'code' => 'ITA'));
-        Team::create(array('name' => 'Uruguay', 'code' => 'URU'));
-        Team::create(array('name' => 'Angleterre', 'code' => 'ENG'));
-
-        //Groupe E
         Team::create(array('name' => 'France', 'code' => 'FRA'));
-        Team::create(array('name' => 'Équateur', 'code' => 'ECU'));
-        Team::create(array('name' => 'Suisse', 'code' => 'SUI'));
-        Team::create(array('name' => 'Honduras', 'code' => 'HON'));
-
-        //Groupe F
-        Team::create(array('name' => 'Argentine', 'code' => 'ARG'));
-        Team::create(array('name' => 'Nigeria', 'code' => 'NGA'));
-        Team::create(array('name' => 'Iran', 'code' => 'IRN'));
-        Team::create(array('name' => 'Bosnie-Herzégovine', 'code' => 'BIH'));
-
-        //Groupe G
-        Team::create(array('name' => 'Allemagne', 'code' => 'GER'));
-        Team::create(array('name' => 'États-Unis', 'code' => 'USA'));
-        Team::create(array('name' => 'Ghana', 'code' => 'GHA'));
-        Team::create(array('name' => 'Portugal', 'code' => 'POR'));
-
-        //Groupe H
-        Team::create(array('name' => 'Belgique', 'code' => 'BEL'));
-        Team::create(array('name' => 'Corée du Sud', 'code' => 'KOR'));
-        Team::create(array('name' => 'Russie', 'code' => 'RUS'));
-        Team::create(array('name' => 'Algérie', 'code' => 'ALG'));
+        Team::create(array('name' => 'Irlande', 'code' => 'IRE'));
+        Team::create(array('name' => 'Italie', 'code' => 'ITA'));
+        Team::create(array('name' => 'Canada', 'code' => 'CAN'));
+        Team::create(array('name' => 'Roumanie', 'code' => 'ROM'));
     }
 
 }
@@ -84,7 +64,6 @@ class StageTableSeeder extends Seeder {
         Stage::create(array('name' => 'Finale'));
         Stage::create(array('name' => '1/2 finales', 'next_stage' => 1));
         Stage::create(array('name' => '1/4 de finale', 'next_stage' => 2));
-        Stage::create(array('name' => '1/8 de finale', 'next_stage' => 3));
 
         Stage::create(array('name' => '3e place'));
     }
@@ -97,32 +76,26 @@ class GameTableSeeder extends Seeder {
     {
         DB::table('game')->delete();
 
-        //8e
-        Game::create(array('team1_id' => 1, 'team2_id' => 6,'stage_id' => 4, 'team1_tmp_name' => '1A', 'team2_tmp_name' => '2B', 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1403971200)));
-        Game::create(array('team1_id' => 9, 'team2_id' => 15,'stage_id' => 4, 'team1_tmp_name' => '1C', 'team2_tmp_name' => '2D', 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', 1403985600)));
-        Game::create(array('team1_id' => 17, 'team2_id' => 22,'stage_id' => 4, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', 1404144000)));
-        Game::create(array('team1_id' => 25, 'team2_id' => 32,'stage_id' => 4, 'team1_tmp_name' => '1D', 'team2_tmp_name' => '2C', 'stage_game_num' => 4, 'date' => DateTime::createFromFormat('U', 1404158400)));
-        Game::create(array('team1_id' => 5, 'team2_id' => 2,'stage_id' => 4, 'team1_tmp_name' => '1E', 'team2_tmp_name' => '2F', 'stage_game_num' => 5, 'date' => DateTime::createFromFormat('U', 1404057600)));
-        Game::create(array('team1_id' => 13, 'team2_id' => 12,'stage_id' => 4, 'team1_tmp_name' => '1G', 'team2_tmp_name' => '2H', 'stage_game_num' => 6, 'date' => DateTime::createFromFormat('U', 1404072000)));
-        Game::create(array('team1_id' => 21, 'team2_id' => 19,'stage_id' => 4, 'team1_tmp_name' => '1F', 'team2_tmp_name' => '2E', 'stage_game_num' => 7, 'date' => DateTime::createFromFormat('U', 1404230400)));
-        Game::create(array('team1_id' => 29, 'team2_id' => 26,'stage_id' => 4, 'team1_tmp_name' => '1H', 'team2_tmp_name' => '2G', 'stage_game_num' => 8, 'date' => DateTime::createFromFormat('U', 1404244800)));
+        //FOR TEST
+        Game::create(array('stage_id' => 3, 'team1_id' => 8, 'team2_id' => 9, 'stage_game_num' => 1, 'pulselive_match_id' => '14200', 'date' => DateTime::createFromFormat('U', 1443879000)));
+
 
         //Quarts
-        Game::create(array('stage_id' => 3, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1404504000)));
-        Game::create(array('stage_id' => 3, 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', 1404489600)));
-        Game::create(array('stage_id' => 3, 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', 1404576000)));
-        Game::create(array('stage_id' => 3, 'stage_game_num' => 4, 'date' => DateTime::createFromFormat('U', 1404576000)));
+        //Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 1, 'pulselive_match_id' => '14226', 'date' => DateTime::createFromFormat('U', 1445094000)));
+        Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1C', 'team2_tmp_name' => '2D', 'stage_game_num' => 2, 'pulselive_match_id' => '14230', 'date' => DateTime::createFromFormat('U', 1445108400)));
+        Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1D', 'team2_tmp_name' => '2C', 'stage_game_num' => 3, 'pulselive_match_id' => '13223', 'date' => DateTime::createFromFormat('U', 1445169600)));
+        Game::create(array('stage_id' => 3, 'team1_tmp_name' => '1A', 'team2_tmp_name' => '2B', 'stage_game_num' => 4, 'pulselive_match_id' => '14219', 'date' => DateTime::createFromFormat('U', 1445180400)));
 
         //Demi
-        Game::create(array('stage_id' => 2, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1404849600)));
-        Game::create(array('stage_id' => 2, 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', 1404936000)));
+        Game::create(array('stage_id' => 2, 'stage_game_num' => 1, 'pulselive_match_id' => '14214', 'date' => DateTime::createFromFormat('U', 1445698800)));
+        Game::create(array('stage_id' => 2, 'stage_game_num' => 2, 'pulselive_match_id' => '14210', 'date' => DateTime::createFromFormat('U', 1445788800)));
 
 
         //Finale
-        Game::create(array('stage_id' => 1, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1405278000)));
+        Game::create(array('stage_id' => 1, 'stage_game_num' => 1, 'pulselive_match_id' => '14204', 'date' => DateTime::createFromFormat('U', 1446307200)));
 
         //Petite Finale
-        Game::create(array('stage_id' => 5, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', 1405195200)));
+        Game::create(array('stage_id' => 4, 'stage_game_num' => 1, 'pulselive_match_id' => '14201', 'date' => DateTime::createFromFormat('U', 1446235200)));
 
     }
 

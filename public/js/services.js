@@ -73,6 +73,9 @@ angular.module('services', [])
         return {
             GetNext : function(token){
                 return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderby=date&order=ASC');
+            },
+            GetPrevious : function(token){
+                return $http.get('api/games?token=' + token + '&winner_id!=null&team1_id!=null&team2_id!=null&orderby=date&order=DESC');
             }
         }
     })
@@ -95,16 +98,19 @@ angular.module('services', [])
 
     .factory('serviceBet', function($http) {
         return {
-            placeBet : function(token, userId, gameId, points, team1Goals, team2Goals, winnerId){
+            placeBet : function(token, userId, gameId, points, distancePoints, winnerId){
                 return $http({
                    method: 'POST',
                     url: 'api/bets?token=' + token,
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "team1_goals" : team1Goals, "team2_goals" : team2Goals, "winner_id" : winnerId})
+                    data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "distance_points" : distancePoints, "winner_id" : winnerId})
                 });
             },
             GetBet : function(token, gameId){
                 return $http.get('api/bets?token=' + token + '&game_id=' + gameId);
+            },
+            GetDistances : function(token){
+                return $http.get('api/bets/distances?token=' + token);
             }
         }
     })

@@ -32,17 +32,12 @@ class Bracket extends Eloquent {
 
             foreach(Game::whereRaw('stage_id = ?', array($next_stage_id))->orderBy('stage_game_num', 'ASC')->get() as $value){
 
-                $score1 = $value->team1_goals;
-                $score2 = $value->team2_goals;
-
-                if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
-                    $score1 .= " (".$value->team1_kick_at_goal.")";
-                if($value->team1_kick_at_goal != null && $value->team2_kick_at_goal != null)
-                    $score2 .= " (".$value->team2_kick_at_goal.")";
+                $score1 = $value->team1_points;
+                $score2 = $value->team2_points;
 
                 $games[] = array(
-                    array('name' => ($value->team1()->first())?$value->team1()->first()->name:"-", 'id' => $value->team1_id, 'score' => $score1),
-                    array('name' => ($value->team2()->first())?$value->team2()->first()->name:"-", 'id' => $value->team2_id, 'score' => $score2)
+                    array('name' => ($value->team1()->first())?$value->team1()->first()->name:(($value->team1_tmp_name)?$value->team1_tmp_name:'-'), 'id' => $value->team1_id, 'score' => $score1),
+                    array('name' => ($value->team2()->first())?$value->team2()->first()->name:(($value->team2_tmp_name)?$value->team2_tmp_name:'-'), 'id' => $value->team2_id, 'score' => $score2)
                 );
             }
 
@@ -68,13 +63,8 @@ class Bracket extends Eloquent {
         $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
 
         if($gamme_third != null){
-            $score1 = $value->team1_goals;
-            $score2 = $value->team2_goals;
-
-            if($gamme_third->team1_kick_at_goal != null && $gamme_third->team2_kick_at_goal != null)
-                $score1 .= " (".$gamme_third->team1_kick_at_goal.")";
-            if($gamme_third->team1_kick_at_goal != null && $gamme_third->team2_kick_at_goal != null)
-                $score2 .= " (".$gamme_third->team2_kick_at_goal.")";
+            $score1 = $value->team1_points;
+            $score2 = $value->team2_points;
 
             $this->third[] = array( array(
                 array('name' => ($gamme_third->team1()->first())?$gamme_third->team1()->first()->name:"-", 'id' => $gamme_third->team1_id, 'score' => $score2),

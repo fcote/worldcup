@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "rhumsaa/uuid": "2.8.*@dev",
+        "ramsey/uuid": "2.8.*@dev",
         "mashape/unirest-php" : "dev-master"
     },
 	"autoload": {

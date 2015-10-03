@@ -13,8 +13,9 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "games", "bracket", function($scope, games, bracket) {
+    .controller('gamesControllerList', ["$scope", "games", "gamesPrevious", "bracket", function($scope, games, gamesPrevious, bracket) {
         $scope.games = games.data;
+        $scope.gamesPrevious = gamesPrevious.data;
 
         $("#rounds").gracket({
             src : bracket.data['rounds'],
@@ -41,24 +42,43 @@ angular.module('gamesController', [])
             .prepend("<h4>Gagnant</h4>")
 
         $('#bracket').hide();
+        $('#gamesPrevious').hide();
         $('#games').show();
 
         $scope.filterList = function(){
+            $('#filter-gamesPrevious').parent('li').removeClass('active');
             $('#filter-bracket').parent('li').removeClass('active');
             $('#filter-list').parent('li').addClass('active');
             $('.bracket-header').hide();
             $('#bracket').hide();
             $('.game-header').show();
             $('#games').show();
+            $('.game-previous-header').hide();
+            $('#gamesPrevious').hide();
         };
 
         $scope.filterBracket = function(){
             $('#filter-list').parent('li').removeClass('active');
+            $('#filter-gamesPrevious').parent('li').removeClass('active');
             $('#filter-bracket').parent('li').addClass('active');
             $('.game-header').hide();
             $('#games').hide();
             $('.bracket-header').show();
             $('#bracket').show();
+            $('.game-previous-header').hide();
+            $('#gamesPrevious').hide();
+        };
+
+        $scope.filterGamesPrevious = function(){
+            $('#filter-list').parent('li').removeClass('active');
+            $('#filter-bracket').parent('li').removeClass('active');
+            $('#filter-gamesPrevious').parent('li').addClass('active');
+            $('.game-header').hide();
+            $('#games').hide();
+            $('.bracket-header').hide();
+            $('#bracket').hide();
+            $('.game-previous-header').show();
+            $('#gamesPrevious').show();
         };
 
     }])

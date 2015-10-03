@@ -62,14 +62,13 @@ class Init extends Migration {
             $table->integer('team1_id')->unsigned()->nullable();
             $table->integer('team2_id')->unsigned()->nullable();
             $table->integer('stage_id')->unsigned();
-            $table->integer('team1_goals')->nullable();
-            $table->integer('team2_goals')->nullable();
-            $table->integer('team1_kick_at_goal')->nullable();
-            $table->integer('team2_kick_at_goal')->nullable();
+            $table->integer('team1_points')->nullable();
+            $table->integer('team2_points')->nullable();
             $table->string('team1_tmp_name', 255)->nullable();
             $table->string('team2_tmp_name', 255)->nullable();
             $table->integer('winner_id')->unsigned()->nullable();
             $table->integer('stage_game_num');
+            $table->integer('pulselive_match_id');
             $table->timestamp('date');
 
             $table->foreign('team1_id')->references('id')->on('team');
@@ -85,8 +84,29 @@ class Init extends Migration {
             $table->integer('user_id')->unsigned();
             $table->integer('game_id')->unsigned();
             $table->integer('points');
-            $table->integer('team1_goals');
-            $table->integer('team2_goals');
+            $table->enum('distance_points', array(
+                BET::$DISTANCE_0_TO_5,
+                BET::$DISTANCE_5_TO_10,
+                BET::$DISTANCE_10_TO_15,
+                BET::$DISTANCE_15_TO_20,
+                BET::$DISTANCE_20_TO_25,
+                BET::$DISTANCE_25_TO_30,
+                BET::$DISTANCE_30_TO_35,
+                BET::$DISTANCE_35_TO_40,
+                BET::$DISTANCE_40_TO_45,
+                BET::$DISTANCE_45_TO_50,
+                BET::$DISTANCE_50_TO_55,
+                BET::$DISTANCE_55_TO_60,
+                BET::$DISTANCE_60_TO_65,
+                BET::$DISTANCE_65_TO_70,
+                BET::$DISTANCE_70_TO_75,
+                BET::$DISTANCE_75_TO_80,
+                BET::$DISTANCE_80_TO_85,
+                BET::$DISTANCE_85_TO_90,
+                BET::$DISTANCE_90_TO_95,
+                BET::$DISTANCE_95_TO_100,
+                BET::$DISTANCE_100_PLUS
+            ));
             $table->integer('winner_id')->unsigned()->nullable();
 
             $table->foreign('user_id')->references('id')->on('user');

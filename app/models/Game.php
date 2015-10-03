@@ -43,10 +43,8 @@ class Game extends Eloquent {
     public $filters = array('team1_id',
         'team2_id',
         'stage_id',
-        'team1_goals',
-        'team2_goals',
-        'team1_kick_at_goal',
-        'team2_kick_at_goal',
+        'team1_points',
+        'team2_points',
         'team1_tmp_name',
         'team2_tmp_name',
         'winner_id',
@@ -173,7 +171,7 @@ class Game extends Eloquent {
 
         //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
         if($num_team == 1){
-            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
+            /*foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
 
                 $cote = $this->getTeam1CoteAttribute();
                 $points = $bet->points * $cote;
@@ -182,13 +180,13 @@ class Game extends Eloquent {
                     $points += (($bet->points/10)*$cote);
 
                 Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
-            }
+            }*/
 
             $this->winner_id = $this->team1_id;
 
         //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
         }else{
-            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
+            /*foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
 
                 $cote = $this->getTeam2CoteAttribute();
                 $points = $bet->points * $cote;
@@ -197,7 +195,7 @@ class Game extends Eloquent {
                     $points += (($bet->points/10)*$cote);
 
                 Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
-            }
+            }*/
 
             $this->winner_id = $this->team2_id;
         }
@@ -258,10 +256,8 @@ class Game extends Eloquent {
         'team1_id' => 'integer',
         'team2_id' => 'integer',
         'stage_id' => 'exists:stage,id',
-        'team1_goals' => 'integer',
-        'team2_goals' => 'integer',
-        'team1_kick_at_goal' => 'integer',
-        'team2_kick_at_goal' => 'integer',
+        'team1_points' => 'integer',
+        'team2_points' => 'integer',
         'team1_tmp_name' => 'alpha|max:255',
         'team2_tmp_name' => 'alpha|max:255',
         'winner_id' => 'integer',
