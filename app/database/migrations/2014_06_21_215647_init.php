@@ -78,34 +78,34 @@ class Init extends Migration {
         });
 
         //Création table des paris
-        Schema::create('bet', function($table)
+        Schema::create('Bet', function($table)
         {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('game_id')->unsigned();
             $table->integer('points');
             $table->enum('distance_points', array(
-                BET::$DISTANCE_0_TO_5,
-                BET::$DISTANCE_5_TO_10,
-                BET::$DISTANCE_10_TO_15,
-                BET::$DISTANCE_15_TO_20,
-                BET::$DISTANCE_20_TO_25,
-                BET::$DISTANCE_25_TO_30,
-                BET::$DISTANCE_30_TO_35,
-                BET::$DISTANCE_35_TO_40,
-                BET::$DISTANCE_40_TO_45,
-                BET::$DISTANCE_45_TO_50,
-                BET::$DISTANCE_50_TO_55,
-                BET::$DISTANCE_55_TO_60,
-                BET::$DISTANCE_60_TO_65,
-                BET::$DISTANCE_65_TO_70,
-                BET::$DISTANCE_70_TO_75,
-                BET::$DISTANCE_75_TO_80,
-                BET::$DISTANCE_80_TO_85,
-                BET::$DISTANCE_85_TO_90,
-                BET::$DISTANCE_90_TO_95,
-                BET::$DISTANCE_95_TO_100,
-                BET::$DISTANCE_100_PLUS
+                Bet::$DISTANCE_0_TO_5,
+                Bet::$DISTANCE_5_TO_10,
+                Bet::$DISTANCE_10_TO_15,
+                Bet::$DISTANCE_15_TO_20,
+                Bet::$DISTANCE_20_TO_25,
+                Bet::$DISTANCE_25_TO_30,
+                Bet::$DISTANCE_30_TO_35,
+                Bet::$DISTANCE_35_TO_40,
+                Bet::$DISTANCE_40_TO_45,
+                Bet::$DISTANCE_45_TO_50,
+                Bet::$DISTANCE_50_TO_55,
+                Bet::$DISTANCE_55_TO_60,
+                Bet::$DISTANCE_60_TO_65,
+                Bet::$DISTANCE_65_TO_70,
+                Bet::$DISTANCE_70_TO_75,
+                Bet::$DISTANCE_75_TO_80,
+                Bet::$DISTANCE_80_TO_85,
+                Bet::$DISTANCE_85_TO_90,
+                Bet::$DISTANCE_90_TO_95,
+                Bet::$DISTANCE_95_TO_100,
+                Bet::$DISTANCE_100_PLUS
             ));
             $table->integer('winner_id')->unsigned()->nullable();
 
@@ -120,12 +120,12 @@ class Init extends Migration {
         {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('bet_id')->unsigned();
+            $table->integer('Bet_id')->unsigned();
             $table->integer('value');
-            $table->enum('type', array('bet', 'gain'));
+            $table->enum('type', array('Bet', 'gain'));
 
             $table->foreign('user_id')->references('id')->on('user');
-            $table->foreign('bet_id')->references('id')->on('bet');
+            $table->foreign('Bet_id')->references('id')->on('Bet');
 
             $table->timestamps();
         });
@@ -139,7 +139,7 @@ class Init extends Migration {
 	public function down()
 	{
         Schema::dropIfExists('transaction');
-        Schema::dropIfExists('bet');
+        Schema::dropIfExists('Bet');
         Schema::dropIfExists('game');
 
         Schema::dropIfExists('token');
