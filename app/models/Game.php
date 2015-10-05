@@ -21,7 +21,7 @@ class Game extends Eloquent {
      */
     protected $table = 'game';
 
-    private $MAX_COTE = 10;
+    private $MAX_COTE = 5;
     private $MIN_COTE = 1.10;
 
 

@@ -35,12 +35,12 @@ angular.module('services', [])
               return $http.get('/api/users?token=' + token + '&orderby=points&order=DESC');
             },
 
-            login : function(email, pass) {
+            login : function(login, pass) {
                 return $http({
                     method: 'POST',
                     url: '/api/users/login',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"email" : email, "password" : pass})
+                    data: $.param({"login" : login, "password" : pass})
                 });
             },
 
@@ -48,12 +48,12 @@ angular.module('services', [])
                 return $http.get('/api/users/logout?token=' + token);
             },
 
-            register : function(email, pass, first, last) {
+            register : function(login, pass) {
                 return $http({
                     method: 'POST',
                     url: 'api/users',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"email" : email, "password" : pass, "firstname" : first, "lastname" : last})
+                    data: $.param({"login" : login, "password" : pass})
                 });
             },
 

@@ -16,11 +16,9 @@ class Init extends Migration {
         Schema::create('user', function($table)
         {
             $table->increments('id')->unsigned();
-            $table->string('email', 255);
+            $table->string('login', 255);
             $table->string('password', 255);
             $table->integer('points');
-            $table->string('firstname', 255);
-            $table->string('lastname', 255);
 
             $table->timestamps();
         });

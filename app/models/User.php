@@ -28,7 +28,7 @@ class User extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = array('email', 'password', 'firstname', 'lastname');
+    protected $fillable = array('login', 'password');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -42,9 +42,7 @@ class User extends Eloquent {
      *
      * @var array
      */
-    public $filters = array('email',
-        'firstname',
-        'lastname',
+    public $filters = array('login',
         'points');
 
     /**
@@ -53,11 +51,9 @@ class User extends Eloquent {
      * @var array
      */
     public static $rules = array(
-        'email' => 'required|email|max:255',
+        'login' => 'required|max:255',
         'password' => 'required|max:255',
         /*'points' => 'required|integer',*/
-        'firstname' => 'required|max:255',
-        'lastname' => 'required|max:255',
     );
 
     /**
@@ -66,10 +62,8 @@ class User extends Eloquent {
      * @var array
      */
     public static $rulesUpdate = array(
-        'email' => 'email|max:255',
+        'login' => 'max:255',
         'password' => 'max:255',
-        'firstname' => 'max:255',
-        'lastname' => 'max:255',
     );
 
     /**
@@ -78,8 +72,8 @@ class User extends Eloquent {
      * @param $password
      * @return mixed
      */
-    public static function getUserWithEmail($email){
-        return User::where('email', $email)->first();
+    public static function getUserWithLogin($login){
+        return User::where('login', $login)->first();
     }
 
     /**

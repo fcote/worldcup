@@ -16,7 +16,7 @@ angular.module('accountsController', [])
     .controller('accountsControllerRegister', ["$scope", "$http", "serviceUser", "$rootScope", "$state", function($scope, $http, User, $rootScope, $state) {
 
         $scope.registerSubmit = function(){
-            User.register($scope.email, $scope.password, $scope.firstname, $scope.lastname)
+            User.register($scope.loginStr, $scope.password)
                 .success(function() {
                    $state.transitionTo("login");
                 });
@@ -26,7 +26,7 @@ angular.module('accountsController', [])
     .controller('accountsControllerLogin', ["$scope", "$http", "serviceUser", "$rootScope", "$state", "$cookies", function($scope, $http, User, $rootScope, $state, $cookies) {
 
         $scope.loginSubmit = function(){
-            User.login($scope.email, $scope.password)
+            User.login($scope.loginStr, $scope.password)
                 .success(function(data) {
                     $rootScope.isConnected = true;
 

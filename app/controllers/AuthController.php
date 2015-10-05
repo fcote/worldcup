@@ -22,11 +22,11 @@ class AuthController extends BaseController {
      */
     public function login()
     {
-        $input = Input::only('email', 'password');
+        $input = Input::only('login', 'password');
 
-        $user = User::getUserWithEmail($input['email']);
+        $user = User::getUserWithLogin($input['login']);
 
-        if ($user != null && Input::has('email') && Input::has('password') && Hash::check($input['password'], $user->password))
+        if ($user != null && Input::has('login') && Input::has('password') && Hash::check($input['password'], $user->password))
         {
             return Response::json(
                 array('success' => true,
@@ -36,7 +36,7 @@ class AuthController extends BaseController {
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'error' => 'Informations incorrects (Adresse mail / mot de passe) !'
+                    'error' => 'Informations incorrects (Login / mot de passe) !'
                 ),
                 404);
         }
