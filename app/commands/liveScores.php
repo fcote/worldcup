@@ -39,8 +39,7 @@ class liveScores extends Command {
 	 */
 	public function fire()
 	{
-
-		while(true){
+        while(true){
             $date = new DateTime();
             $games = Game::whereRaw('date < ? && winner_id IS NULL', array(new DateTime()))->get();
 
@@ -57,7 +56,7 @@ class liveScores extends Command {
                     //Si le match corespond a celui qu'on veut mettre à jour
                     if(isset($teams[0]->abbreviation) && isset($teams[1]->abbreviation) && $teams[0]->abbreviation == $value->team1()->first()->code && $teams[1]->abbreviation == $value->team2()->first()->code){
                         //Si le match à commencé
-                        if('U' !== $match->status && 'C' !== $match->status){
+                        if('U' !== $match->status){
                             $value->team1_points = $scores[0];
                             $value->team2_points = $scores[1];
 

@@ -207,43 +207,46 @@ class Game extends Eloquent {
         /////////////////////////////////////////////////
 
         //On inscrit l'équipe gagnante dans son prochain match
-        $id = $this->stage()->first()->next_stage()->first()->id;
-        $num_game = round($this->stage_game_num / 2);
 
-        $game = Game::whereRaw("stage_id = ? && stage_game_num = ?", array($id, $num_game))->first();
+        if($this->stage_id != null) {
+            $id = $this->stage()->first()->next_stage()->first()->id;
+            $num_game = round($this->stage_game_num / 2);
 
-        if(($this->stage_game_num % 2) == 1)
-            $game->team1_id = $this->winner_id;
-        else
-            $game->team2_id = $this->winner_id;
+            $game = Game::whereRaw("stage_id = ? && stage_game_num = ?", array($id, $num_game))->first();
 
-        $game->save();
+            if (($this->stage_game_num % 2) == 1)
+                $game->team1_id = $this->winner_id;
+            else
+                $game->team2_id = $this->winner_id;
 
-        /////////////////////////////////////////////////
-        //******************* 3e place ****************//
-        /////////////////////////////////////////////////
+            $game->save();
 
-        //Si on est lors des demi, on va définir aussi la 3e finale
-        if($this->stage()->first()->next_stage()->first()->next_stage == null){
+            /////////////////////////////////////////////////
+            //******************* 3e place ****************//
+            /////////////////////////////////////////////////
 
-            $stage_third = Stage::getThirdStage()->id;
+            //Si on est lors des demi, on va définir aussi la 3e finale
+            if ($this->stage()->first()->next_stage()->first()->next_stage == null) {
 
-            $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
+                $stage_third = Stage::getThirdStage()->id;
 
-            //Si équipe 1 a gagné on met l'équipe 2 en 3e place
-            if($num_game == 1){
-                if(($this->stage_game_num % 2) == 1)
-                    $gamme_third->team1_id = $this->team1_id;
-                else
-                    $gamme_third->team2_id = $this->team1_id;
-            }else{
-                if(($this->stage_game_num % 2) == 1)
-                    $gamme_third->team1_id = $this->team2_id;
-                else
-                    $gamme_third->team2_id = $this->team2_id;
+                $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
+
+                //Si équipe 1 a gagné on met l'équipe 2 en 3e place
+                if ($num_game == 1) {
+                    if (($this->stage_game_num % 2) == 1)
+                        $gamme_third->team1_id = $this->team1_id;
+                    else
+                        $gamme_third->team2_id = $this->team1_id;
+                } else {
+                    if (($this->stage_game_num % 2) == 1)
+                        $gamme_third->team1_id = $this->team2_id;
+                    else
+                        $gamme_third->team2_id = $this->team2_id;
+                }
+
+                $gamme_third->save();
             }
-
-            $gamme_third->save();
         }
 
         $this->save();

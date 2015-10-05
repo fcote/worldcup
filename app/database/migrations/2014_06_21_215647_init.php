@@ -59,13 +59,13 @@ class Init extends Migration {
             $table->increments('id')->unsigned();
             $table->integer('team1_id')->unsigned()->nullable();
             $table->integer('team2_id')->unsigned()->nullable();
-            $table->integer('stage_id')->unsigned();
+            $table->integer('stage_id')->unsigned()->nullable();
             $table->integer('team1_points')->nullable();
             $table->integer('team2_points')->nullable();
             $table->string('team1_tmp_name', 255)->nullable();
             $table->string('team2_tmp_name', 255)->nullable();
             $table->integer('winner_id')->unsigned()->nullable();
-            $table->integer('stage_game_num');
+            $table->integer('stage_game_num')->nullable();
             $table->integer('pulselive_match_id');
             $table->timestamp('date');
 
@@ -76,7 +76,7 @@ class Init extends Migration {
         });
 
         //Création table des paris
-        Schema::create('Bet', function($table)
+        Schema::create('bet', function($table)
         {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -118,12 +118,12 @@ class Init extends Migration {
         {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('Bet_id')->unsigned();
+            $table->integer('bet_id')->unsigned();
             $table->integer('value');
             $table->enum('type', array('Bet', 'gain'));
 
             $table->foreign('user_id')->references('id')->on('user');
-            $table->foreign('Bet_id')->references('id')->on('Bet');
+            $table->foreign('bet_id')->references('id')->on('bet');
 
             $table->timestamps();
         });
@@ -137,7 +137,7 @@ class Init extends Migration {
 	public function down()
 	{
         Schema::dropIfExists('transaction');
-        Schema::dropIfExists('Bet');
+        Schema::dropIfExists('bet');
         Schema::dropIfExists('game');
 
         Schema::dropIfExists('token');
