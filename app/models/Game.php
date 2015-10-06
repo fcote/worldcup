@@ -56,7 +56,7 @@ class Game extends Eloquent {
      *
      * @var array
      */
-    protected $with = array('stage', 'team1', 'team2', 'winner');
+    protected $with = array('stage', 'team1', 'team2', 'winner', 'bets');
 
     /**
      * Récupère l'objet Stage indiqué dans ce matche
@@ -96,6 +96,16 @@ class Game extends Eloquent {
     public function winner()
     {
         return $this->belongsTo('Team', 'winner_id', 'id');
+    }
+
+    /**
+     * Récupère tous les pari du match
+     *
+     * @var Bet[]
+     */
+    public function bets()
+    {
+        return $this->hasMany('Bet', 'game_id', 'id');
     }
 
     /**

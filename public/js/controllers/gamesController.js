@@ -80,5 +80,39 @@ angular.module('gamesController', [])
             $('.game-previous-header').show();
             $('#gamesPrevious').show();
         };
-
     }])
+
+    .controller('gamesControllerModal', function ($scope, $modal) {
+
+        $scope.open = function (game) {
+            $modal.open({
+                templateUrl: '/views/partials/gameInfo.html',
+                controller: 'gamesControllerModalInstance',
+                resolve: {
+                    game: function(){
+                        return game;
+                    },
+                    distances: [ "serviceBet", "$cookies", function(Bet, $cookies){
+                        return Bet.GetDistances($cookies.get('token'));
+                    }]
+                }
+            });
+        };
+    })
+
+
+    .controller('gamesControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "distances" , function ($scope, $modalInstance, $cookies, game, distances) {
+        $scope.game = game;
+
+        $scope.teams = [game.team1, game.team2];
+
+        $scope.distances = [];
+
+        distances.data.forEach(function(distance) {
+            $scope.distances[distance.id] = distance.name;
+        });
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }]);

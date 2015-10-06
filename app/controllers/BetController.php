@@ -59,7 +59,7 @@ class BetController extends BaseController {
 
         return Response::json(
             array('success' => true,
-                'payload' => Bet::whereRaw('user_id = ? && id = ?', array($user->id), $id)->toArray(),
+                'payload' => Bet::with('game')->whereRaw('user_id = ? && id = ?', array($user->id), $id)->toArray(),
             ));
     }
 

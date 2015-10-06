@@ -48,7 +48,7 @@ class Bet extends Eloquent {
      *
      * @var array
      */
-    protected $with = array('game');
+    protected $with = array('user');
 
     /**
      * Liste des champs assignable en masse
@@ -79,6 +79,16 @@ class Bet extends Eloquent {
     public function game()
     {
         return $this->belongsTo('Game', 'game_id', 'id');
+    }
+
+    /**
+     * Récupère l'objet User
+     *
+     * @var Stage
+     */
+    public function user()
+    {
+        return $this->belongsTo('User', 'user_id', 'id');
     }
 
     public function inDistance($points){
