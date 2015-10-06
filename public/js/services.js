@@ -106,6 +106,14 @@ angular.module('services', [])
                     data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "distance_points" : distancePoints, "winner_id" : winnerId})
                 });
             },
+            updateBet : function(token, betId, points, distancePoints, winnerId){
+                return $http({
+                    method: 'PUT',
+                    url: 'api/bets/'+betId+'/?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"points" : points, "distance_points" : distancePoints, "winner_id" : winnerId})
+                });
+            },
             GetBet : function(token, gameId){
                 return $http.get('api/bets?token=' + token + '&game_id=' + gameId);
             },

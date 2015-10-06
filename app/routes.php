@@ -36,7 +36,7 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
         array('only' => array('index', 'show')));
 
     Route::resource('bets', 'BetController',
-        array('only' => array('index', 'show', 'store')));
+        array('only' => array('index', 'show', 'store', 'update')));
 
     Route::resource('bracket', 'BracketController',
         array('only' => array('index')));

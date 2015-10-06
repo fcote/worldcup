@@ -51,12 +51,21 @@ angular.module('betsController', [])
         $scope.distances = distances.data;
 
         $scope.ok = function () {
-            $modalInstance.close(
-                Bet.placeBet($cookies.get('token'), user.id, game.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
-                    .success(function() {
-                        user.points = parseInt(user.points) - parseInt($scope.bet.points);
-                    })
-            );
+            if($scope.bet == {}){
+                $modalInstance.close(
+                    Bet.placeBet($cookies.get('token'), user.id, game.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
+                        .success(function() {
+                            user.points = parseInt(user.points) - parseInt($scope.bet.points);
+                        })
+                );
+            }else{
+                $modalInstance.close(
+                    Bet.updateBet($cookies.get('token'), $scope.bet.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
+                        .success(function(data) {
+                            user.points = data.user.points;
+                        })
+                );
+            }
         };
 
         $scope.cancel = function () {

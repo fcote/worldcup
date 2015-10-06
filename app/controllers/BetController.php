@@ -135,4 +135,94 @@ class BetController extends BaseController {
             ));
     }
 
+    /**
+     * Modifie un pari existant
+     *
+     * @return Response
+     */
+    public function update($id)
+    {
+        $user = User::getUserWithToken($_GET['token']);
+        $bet = Bet::find($id);
+
+        if(!$bet){
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'message' => 'Le pari n\'existe pas !'
+                ));
+        }
+
+        if($bet->user_id != $user->id){
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'message' => 'Le pari ne vous appartient pas !'
+                ));
+        }
+
+        $input = Input::all();
+
+        $validator = Validator::make($input, Bet::$rules, BaseController::$messages);
+
+        if ($validator->fails())
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => $this->errorsArraytoString($validator->messages())
+                ),
+                400);
+
+        //On vérifie si la date du match n'est pas dépassé
+        if(new DateTime() > new DateTime($bet->game->date))
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Le date du match est dépassé !"
+                ),
+                400);
+
+        //On vérifie si la somme misé est disponible
+        if($input['points'] > ($user->points+$bet->points))
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Vous avez miser plus de points que vous en avez !"
+                ),
+                400);
+
+        $game = Game::find($bet->game->id);
+
+        //On vérifie si le winner est bien une équipe du match
+        if($input['winner_id'] != $game->team1_id && $input['winner_id'] != $game->team2_id)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Veuillez mettre une équipe du match !"
+                ),
+                400);
+
+        $user->points = $user->points + ($bet->points-$input['points']);
+
+        $bet->winner_id = $input['winner_id'];
+        $bet->points = $input['points'];
+        $bet->distance_points = $input['distance_points'];
+
+        $transaction = Transaction::whereRaw('user_id = ? && bet_id = ?', array($user->id, $bet->id))->first();
+        $transaction->value = $input['points'];
+
+        $transaction->save();
+        $bet->save();
+        $user->save();
+
+        $betArray = $bet->toArray();
+        $betArray['user'] = $user->toArray();
+
+        return Response::json(
+            array('success' => true,
+                'payload' => $betArray,
+                'message' => 'Pari modifié ('.$bet->points.' points) sur : '.$game->team1->name.' - '.$game->team2->name
+            ));
+    }
+
 }

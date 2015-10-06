@@ -22,24 +22,26 @@
         <div class="row" id="winner">
             <div class="col-xs-12">
                 Pays gagnant :
-                <select class="form-control" ng-model="bet.winner_id" ng-disabled="bet.id != null" ng-options="team.id as team.name for team in teams"></select>
+                <select class="form-control" ng-model="bet.winner_id" ng-options="team.id as team.name for team in teams"></select>
             </div>
         </div>
         <div class="row" id="distance">
             <div class="col-xs-12">
                 Nombre de points d'écart dans le score :
-                <select class="form-control" ng-model="bet.distance_points" ng-disabled="bet.id != null" ng-options="distance.id as distance.name for distance in distances"></select>
+                <select class="form-control" ng-model="bet.distance_points" ng-options="distance.id as distance.name for distance in distances"></select>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
                 Points à miser :
-                <input ng-model="bet.points" ng-disabled="bet.id != null" type="text" class="form-control" placeholder="Points à miser" required/>
+                <input ng-model="bet.points" type="text" class="form-control" placeholder="Points à miser" required/>
             </div>
         </div>
     </div>
-    <div class="modal-footer" ng-hide="bet.id != null">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <div class="modal-footer" >
+        <button class="btn btn-primary" ng-hide="bet.id != null" ng-click="ok()">Parier</button>
+        <button class="btn btn-primary" ng-hide="bet.id == null" ng-click="ok()">Modifier</button>
         <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
     </div>
+
 </div>

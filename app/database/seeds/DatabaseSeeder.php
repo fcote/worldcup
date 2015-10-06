@@ -76,6 +76,8 @@ class GameTableSeeder extends Seeder {
     {
         DB::table('game')->delete();
 
+        //@TODO : problème sur les dates (prend pas en compte la timezone)
+
         //Pools
         Game::create(array('team1_id' => 3, 'team2_id' => 4, 'pulselive_match_id' => '14184', 'date' => DateTime::createFromFormat('U', 1442602800)));
 
