@@ -51,7 +51,7 @@ angular.module('betsController', [])
         $scope.distances = distances.data;
 
         $scope.ok = function () {
-            if($scope.bet == {}){
+            if(bet.data[0] == undefined){
                 $modalInstance.close(
                     Bet.placeBet($cookies.get('token'), user.id, game.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
                         .success(function() {

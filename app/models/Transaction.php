@@ -35,7 +35,7 @@ class Transaction extends Eloquent {
      */
     public function bet()
     {
-        return $this->belongsTo('Bet', 'bet_id', 'id');
+        return $this->belongsTo('Bet', 'bet_id', 'id')->with('game');
     }
 
     /**
