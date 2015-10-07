@@ -26,7 +26,7 @@ class UserController extends BaseController {
         return Response::json(
             array('success' => true,
                 'payload' => $this->query_params(new User())->toArray(),
-            ));
+            ), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

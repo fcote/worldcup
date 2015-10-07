@@ -47,7 +47,7 @@ class Transaction extends Eloquent {
         'user_id' => 'exists:stage,id',
         'bet_id' => 'exists:bet,id',
         'value' => 'integer',
-        'type' => 'in:bet,gain',
+        'type' => 'in:bet,gain,bonus',
     );
 
     /**
@@ -83,6 +83,8 @@ class Transaction extends Eloquent {
             if($transaction->type == "bet")
                 $user->points -= $transaction->value;
             else if ($transaction->type == "gain")
+                $user->points += $transaction->value;
+            else if ($transaction->type == "bonus")
                 $user->points += $transaction->value;
 
             $user->save();

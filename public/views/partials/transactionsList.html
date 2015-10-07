@@ -16,10 +16,13 @@
                 <td ng-show="transaction.type=='gain'" >
                     Gains sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
                 </td>
+                <td ng-show="transaction.type=='bonus'" >
+                    Bonus sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
+                </td>
                 <td ng-show="transaction.type=='bet'" >
                     <font color="red" >- @@ transaction.value @@ points</font>
                 </td>
-                <td ng-show="transaction.type=='gain'" >
+                <td ng-show="transaction.type=='gain' || transaction.type=='bonus'" >
                     <font color="green" >+ @@ transaction.value @@ points</font>
                 </td>
                 <td>
