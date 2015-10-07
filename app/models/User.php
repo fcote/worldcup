@@ -45,6 +45,13 @@ class User extends Eloquent {
     public $filters = array('login',
         'points');
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+        $array['winPoints'] = $this->winPoints;
+        return $array;
+    }
+
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
@@ -86,6 +93,11 @@ class User extends Eloquent {
             ->select('user.*')
             ->where('token.id', $token)
             ->first();
+    }
+
+    public function getWinPointsAttribute()
+    {
+        return DB::table('transaction')->where('user_id', '=', $this->id)->where('type', '=', 'gain')->sum('value');
     }
 
     /**

@@ -6,18 +6,18 @@
         <table class="table">
             <thead>
                 <th>Position</th>
-                <th>Points</th>
+                <th>Total gains</th>
                 <th>Utilisateur</th>
             </thead>
             <tbody>
-                <tr ng-repeat="user in users">
+                <tr ng-repeat="user in users | orderBy : '-winPoints'">
                     <td>
                         <h3>@@ $index + 1 @@</h3>
                         <img src="/images/medals/medal1.png" ng-show="$index + 1 == 1"/>
                         <img src="/images/medals/medal2.png" ng-show="$index + 1 == 2"/>
                         <img src="/images/medals/medal3.png" ng-show="$index + 1 == 3"/>
                     </td>
-                    <td><h3>@@ user.points @@</h3></td>
+                    <td><h3>@@ user.winPoints @@</h3></td>
                     <td><h3>@@ user.login @@</h3></td>
                 </tr>
             </tbody>
