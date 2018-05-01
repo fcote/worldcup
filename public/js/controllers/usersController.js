@@ -52,7 +52,7 @@ angular.module('usersController', [])
         $scope.userData = {};
 
         $scope.ok = function () {
-            User.update($cookies.get('token'), $cookies['user_id'], $scope.userData)
+            User.update($cookies['token'], $cookies['user_id'], $scope.userData)
                 .success(function(data){
                     $rootScope.user = data;
                 });

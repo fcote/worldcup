@@ -42,32 +42,34 @@ class liveScores extends Command {
         while(true){
             $date = new DateTime();
             $games = Game::whereRaw('date < ? && winner_id IS NULL', array(new DateTime()))->get();
-
             if(count($games) > 0){
-
                 foreach($games as $value){
-                    $response = Unirest\Request::get("http://cmsapi.pulselive.com/rugby/match/".$value->pulselive_match_id."/timeline?language=fr&client=pulse");
-
+                    $response = Unirest\Request::get("https://data.fifa.com/matches/fr/live/info/".$value->fifa_match_id."");
                     $body = $response->body;
                     $match = $body->match;
-                    $teams = $match->teams;
-                    $scores = $match->scores;
 
-                    //Si le match corespond a celui qu'on veut mettre à jour
-                    if(isset($teams[0]->abbreviation) && isset($teams[1]->abbreviation) && $teams[0]->abbreviation == $value->team1()->first()->code && $teams[1]->abbreviation == $value->team2()->first()->code){
-                        //Si le match à commencé
-                        if('U' !== $match->status){
-                            $value->team1_points = $scores[0];
-                            $value->team2_points = $scores[1];
+                    //Si le match à commencé
+                    if($match->isStarted && !$match->isFinished){
+                        $value->team1_points = $match->scoreHome;
+                        $value->team2_points = $match->scoreAway;
+                        $value->team1_kick_at_goal = $match->scoreHomeFirstLeg;
+                        $value->team2_kick_at_goal = $match->scoreAwayFirstLeg;
+                        $value->minute = $match->minute;
+                        $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : '.$value->team1()->first()->name.' '.$value->team1_points.'-'.$value->team2_points.' '.$value->team2()->first()->name.'.');
+                    }
 
-                            $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : '.$value->team1()->first()->name.' '.$value->team1_points.'-'.$value->team2_points.' '.$value->team2()->first()->name.'.');
-                        }
-
-                        if($match->status == 'C'){
-                            if($value->team1_points > $value->team2_points){
+                    if($match->isStarted && $match->isFinished){
+                        if($value->team1_goals > $value->team2_goals){
+                            $value->setFinished(1);
+                            $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team1()->first()->name.' gagnant.');
+                        }else if($value->team1_goals < $value->team2_goals){
+                            $value->setFinished(2);
+                            $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team2()->first()->name.' gagnant.');
+                        }else if($value->team1_goals == $value->team2_goals){
+                            if($value->team1_kick_at_goal > $value->team2_kick_at_goal){
                                 $value->setFinished(1);
                                 $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team1()->first()->name.' gagnant.');
-                            }else if($value->team1_points < $value->team2_points){
+                            }else{
                                 $value->setFinished(2);
                                 $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team2()->first()->name.' gagnant.');
                             }
@@ -75,12 +77,9 @@ class liveScores extends Command {
                     }
 
                     $value->save();
-
                 }
-
             }else
                 $this->info('[' . $date->format('Y-m-d H:i:s') . '] Aucun match à surveiller.');
-
 
             sleep(50);
         }
