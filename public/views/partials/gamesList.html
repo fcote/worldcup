@@ -19,7 +19,7 @@
                         <h2 class="subheader" ng-hide="game.stage != null">Phase de poule</h2>
                     </div>
                     <div class="col-xs-4">
-                        <div class="col-xs-6"><div class="tLogo50 @@ game.team1.code @@"></div></div>
+                        <div class="col-xs-6"><img width="100px" src="images/flags/@@ game.team1.code.toLowerCase() @@"/></div>
                         <div class="col-xs-6"><h2>@@ game.team1.name @@</h2></div>
                     </div>
                     <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-xs-4">
                         <div class="col-xs-6"><h2>@@ game.team2.name @@</h2></div>
-                        <div class="col-xs-6"><div class="tLogo50 @@ game.team2.code @@"></div></div>
+                        <div class="col-xs-6"><img width="100px" src="images/flags/@@ game.team2.code.toLowerCase() @@"/></div>
                     </div>
                 </div>
                 <div class="jumbotron" ng-show="games.length == 0"><h2>Pas de match pour le moment ! :(</h2></div>

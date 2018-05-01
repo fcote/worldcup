@@ -60,13 +60,14 @@ class Init extends Migration {
             $table->integer('team1_id')->unsigned()->nullable();
             $table->integer('team2_id')->unsigned()->nullable();
             $table->integer('stage_id')->unsigned()->nullable();
-            $table->integer('team1_points')->nullable();
-            $table->integer('team2_points')->nullable();
+            $table->integer('team1_goals')->nullable();
+            $table->integer('team2_goals')->nullable();
+            $table->integer('team1_kick_at_goal')->nullable();
+            $table->integer('team2_kick_at_goal')->nullable();
             $table->string('team1_tmp_name', 255)->nullable();
             $table->string('team2_tmp_name', 255)->nullable();
             $table->integer('winner_id')->unsigned()->nullable();
             $table->integer('stage_game_num')->nullable();
-            $table->integer('pulselive_match_id');
             $table->timestamp('date');
 
             $table->foreign('team1_id')->references('id')->on('team');
