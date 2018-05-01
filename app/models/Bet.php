@@ -33,14 +33,14 @@ class Bet extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = array('user_id', 'game_id', 'winner_id');
+    protected $fillable = array('user_id', 'game_id', 'winner_id', 'team1_points', 'team2_points');
 
     /**
      * Liste des champs qui peuvent servir de filter dans l'url
      *
      * @var array
      */
-    public $filters = array('game_id', 'user_id');
+    public $filters = array('game_id', 'user_id', 'team1_points', 'team2_points');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -77,6 +77,8 @@ class Bet extends Eloquent {
     public static $rules = array(
         'user_id' => 'exists:user,id',
         'game_id' => 'exists:game,id',
+        'team1_points' => 'required|integer',
+        'team2_points' => 'required|integer',
         'winner_id' => 'required|exists:team,id',
     );
 }

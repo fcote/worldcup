@@ -172,6 +172,8 @@ class BetController extends BaseController {
                 400);
 
         $bet->winner_id = ($input['winner_id'] != null)?$input['winner_id']:null;
+        $bet->team1_points = $input['team1_points'];
+        $bet->team2_points = $input['team2_points'];
 
         $bet->save();
         $user->save();

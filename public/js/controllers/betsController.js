@@ -48,13 +48,13 @@ angular.module('betsController', [])
         $scope.ok = function () {
             if(bet.data[0] == undefined){
                 $modalInstance.close(
-                    Bet.placeBet($cookies['token'], user.id, game.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
+                    Bet.placeBet($cookies['token'], user.id, game.id, $scope.bet.winner_id, $scope.bet.team1_points, $scope.bet.team2_points)
                         .success(function() {
                         })
                 );
             }else{
                 $modalInstance.close(
-                    Bet.updateBet($cookies['token'], $scope.bet.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
+                    Bet.updateBet($cookies['token'], $scope.bet.id, $scope.bet.winner_id, $scope.bet.team1_points, $scope.bet.team2_points)
                         .success(function(data) {
                         })
                 );

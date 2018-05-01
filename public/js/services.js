@@ -101,20 +101,20 @@ angular.module('services', [])
 
     .factory('serviceBet', function($http) {
         return {
-            placeBet : function(token, userId, gameId, points, distancePoints, winnerId){
+            placeBet : function(token, userId, gameId, winnerId, team1_points, team2_points){
                 return $http({
                    method: 'POST',
                     url: 'api/bets?token=' + token,
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "distance_points" : distancePoints, "winner_id" : winnerId})
+                    data: $.param({"user_id" : userId, "game_id" : gameId, "team1_points" : team1_points, "team2_points" : team2_points, "winner_id" : winnerId})
                 });
             },
-            updateBet : function(token, betId, points, distancePoints, winnerId){
+            updateBet : function(token, betId, winnerId, team1_points, team2_points){
                 return $http({
                     method: 'PUT',
                     url: 'api/bets/'+betId+'/?token=' + token,
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"points" : points, "distance_points" : distancePoints, "winner_id" : winnerId})
+                    data: $.param({"team1_points" : team1_points, "team2_points" : team2_points, "winner_id" : winnerId})
                 });
             },
             GetBet : function(token, gameId){
