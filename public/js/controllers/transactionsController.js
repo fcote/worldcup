@@ -21,7 +21,7 @@ angular.module('transactionsController', [])
                 controller: 'transactionsControllerModalInstance',
                 resolve: {
                     transactions: [ "serviceTransaction", "$cookies", function(Transaction, $cookies){
-                        return Transaction.GetTransactions($cookies.get('token'));
+                        return Transaction.GetTransactions($cookies['token']);
                     }]
                 }
             });

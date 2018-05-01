@@ -15,7 +15,7 @@ angular.module('auth', [])
 
     .run(["$rootScope", "serviceUser", "serviceTransaction", "$state", "$cookies", function($rootScope, User, Transaction, $state, $cookies) {
 
-        if($cookies.get('token') != null){
+        if($cookies['token'] != null){
             $rootScope.isConnected = true;
         }else{
             $rootScope.isConnected = false;
@@ -26,8 +26,11 @@ angular.module('auth', [])
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
             $("#content").html("");
 
+		console.log("test check perm");
+		console.log($rootScope.isConnected);
+
             if($rootScope.isConnected){
-                User.getUser($cookies.get('user_id'), $cookies.get('token'))
+                User.getUser($cookies['user_id'], $cookies['token'])
                     .success(function(data) {
                         $rootScope.user = data;
                     });
@@ -66,12 +69,12 @@ angular.module('auth', [])
         };
 
         $scope.logout = function(){
-            User.logout($cookies.get('token'))
+            User.logout($cookies['token'])
                 .success(function(){
                     $rootScope.user = null;
                     $rootScope.isConnected = false;
-                    $cookies.remove('token');
-                    $cookies.remove('user_id');
+                    delete $cookies['token'];
+                    delete $cookies['user_id'];
                 });
         }
 

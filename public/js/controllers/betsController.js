@@ -27,10 +27,10 @@ angular.module('betsController', [])
                         return user;
                     },
                     bet: [ "serviceBet", "$cookies", function(Bet, $cookies){
-                        return Bet.GetBet($cookies.get('token'), game.id);
+                        return Bet.GetBet($cookies['token'], game.id);
                     }],
                     distances: [ "serviceBet", "$cookies", function(Bet, $cookies){
-                        return Bet.GetDistances($cookies.get('token'));
+                        return Bet.GetDistances($cookies['token']);
                     }]
                 }
             });
@@ -72,3 +72,4 @@ angular.module('betsController', [])
             $modalInstance.dismiss('cancel');
         };
     }]);
+

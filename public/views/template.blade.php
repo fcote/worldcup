@@ -24,6 +24,8 @@
     <link rel="stylesheet" type="text/css" href="/css/worldcup.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/css/animate.css" media="screen" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
+	
+	<base href="http://worldcup.hemidy.fr/">
 
     @yield('scripts')
 

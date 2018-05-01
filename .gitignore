@@ -18,4 +18,9 @@ Thumbs.db
 .idea
 
 ### BOWER ###
-/public/bower_components
+### /public/bower_components
+/public/bower_components_old/
+
+### DRIM73 ###
+robots.txt
+stats/

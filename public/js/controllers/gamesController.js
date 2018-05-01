@@ -93,7 +93,7 @@ angular.module('gamesController', [])
                         return game;
                     },
                     distances: [ "serviceBet", "$cookies", function(Bet, $cookies){
-                        return Bet.GetDistances($cookies.get('token'));
+                        return Bet.GetDistances($cookies['token']);
                     }]
                 }
             });

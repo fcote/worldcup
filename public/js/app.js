@@ -16,12 +16,10 @@ var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-l
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
     $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
+        enabled: true
     });
 
     $urlRouterProvider.otherwise('/');
-
 
     $stateProvider
         .state('register', {
@@ -30,20 +28,17 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
             controller: 'accountsControllerRegister',
             access: accessLevels.public
         })
-
         .state('login', {
             url: '/login',
             templateUrl: '/views/partials/loginForm.html',
             controller: 'accountsControllerLogin',
             access: accessLevels.public
         })
-
         .state('account', {
             url: '/account',
             templateUrl: '/views/partials/accountForm.html',
             access: accessLevels.user
         })
-
         .state('index', {
             url: '/',
             templateUrl: '/views/partials/gamesList.html',
@@ -51,21 +46,21 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
             access: accessLevels.user,
             resolve: {
                 games: [ "serviceGame", "$cookies", function(Game, $cookies){
-                    return Game.GetNext($cookies.get('token'));
+                    return Game.GetNext($cookies['token']);
                 }],
                 gamesPrevious: [ "serviceGame", "$cookies", function(Game, $cookies){
-                    return Game.GetPrevious($cookies.get('token'));
+                    return Game.GetPrevious($cookies['token']);
                 }],
                 bracket: [ "serviceBracket", "$cookies", function(Bracket, $cookies){
-                    return Bracket.GetBracket($cookies.get('token'));
+                    return Bracket.GetBracket($cookies['token']);
                 }],
                 users: ["serviceUser", "$cookies", function(User, $cookies){
-                    return User.getRanking($cookies.get('token'));
+                    return User.getRanking($cookies['token']);
                 }]
             }
         })
 
-
+console.log('test');
 
 
 });
@@ -93,8 +88,8 @@ worldcup.config(['$httpProvider', function ($httpProvider) {
                 if(rejection.status == 401){
                     $rootScope.user = null;
                     $rootScope.isConnected = false;
-                    $cookies.remove('token');
-                    $cookies.remove('user_id');
+                    delete $cookies['token'];
+                    delete $cookies['user_id'];
                 }
 
                 return $q.reject(rejection);
