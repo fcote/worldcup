@@ -77,6 +77,6 @@ class Bet extends Eloquent {
     public static $rules = array(
         'user_id' => 'exists:user,id',
         'game_id' => 'exists:game,id',
-        'winner_id' => 'exists:team,id',
+        'winner_id' => 'required|exists:team,id',
     );
 }

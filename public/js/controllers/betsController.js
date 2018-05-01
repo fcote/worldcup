@@ -43,7 +43,7 @@ angular.module('betsController', [])
             $scope.bet = {};
         }
 
-        $scope.teams = [{id: null, name: "Match nul", code: "NULL"}, game.team1, game.team2];
+        $scope.teams = [/*{id: null, name: "Match nul", code: "NULL"}, */game.team1, game.team2];
 
         $scope.ok = function () {
             if(bet.data[0] == undefined){
