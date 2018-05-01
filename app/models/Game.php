@@ -115,8 +115,10 @@ class Game extends Eloquent {
      */
     public function getTeam1CoteAttribute()
     {
-        $sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
+        /*$sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
+        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');*/
+        $sumPoints1 = 0;
+        $sumPoints2 = 0;
 
         $cote = ((($sumPoints2+1)/($sumPoints1+1))+1);
 
@@ -150,8 +152,10 @@ class Game extends Eloquent {
      */
     public function getTeam2CoteAttribute()
     {
-        $sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
+        /*$sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
+        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');*/
+        $sumPoints1 = 0;
+        $sumPoints2 = 0;
 
         $cote = ((($sumPoints1+1)/($sumPoints2+1))+1);
         $cote = round($cote,2);

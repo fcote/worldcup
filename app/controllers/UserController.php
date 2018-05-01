@@ -109,7 +109,6 @@ class UserController extends BaseController {
                 400);
 
         $user = User::create($input);
-        $user->points = Config::get('app.points');
         $user->save();
 
         return Response::json(

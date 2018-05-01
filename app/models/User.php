@@ -42,8 +42,7 @@ class User extends Eloquent {
      *
      * @var array
      */
-    public $filters = array('login',
-        'points');
+    public $filters = array('login');
 
     public function toArray()
     {
@@ -59,8 +58,7 @@ class User extends Eloquent {
      */
     public static $rules = array(
         'login' => 'required|max:255',
-        'password' => 'required|max:255',
-        /*'points' => 'required|integer',*/
+        'password' => 'required|max:255'
     );
 
     /**

@@ -23,9 +23,7 @@
                 <table class="table table-bordered">
                     <tr class="game row" ng-repeat="bet in game.bets" >
                         <td>@@ bet.user.login @@</td>
-                        <td>@@ bet.points @@ points</td>
-                        <td>Pour <b><div ng-show="bet.winner_id == game.team1_id" >@@ game.team1.name @@</div><div ng-show="bet.winner_id == game.team2_id">@@ game.team2.name @@</div></b></td>
-                        <td>Avec un écart de point de @@ distances[bet.distance_points] @@</td>
+                        <td>Vainqueur : <b><span ng-show="bet.winner_id != game.team1_id && bet.winner_id != game.team2_id" >Match nul</span><span ng-show="bet.winner_id == game.team1_id" >@@ game.team1.name @@</span><span ng-show="bet.winner_id == game.team2_id">@@ game.team2.name @@</span></b></td>
                     </tr>
                 </table>
             </div>

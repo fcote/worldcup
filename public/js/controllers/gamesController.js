@@ -91,26 +91,17 @@ angular.module('gamesController', [])
                 resolve: {
                     game: function(){
                         return game;
-                    },
-                    distances: [ "serviceBet", "$cookies", function(Bet, $cookies){
-                        return Bet.GetDistances($cookies['token']);
-                    }]
+                    }
                 }
             });
         };
     })
 
 
-    .controller('gamesControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "distances" , function ($scope, $modalInstance, $cookies, game, distances) {
+    .controller('gamesControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game" , function ($scope, $modalInstance, $cookies, game) {
         $scope.game = game;
 
         $scope.teams = [game.team1, game.team2];
-
-        $scope.distances = [];
-
-        distances.data.forEach(function(distance) {
-            $scope.distances[distance.id] = distance.name;
-        });
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

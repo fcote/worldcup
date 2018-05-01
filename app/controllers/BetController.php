@@ -35,19 +35,6 @@ class BetController extends BaseController {
     }
 
     /**
-     * Renvoi toutes les écarts possibles
-     *
-     * @return Response
-     */
-    public function distances()
-    {
-        return Response::json(
-            array('success' => true,
-                'payload' => Bet::getDistances(),
-            ));
-    }
-
-    /**
      * Renvoi un paris
      *
      * @return Response
@@ -104,19 +91,10 @@ class BetController extends BaseController {
                 ),
                 400);
 
-        //On vérifie si la somme misé est disponible
-        if($input['points'] > $user->points)
-            return Response::json(
-                array('success' => false,
-                    'payload' => array(),
-                    'error' => "Vous avez miser plus de points que vous en avez !"
-                ),
-                400);
-
         $game = Game::find($input['game_id']);
 
         //On vérifie si le winner est bien une équipe du match
-        if($input['winner_id'] != $game->team1_id && $input['winner_id'] != $game->team2_id)
+        if($input['winner_id'] != $game->team1_id && $input['winner_id'] != $game->team2_id && $input['winner_id'] != null)
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
@@ -124,14 +102,14 @@ class BetController extends BaseController {
                 ),
                 400);
 
-        $bet = Bet::create($input);
+        $input['winner_id'] = ($input['winner_id'] != null)?$input['winner_id']:null;
 
-        Transaction::addTransaction($input['user_id'], $bet->id, $input['points'], 'bet');
+        $bet = Bet::create($input);
 
         return Response::json(
             array('success' => true,
                 'payload' => $bet->toArray(),
-                'message' => 'Pari enregistré ('.$bet->points.' points) sur : '.$game->team1->name.' - '.$game->team2->name
+                'message' => 'Pari enregistré sur : '.$game->team1->name.' - '.$game->team2->name
             ));
     }
 
@@ -182,19 +160,10 @@ class BetController extends BaseController {
                 ),
                 400);
 
-        //On vérifie si la somme misé est disponible
-        if($input['points'] > ($user->points+$bet->points))
-            return Response::json(
-                array('success' => false,
-                    'payload' => array(),
-                    'error' => "Vous avez miser plus de points que vous en avez !"
-                ),
-                400);
-
         $game = Game::find($bet->game->id);
 
         //On vérifie si le winner est bien une équipe du match
-        if($input['winner_id'] != $game->team1_id && $input['winner_id'] != $game->team2_id)
+        if($input['winner_id'] != $game->team1_id && $input['winner_id'] != $game->team2_id && $input['winner_id'] != null)
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
@@ -202,16 +171,8 @@ class BetController extends BaseController {
                 ),
                 400);
 
-        $user->points = $user->points + ($bet->points-$input['points']);
+        $bet->winner_id = ($input['winner_id'] != null)?$input['winner_id']:null;
 
-        $bet->winner_id = $input['winner_id'];
-        $bet->points = $input['points'];
-        $bet->distance_points = $input['distance_points'];
-
-        $transaction = Transaction::whereRaw('user_id = ? && bet_id = ?', array($user->id, $bet->id))->first();
-        $transaction->value = $input['points'];
-
-        $transaction->save();
         $bet->save();
         $user->save();
 
@@ -221,7 +182,7 @@ class BetController extends BaseController {
         return Response::json(
             array('success' => true,
                 'payload' => $betArray,
-                'message' => 'Pari modifié ('.$bet->points.' points) sur : '.$game->team1->name.' - '.$game->team2->name
+                'message' => 'Pari modifié sur : '.$game->team1->name.' - '.$game->team2->name
             ));
     }
 

@@ -7,7 +7,7 @@
             </ul>
             <div class="my-points">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-controller="transactionsControllerModal" ng-click="open()" >@@ user.points @@ points</button>
+                    <button type="button" class="btn btn-default" ng-controller="transactionsControllerModal" ng-click="open()" >@@ user.winPoints @@ points</button>
                 </div>
             </div>
         </div>
@@ -30,26 +30,18 @@
                         <div class="col-xs-5"><h3 class="goals-team2">@@ game.team2_points @@</h3></div><br />
                         <small class="minute">@@ game.minute @@'</small>
                     </div>
-                    <div class="col-xs-1" ng-show="game.team1_points == null && game.team2_points == null">
-                        <div class="col-xs-12" style="padding: 50px 0px;">
-                            <div class="label label-info" style="padding:11px;" >@@ game.team1_cote @@</div>
-                        </div>
-                    </div>
-                    <div class="col-xs-2" ng-show="game.team1_points == null && game.team2_points == null">
+                    <div class="col-xs-4" ng-show="game.team1_points == null && game.team2_points == null">
                         <div class="col-xs-12 col-centered text-center" >
-                            <button style="float:left;" class="btn btn-default" ng-controller="betsControllerModal" ng-click="open(game, user)">
+                            <button style="float:left;margin-left:95px;" class="btn btn-default" ng-controller="betsControllerModal" ng-click="open(game, user)">
                                 <div ng-hide="game.user_has_bet"><i class="fa fa-plus"></i></div>
                                 <div ng-show="game.user_has_bet"><i class="fa fa-pencil"></i></div>
                             </button>
                             <button style="float:left;margin-left:3px;" class="btn btn-default" ng-controller="gamesControllerModal" ng-click="open(game)">
                                 <i class="fa fa-users"></i>
                             </button>
+                        </div><p style="clear:both;" ></p>
+                        <div class="col-xs-12 col-centered text-center" >
                             <h5>@@game.date | dateToISO | date:'dd/MM/yyyy à H:mm'@@h</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-1" ng-show="game.team1_points == null && game.team2_points == null">
-                        <div class="col-xs-12" style="padding: 50px 0px;">
-                            <div class="label label-info" style="padding:11px;" >@@ game.team2_cote @@</div>
                         </div>
                     </div>
                     <div class="col-xs-4">

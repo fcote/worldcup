@@ -28,16 +28,13 @@ angular.module('betsController', [])
                     },
                     bet: [ "serviceBet", "$cookies", function(Bet, $cookies){
                         return Bet.GetBet($cookies['token'], game.id);
-                    }],
-                    distances: [ "serviceBet", "$cookies", function(Bet, $cookies){
-                        return Bet.GetDistances($cookies['token']);
                     }]
                 }
             });
         };
     })
 
-    .controller('betsControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "user", "serviceBet", "bet", "distances" , function ($scope, $modalInstance, $cookies, game, user, Bet, bet, distances) {
+    .controller('betsControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "user", "serviceBet", "bet" , function ($scope, $modalInstance, $cookies, game, user, Bet, bet) {
         $scope.game = game;
 
         if(bet.data[0] != undefined){
@@ -46,23 +43,19 @@ angular.module('betsController', [])
             $scope.bet = {};
         }
 
-        $scope.teams = [game.team1, game.team2];
-
-        $scope.distances = distances.data;
+        $scope.teams = [{id: null, name: "Match nul", code: "NULL"}, game.team1, game.team2];
 
         $scope.ok = function () {
             if(bet.data[0] == undefined){
                 $modalInstance.close(
                     Bet.placeBet($cookies['token'], user.id, game.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
                         .success(function() {
-                            user.points = parseInt(user.points) - parseInt($scope.bet.points);
                         })
                 );
             }else{
                 $modalInstance.close(
                     Bet.updateBet($cookies['token'], $scope.bet.id, $scope.bet.points, $scope.bet.distance_points, $scope.bet.winner_id)
                         .success(function(data) {
-                            user.points = data.user.points;
                         })
                 );
             }

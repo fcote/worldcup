@@ -18,7 +18,6 @@ class Init extends Migration {
             $table->increments('id')->unsigned();
             $table->string('login', 255);
             $table->string('password', 255);
-            $table->integer('points');
 
             $table->timestamps();
         });
@@ -84,30 +83,6 @@ class Init extends Migration {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('game_id')->unsigned();
-            $table->integer('points');
-            $table->enum('distance_points', array(
-                Bet::$DISTANCE_0_TO_5,
-                Bet::$DISTANCE_5_TO_10,
-                Bet::$DISTANCE_10_TO_15,
-                Bet::$DISTANCE_15_TO_20,
-                Bet::$DISTANCE_20_TO_25,
-                Bet::$DISTANCE_25_TO_30,
-                Bet::$DISTANCE_30_TO_35,
-                Bet::$DISTANCE_35_TO_40,
-                Bet::$DISTANCE_40_TO_45,
-                Bet::$DISTANCE_45_TO_50,
-                Bet::$DISTANCE_50_TO_55,
-                Bet::$DISTANCE_55_TO_60,
-                Bet::$DISTANCE_60_TO_65,
-                Bet::$DISTANCE_65_TO_70,
-                Bet::$DISTANCE_70_TO_75,
-                Bet::$DISTANCE_75_TO_80,
-                Bet::$DISTANCE_80_TO_85,
-                Bet::$DISTANCE_85_TO_90,
-                Bet::$DISTANCE_90_TO_95,
-                Bet::$DISTANCE_95_TO_100,
-                Bet::$DISTANCE_100_PLUS
-            ));
             $table->integer('winner_id')->unsigned()->nullable();
 
             $table->foreign('user_id')->references('id')->on('user');

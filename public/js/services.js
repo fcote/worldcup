@@ -32,7 +32,7 @@ angular.module('services', [])
             },
 
             getRanking : function(token) {
-              return $http.get('/api/users?token=' + token + '&orderby=points&order=DESC');
+              return $http.get('/api/users?token=' + token /*+ '&orderby=points&order=DESC'*/);
             },
 
             login : function(login, pass) {
@@ -119,9 +119,6 @@ angular.module('services', [])
             },
             GetBet : function(token, gameId){
                 return $http.get('api/bets?token=' + token + '&game_id=' + gameId);
-            },
-            GetDistances : function(token){
-                return $http.get('api/bets/distances?token=' + token);
             }
         }
     })
